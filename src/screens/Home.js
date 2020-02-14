@@ -5,7 +5,7 @@ const styles = StyleSheet.create({});
 
 const HomeScreen = () => (
   <View>
-    <Text>Patient Home Screen</Text>
+    <Text>Home Screen</Text>
   </View>
 );
 
