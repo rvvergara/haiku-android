@@ -5,12 +5,15 @@ import BookingsScreen from './src/screens/BookingsScreen';
 import FeedbackScreen from './src/screens/FeedbackScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import HomeScreen from './src/screens/Home';
-import ProfileScreen from './src/screens/ProfileScreen';
+import ProfileEditScreen from './src/screens/ProfileEditScreen';
 import PractitionersScreen from './src/screens/PractitionersScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import ScheduleScreen from './src/screens/ScheduleScreen';
 import ClinicsScreen from './src/screens/ClinicsScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import BookingSelectionScreen from './src/screens/BookingSelectionScreen';
+import BookingSubmissionScreen from './src/screens/BookingSubmissionScreen';
 
 const switchNavigator = createSwitchNavigator(
   {
@@ -20,15 +23,20 @@ const switchNavigator = createSwitchNavigator(
       VerifyMessage: VerifyMessageScreen,
     }),
     patientFlow: createDrawerNavigator({
-      Home: HomeScreen,
-      Profile: ProfileScreen,
+      Home: createStackNavigator({
+        Home: HomeScreen,
+        PractitionerProfile: ProfileScreen,
+        BookingSelection: BookingSelectionScreen,
+        BookingSubmission: BookingSubmissionScreen,
+      }),
+      ProfileEdit: ProfileEditScreen,
       Practitioners: PractitionersScreen,
       Bookings: BookingsScreen,
       Feedback: FeedbackScreen,
     }),
     practitionerFlow: createDrawerNavigator({
       Home: HomeScreen,
-      Profile: ProfileScreen,
+      ProfileEdit: ProfileEditScreen,
       Schedule: ScheduleScreen,
       Clinics: ClinicsScreen,
       Feedback: FeedbackScreen,

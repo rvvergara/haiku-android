@@ -4,11 +4,11 @@ import Header from '../components/Common/Header';
 
 const styles = StyleSheet.create({});
 
-const ProfileScreen = () => (
+const ProfileEditScreen = () => (
   <View>
     <Header />
-    <Text>Profile Info Screen</Text>
+    <Text>Patient Profile Screen</Text>
   </View>
 );
 
-export default ProfileScreen;
+export default ProfileEditScreen;
