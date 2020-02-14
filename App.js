@@ -8,6 +8,8 @@ import ProfileScreen from './src/screens/ProfileScreen';
 import PractitionersScreen from './src/screens/PractitionersScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
+import ScheduleScreen from './src/screens/ScheduleScreen';
+import ClinicsScreen from './src/screens/ClinicsScreen';
 
 const switchNavigator = createSwitchNavigator({
   authFlow: createStackNavigator({
@@ -16,10 +18,17 @@ const switchNavigator = createSwitchNavigator({
     VerifyMessage: VerifyMessageScreen,
   }),
   patientFlow: createStackNavigator({
-    PatientHome: HomeScreen,
-    PatientProfile: ProfileScreen,
+    Home: HomeScreen,
+    Profile: ProfileScreen,
     Practitioners: PractitionersScreen,
     Bookings: BookingsScreen,
+    Feedback: FeedbackScreen,
+  }),
+  practitionerFlow: createStackNavigator({
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+    Schedule: ScheduleScreen,
+    Clinics: ClinicsScreen,
     Feedback: FeedbackScreen,
   }),
 });
