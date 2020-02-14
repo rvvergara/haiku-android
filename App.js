@@ -14,6 +14,7 @@ import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import VideoScreen from './src/screens/VideoScreen';
 import ScheduleSubmissionScreen from './src/screens/ScheduleSubmissionScreen';
 import PatientHomeStack from './src/navigators/stacks/Patient/PatientHomeStack';
+import PatientProfileEditStack from './src/navigators/stacks/Patient/PatientProfileEditStack';
 
 const switchNavigator = createSwitchNavigator(
   {
@@ -24,7 +25,7 @@ const switchNavigator = createSwitchNavigator(
     }),
     patientFlow: createDrawerNavigator({
       Home: PatientHomeStack,
-      ProfileEdit: ProfileEditScreen,
+      ProfileEdit: PatientProfileEditStack,
       Practitioners: PractitionersScreen,
       Bookings: createStackNavigator({
         Bookings: BookingsScreen,
