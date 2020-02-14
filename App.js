@@ -1,19 +1,20 @@
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
 import {createDrawerNavigator} from 'react-navigation-drawer';
+import {createStackNavigator} from 'react-navigation-stack';
+import BookingSelectionScreen from './src/screens/BookingSelectionScreen';
 import BookingsScreen from './src/screens/BookingsScreen';
+import BookingSubmissionScreen from './src/screens/BookingSubmissionScreen';
+import ClinicsScreen from './src/screens/ClinicsScreen';
 import FeedbackScreen from './src/screens/FeedbackScreen';
-import LoginScreen from './src/screens/LoginScreen';
 import HomeScreen from './src/screens/Home';
-import ProfileEditScreen from './src/screens/ProfileEditScreen';
+import LoginScreen from './src/screens/LoginScreen';
 import PractitionersScreen from './src/screens/PractitionersScreen';
+import ProfileEditScreen from './src/screens/ProfileEditScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import ScheduleScreen from './src/screens/ScheduleScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
-import ScheduleScreen from './src/screens/ScheduleScreen';
-import ClinicsScreen from './src/screens/ClinicsScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
-import BookingSelectionScreen from './src/screens/BookingSelectionScreen';
-import BookingSubmissionScreen from './src/screens/BookingSubmissionScreen';
+import VideoScreen from './src/screens/VideoScreen';
 
 const switchNavigator = createSwitchNavigator(
   {
@@ -31,7 +32,10 @@ const switchNavigator = createSwitchNavigator(
       }),
       ProfileEdit: ProfileEditScreen,
       Practitioners: PractitionersScreen,
-      Bookings: BookingsScreen,
+      Bookings: createStackNavigator({
+        Bookings: BookingsScreen,
+        Video: VideoScreen,
+      }),
       Feedback: FeedbackScreen,
     }),
     practitionerFlow: createDrawerNavigator({
