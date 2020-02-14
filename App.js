@@ -1,3 +1,4 @@
+import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -16,6 +17,7 @@ import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import VideoScreen from './src/screens/VideoScreen';
 import ScheduleSubmissionScreen from './src/screens/ScheduleSubmissionScreen';
+import Header from './src/components/Common/Header';
 
 const switchNavigator = createSwitchNavigator(
   {
@@ -30,6 +32,11 @@ const switchNavigator = createSwitchNavigator(
         PractitionerProfile: ProfileScreen,
         BookingSelection: BookingSelectionScreen,
         BookingSubmission: BookingSubmissionScreen,
+      },
+      {
+        navigationOptions: {
+          headerTitle: () => <Header />,
+        },
       }),
       ProfileEdit: ProfileEditScreen,
       Practitioners: PractitionersScreen,

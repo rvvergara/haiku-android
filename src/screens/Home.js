@@ -10,8 +10,8 @@ const HomeScreen = ({ navigation }) => (
     <Header />
     <Text>Home Screen</Text>
     <Button
-      title="Go To Booking Selection"
-      onPress={() => navigation.navigate('BookingSelection')}
+      title="Go To Practitioner Profile"
+      onPress={() => navigation.navigate('PractitionerProfile')}
     />
   </View>
 );
