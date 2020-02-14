@@ -6,7 +6,6 @@ const styles = StyleSheet.create({});
 
 const ClinicsScreen = () => (
   <View>
-    <Header />
     <Text>Clinics Screen</Text>
   </View>
 );

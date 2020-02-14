@@ -7,7 +7,6 @@ const styles = StyleSheet.create({});
 
 const ScheduleSubmissionScreen = () => (
   <View>
-    <Header />
     <Text>Schedule Submission Screen</Text>
   </View>
 );

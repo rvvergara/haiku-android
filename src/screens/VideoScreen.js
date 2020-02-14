@@ -6,7 +6,6 @@ const styles = StyleSheet.create({});
 
 const VideoScreen = () => (
   <View>
-    <Header />
     <Text>Video Call Screen</Text>
   </View>
 );

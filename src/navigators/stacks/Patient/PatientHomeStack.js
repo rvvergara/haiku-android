@@ -1,9 +1,9 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import HomeScreen from '../../screens/Home';
-import ProfileScreen from '../../screens/ProfileScreen';
-import BookingSelectionScreen from '../../screens/BookingSelectionScreen';
-import BookingSubmissionScreen from '../../screens/BookingSubmissionScreen';
-import { navigationOptions } from '../navigationHelpers';
+import HomeScreen from '../../../screens/Home';
+import ProfileScreen from '../../../screens/ProfileScreen';
+import BookingSelectionScreen from '../../../screens/BookingSelectionScreen';
+import BookingSubmissionScreen from '../../../screens/BookingSubmissionScreen';
+import { navigationOptions } from '../../navigationHelpers';
 
 const screens = {
   Home: {

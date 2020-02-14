@@ -6,7 +6,6 @@ const styles = StyleSheet.create({});
 
 const ProfileEditScreen = () => (
   <View>
-    <Header />
     <Text>Patient Profile Screen</Text>
   </View>
 );

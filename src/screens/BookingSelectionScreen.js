@@ -7,7 +7,6 @@ const styles = StyleSheet.create({});
 
 const BookingSelectionScreen = ({ navigation }) => (
   <View>
-    <Header />
     <Text>Select Time Slot Screen</Text>
     <Button
       title="Go To Booking Form"

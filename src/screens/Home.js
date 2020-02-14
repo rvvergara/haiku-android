@@ -7,7 +7,6 @@ const styles = StyleSheet.create({});
 
 const HomeScreen = ({ navigation }) => (
   <View>
-    <Header />
     <Text>Home Screen</Text>
     <Button
       title="Go To Practitioner Profile"

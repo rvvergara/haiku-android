@@ -6,7 +6,6 @@ const styles = StyleSheet.create({});
 
 const FeedbackScreen = () => (
   <View>
-    <Header />
     <Text>Feedback Screen</Text>
   </View>
 );

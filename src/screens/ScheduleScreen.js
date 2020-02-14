@@ -7,7 +7,6 @@ const styles = StyleSheet.create({});
 
 const ScheduleScreen = ({ navigation }) => (
   <View>
-    <Header />
     <Text>Schedule Screen</Text>
     <Button
       title="Click to set Schedule"

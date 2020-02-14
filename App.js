@@ -13,7 +13,7 @@ import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import VideoScreen from './src/screens/VideoScreen';
 import ScheduleSubmissionScreen from './src/screens/ScheduleSubmissionScreen';
-import PatientHomeStack from './src/navigators/stacks/PatientHomeStack';
+import PatientHomeStack from './src/navigators/stacks/Patient/PatientHomeStack';
 
 const switchNavigator = createSwitchNavigator(
   {

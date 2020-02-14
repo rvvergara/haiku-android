@@ -6,7 +6,6 @@ const styles = StyleSheet.create({});
 
 const BookingSubmissionScreen = () => (
   <View>
-    <Header />
     <Text>Booking Form Here Screen</Text>
   </View>
 );

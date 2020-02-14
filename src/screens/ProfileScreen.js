@@ -7,7 +7,6 @@ const styles = StyleSheet.create({});
 
 const ProfileScreen = ({ navigation }) => (
   <View>
-    <Header />
     <Text>Profile Info Screen</Text>
     <Button
       title="Go to Booking Selection"
