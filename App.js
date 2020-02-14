@@ -15,6 +15,7 @@ import ScheduleSubmissionScreen from './src/screens/ScheduleSubmissionScreen';
 import PatientHomeStack from './src/navigators/stacks/Patient/PatientHomeStack';
 import PatientProfileEditStack from './src/navigators/stacks/Patient/PatientProfileEditStack';
 import PractitionersListStack from './src/navigators/stacks/Patient/PractitionersListStack';
+import BookingsStack from './src/navigators/stacks/Patient/BookingsStack';
 
 const switchNavigator = createSwitchNavigator(
   {
@@ -27,10 +28,7 @@ const switchNavigator = createSwitchNavigator(
       Home: PatientHomeStack,
       ProfileEdit: PatientProfileEditStack,
       Practitioners: PractitionersListStack,
-      Bookings: createStackNavigator({
-        Bookings: BookingsScreen,
-        Video: VideoScreen,
-      }),
+      Bookings: BookingsStack,
       Feedback: FeedbackScreen,
     }),
     practitionerFlow: createDrawerNavigator({
