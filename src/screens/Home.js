@@ -3,10 +3,10 @@ import {StyleSheet, Text, View} from 'react-native';
 
 const styles = StyleSheet.create({});
 
-const PatientProfileScreen = () => (
+const HomeScreen = () => (
   <View>
-    <Text>Patient Profile Screen</Text>
+    <Text>Patient Home Screen</Text>
   </View>
 );
 
-export default PatientProfileScreen;
+export default HomeScreen;
