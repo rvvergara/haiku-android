@@ -15,6 +15,7 @@ import ScheduleScreen from './src/screens/ScheduleScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import VideoScreen from './src/screens/VideoScreen';
+import ScheduleSubmissionScreen from './src/screens/ScheduleSubmissionScreen';
 
 const switchNavigator = createSwitchNavigator(
   {
@@ -41,13 +42,20 @@ const switchNavigator = createSwitchNavigator(
     practitionerFlow: createDrawerNavigator({
       Home: HomeScreen,
       ProfileEdit: ProfileEditScreen,
-      Schedule: ScheduleScreen,
+      Schedule: createStackNavigator({
+        Schedule: ScheduleScreen,
+        ScheduleSubmission: ScheduleSubmissionScreen,
+      }),
+      Bookings: createStackNavigator({
+        Bookings: BookingsScreen,
+        Video: VideoScreen,
+      }),
       Clinics: ClinicsScreen,
       Feedback: FeedbackScreen,
     }),
   },
   {
-    initialRouteName: 'patientFlow',
+    initialRouteName: 'practitionerFlow',
   },
 );
 
