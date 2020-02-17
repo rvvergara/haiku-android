@@ -12,6 +12,7 @@ import ScheduleScreen from './src/screens/ScheduleScreen';
 import ScheduleSubmissionScreen from './src/screens/ScheduleSubmissionScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
+import ScheduleStack from './src/navigators/stacks/Practitioner/ScheduleStack';
 
 const switchNavigator = createSwitchNavigator(
   {
@@ -37,10 +38,7 @@ const switchNavigator = createSwitchNavigator(
       {
         Home: HomeStack,
         ProfileEdit: ProfileEditStack,
-        Schedule: createStackNavigator({
-          Schedule: ScheduleScreen,
-          ScheduleSubmission: ScheduleSubmissionScreen,
-        }),
+        Schedule: ScheduleStack,
         Bookings: BookingsStack,
         Clinics: ClinicsStack,
         Feedback: FeedbackStack,

@@ -2,7 +2,7 @@ import React from 'react';
 import DrawerTrigger from '../components/Common/DrawerTrigger.js';
 
 export const navigationOptions = {
-  headerRight: <DrawerTrigger />,
+  headerRight: () => <DrawerTrigger />,
 };
 
 export const defaultNavigationOptions = {

@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { navigationOptions } from '../../navigationHelpers';
+import { navigationOptions, defaultNavigationOptions } from '../../navigationHelpers';
 import BookingsScreen from '../../../screens/BookingsScreen';
 import VideoScreen from '../../../screens/VideoScreen';
 
@@ -14,12 +14,6 @@ const screens = {
   },
 };
 
-const BookingsStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: 'blue',
-    },
-  },
-});
+const BookingsStack = createStackNavigator(screens, defaultNavigationOptions);
 
 export default BookingsStack;

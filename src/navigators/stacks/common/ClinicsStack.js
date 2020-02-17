@@ -1,6 +1,6 @@
 import {createStackNavigator} from 'react-navigation-stack';
 import ClinicScreen from '../../../screens/ClinicsScreen';
-import {navigationOptions} from '../../navigationHelpers';
+import {navigationOptions, defaultNavigationOptions} from '../../navigationHelpers';
 
 const screens = {
   Clinics: {
@@ -9,12 +9,6 @@ const screens = {
   },
 };
 
-const ClinicsStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: 'blue',
-    },
-  },
-});
+const ClinicsStack = createStackNavigator(screens, defaultNavigationOptions);
 
 export default ClinicsStack;

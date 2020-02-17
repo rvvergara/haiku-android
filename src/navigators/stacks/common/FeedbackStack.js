@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { navigationOptions } from '../../navigationHelpers';
+import { navigationOptions, defaultNavigationOptions } from '../../navigationHelpers';
 import FeedbackScreen from '../../../screens/FeedbackScreen';
 
 const screens = {
@@ -9,12 +9,6 @@ const screens = {
   },
 };
 
-const FeedbackStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: 'blue',
-    },
-  },
-});
+const FeedbackStack = createStackNavigator(screens, defaultNavigationOptions);
 
 export default FeedbackStack;
