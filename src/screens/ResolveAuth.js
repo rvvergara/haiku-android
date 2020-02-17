@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { resolveToken } from '../store/thunks/user';
+import { resolveToken } from '../store/thunks/resolvers';
 
 const ResolveAuth = () => {
   const dispatch = useDispatch();

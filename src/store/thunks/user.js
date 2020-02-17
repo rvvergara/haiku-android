@@ -39,12 +39,6 @@ export const logout = () => async (dispatch) => {
   navigate('Login');
 };
 
-export const checkIfTokenExp = (decoded) => {
-  const expirationTime = moment.unix(decoded.exp);
-  const nowTime = moment();
-  return expirationTime < nowTime;
-};
-
 const fetchUserProfile = async (id, role) => {
   const path = `v1/users/${id}/${role.toLowerCase()}`;
   try {
@@ -65,7 +59,7 @@ export const fetchUserData = (id) => async (dispatch) => {
     const {role} = user.user;
     const profile = await fetchUserProfile(id, role);
     if (profile) {
-      dispatch(
+      return dispatch(
         setCurrentUser({
           authenticated: true,
           data: {
@@ -75,27 +69,14 @@ export const fetchUserData = (id) => async (dispatch) => {
           },
         }),
       );
-    } else {
-      dispatch(
-        setCurrentUser({
-          authenticated: true,
-          data: {...user.user, token: user.token},
-        }),
-      );
     }
+    return dispatch(
+      setCurrentUser({
+        authenticated: true,
+        data: {...user.user, token: user.token},
+      }),
+    );
   } catch (err) {
     return dispatch(setError(err));
-  }
-};
-
-export const resolveToken = () => async (dispatch) => {
-  const token = await AsyncStorage.getItem('token');
-
-  if (token && !checkIfTokenExp(decode(token))) {
-    const decoded = decode(token);
-    await dispatch(fetchUserData(decoded.user_id));
-    navigate('Home');
-  } else {
-    navigate('Login');
   }
 };
