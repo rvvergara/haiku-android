@@ -4,6 +4,7 @@ import moment from 'moment';
 import {sendUnauthenticatedRequest, sendAuthorizedRequest, setAuthorizationToken} from '../../utils/api';
 import {navigate} from '../../utils/navigationRef';
 import {setCurrentUser} from '../actions/user';
+import { setError} from '../actions/error';
 
 export const login = (loginParams) => async (dispatch) => {
   const path = 'v1/login';
@@ -20,7 +21,7 @@ export const login = (loginParams) => async (dispatch) => {
     );
     navigate('patientFlow');
   } catch (err) {
-    console.log('LOGIN ERROR', err);
+    dispatch(setError('Invalid email or password!'));
   }
 };
 
