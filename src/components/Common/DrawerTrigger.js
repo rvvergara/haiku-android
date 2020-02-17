@@ -11,9 +11,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   container: {
-    borderColor: 'yellow',
-    borderWidth: 5,
-    alignSelf: 'flex-end',
+    marginRight: 20,
   },
 });
 

@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { navigationOptions } from '../../navigationHelpers';
+import { navigationOptions, defaultNavigationOptions } from '../../navigationHelpers';
 import PractitionersScreen from '../../../screens/PractitionersScreen';
 
 const screens = {
@@ -9,12 +9,6 @@ const screens = {
   },
 };
 
-const PractitionersListStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: 'blue',
-    },
-  },
-});
+const PractitionersListStack = createStackNavigator(screens, defaultNavigationOptions);
 
 export default PractitionersListStack;

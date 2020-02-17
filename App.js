@@ -28,6 +28,8 @@ const switchNavigator = createSwitchNavigator(
       Practitioners: PractitionersListStack,
       Bookings: BookingsStack,
       Feedback: FeedbackStack,
+    }, {
+      drawerPosition: 'right',
     }),
     practitionerFlow: createDrawerNavigator({
       Home: HomeScreen,
@@ -39,6 +41,8 @@ const switchNavigator = createSwitchNavigator(
       Bookings: BookingsStack,
       Clinics: ClinicsScreen,
       Feedback: FeedbackStack,
+    }, {
+      drawerPosition: 'right',
     }),
   },
   {

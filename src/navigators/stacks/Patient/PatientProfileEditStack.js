@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { navigationOptions } from '../../navigationHelpers';
+import { navigationOptions, defaultNavigationOptions } from '../../navigationHelpers';
 import ProfileEditScreen from '../../../screens/ProfileEditScreen';
 
 const screens = {
@@ -9,12 +9,6 @@ const screens = {
   },
 };
 
-const PatientProfileEditStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: 'blue',
-    },
-  },
-});
+const PatientProfileEditStack = createStackNavigator(screens, defaultNavigationOptions);
 
 export default PatientProfileEditStack;
