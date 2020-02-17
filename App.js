@@ -73,7 +73,7 @@ const switchNavigator = createSwitchNavigator(
     ),
   },
   {
-    initialRouteName: 'patientFlow',
+    initialRouteName: 'authFlow',
   },
 );
 
