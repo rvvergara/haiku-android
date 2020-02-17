@@ -15,6 +15,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import store from './src/store/store';
+import { setNavigator } from './src/utils/navigationRef';
 
 const switchNavigator = createSwitchNavigator(
   {
@@ -81,6 +82,6 @@ const App = createAppContainer(switchNavigator);
 
 export default () => (
   <Provider store={store}>
-    <App />
+    <App ref={(navigator) => setNavigator(navigator)} />
   </Provider>
 );

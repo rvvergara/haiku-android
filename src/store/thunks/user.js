@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {sendRequest, setAuthorizationToken} from '../../utils/api';
 import { setCurrentUser } from '../actions/user';
+import { navigate } from '../../utils/navigationRef';
 
 export const login = (loginParams) => async (dispatch) => {
   const path = 'v1/login';
@@ -17,6 +18,7 @@ export const login = (loginParams) => async (dispatch) => {
       data: user,
     }));
     // navigate to the appropriate flow
+    navigate('patientFlow');
   } catch (err) {
     console.log('LOGIN ERROR', err);
   }

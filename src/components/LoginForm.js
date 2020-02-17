@@ -10,8 +10,8 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const handleSubmit = async () => {
-    await dispatch(login({email, password}));
+  const handleSubmit = () => {
+    dispatch(login({email, password}));
     setEmail('');
     setPassword('');
   };
