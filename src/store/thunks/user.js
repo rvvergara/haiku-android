@@ -5,7 +5,7 @@ import {sendRequest, setAuthorizationToken} from '../../utils/api';
 import {navigate} from '../../utils/navigationRef';
 import {setCurrentUser} from '../actions/user';
 
-export const login = (loginParams) => async (dispatch) => {
+export const login = loginParams => async dispatch => {
   const path = 'v1/login';
 
   try {
@@ -28,7 +28,7 @@ export const login = (loginParams) => async (dispatch) => {
   }
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async dispatch => {
   setAuthorizationToken(false);
 
   await AsyncStorage.removeItem('token');
@@ -43,20 +43,64 @@ export const logout = () => async (dispatch) => {
 };
 
 // Resolvers
-export const checkIfTokenExp = (decoded) => {
+export const checkIfTokenExp = decoded => {
   const expirationTime = moment.unix(decoded.exp);
   const nowTime = moment();
   return expirationTime < nowTime;
 };
 
-export const resolveToken = () => async (dispatch) => {
+const fetchUserProfile = async (id, role) => {
+  // const path = `v1/${role.toLowerCase()}s/${id}/user`;
+  const path = `v1/users/${id}/${role.toLowerCase()}`;
+  try {
+    const res = await sendRequest('get', path);
+    return res.data[role.toLowerCase()];
+  } catch (err) {
+    return false;
+  }
+};
+
+export const fetchUserData = id => async dispatch => {
+  console.log('RUNNING');
+  const path = `v1/users/${id}`;
+  try {
+    const res = await sendRequest('get', path);
+    const user = await res.data;
+    const {role} = user.user;
+    // Fetch user's profile data (whether patient or practitioner)
+    const profile = await fetchUserProfile(id, role);
+    if (profile) {
+      // If user has a profile already add it to user data
+      dispatch(
+        setCurrentUser({
+          authenticated: true,
+          data: {
+            ...user.user,
+            [role.toLowerCase()]: profile,
+            token: user.token,
+          },
+        }),
+      );
+    } else {
+      // Redirect user to profile edit page
+      dispatch(
+        setCurrentUser({
+          authenticated: true,
+          data: {...user.user, token: user.token},
+        }),
+      );
+    }
+  } catch (err) {
+    // return dispatch(setError(err));
+    console.log(err, 'ERROR');
+  }
+};
+
+export const resolveToken = () => async dispatch => {
   const token = await AsyncStorage.getItem('token');
 
   if (token && !checkIfTokenExp(decode(token))) {
-    dispatch(setCurrentUser({
-      authenticated: true,
-      data: decode(token),
-    }));
+    await fetchUserData(decode(token).id);
     navigate('Home');
   } else {
     navigate('Login');
