@@ -84,8 +84,7 @@ export const fetchUserData = (id) => async (dispatch) => {
       );
     }
   } catch (err) {
-    // return dispatch(setError(err));
-    console.log(err, 'ERROR');
+    return dispatch(setError(err));
   }
 };
 
