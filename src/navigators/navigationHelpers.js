@@ -8,7 +8,7 @@ export const navigationOptions = {
 export const defaultNavigationOptions = {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: 'blue',
+      backgroundColor: '#5073f1',
     },
     title: null,
   },
