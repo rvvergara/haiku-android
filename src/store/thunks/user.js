@@ -6,8 +6,8 @@ export const login = (loginParams) => async (dispatch) => {
 
   try {
     const res = await sendRequest('post', path, loginParams);
-
-    console.log('RESPONSE DATA', res.data);
+    const { token, user } = res.data;
+    setAuthorizationToken(token);
   } catch (err) {
     console.log('LOGIN ERROR', err);
   }
