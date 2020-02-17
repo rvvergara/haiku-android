@@ -12,8 +12,15 @@ export const checkIfTokenExp = decoded => {
 export const resolveToken = async () => {
   const token = await AsyncStorage.getItem('token');
   if (token && checkIfTokenExp(decode(token))) {
+    resolveProfile();
     navigate('Home');
   } else {
     navigate('Login');
   }
+};
+
+export const resolveProfile = async () => {
+  const token = await AsyncStorage.getItem('token');
+  const decoded = decode(token);
+  console.log(decoded);
 };
