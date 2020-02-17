@@ -3,7 +3,7 @@ import HomeScreen from '../../../screens/Home';
 import ProfileScreen from '../../../screens/ProfileScreen';
 import BookingSelectionScreen from '../../../screens/BookingSelectionScreen';
 import BookingSubmissionScreen from '../../../screens/BookingSubmissionScreen';
-import { navigationOptions } from '../../navigationHelpers';
+import { navigationOptions, defaultNavigationOptions } from '../../navigationHelpers';
 
 const screens = {
   Home: {
@@ -24,12 +24,6 @@ const screens = {
   },
 };
 
-const PatientHomeStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: 'blue',
-    },
-  },
-});
+const PatientHomeStack = createStackNavigator(screens, defaultNavigationOptions);
 
 export default PatientHomeStack;

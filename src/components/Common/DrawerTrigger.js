@@ -5,13 +5,24 @@ import {withNavigation} from 'react-navigation';
 import { DrawerActions } from 'react-navigation-drawer';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  icon: {
+    color: 'white',
+    fontSize: 30,
+  },
+  container: {
+    borderColor: 'yellow',
+    borderWidth: 5,
+    alignSelf: 'flex-end',
+  },
+});
 
 const DrawerTrigger = ({navigation}) => (
   <TouchableOpacity
+    style={styles.container}
     onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
   >
-    <Icon name="menu" size={30} />
+    <Icon name="menu" style={styles.icon} />
   </TouchableOpacity>
 );
 
