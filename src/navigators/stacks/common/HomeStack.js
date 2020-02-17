@@ -1,5 +1,5 @@
 import {createStackNavigator} from 'react-navigation-stack';
-import HomeScreen from '../../../screens/Home';
+import HomeScreen from '../../../screens/HomeScreen';
 import ProfileScreen from '../../../screens/ProfileScreen';
 import BookingSelectionScreen from '../../../screens/BookingSelectionScreen';
 import BookingSubmissionScreen from '../../../screens/BookingSubmissionScreen';
