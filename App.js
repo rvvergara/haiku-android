@@ -30,6 +30,7 @@ const switchNavigator = createSwitchNavigator(
       },
       {
         drawerPosition: 'right',
+        unmountInactiveRoutes: true,
       },
     ),
     practitionerFlow: createDrawerNavigator(
@@ -43,11 +44,12 @@ const switchNavigator = createSwitchNavigator(
       },
       {
         drawerPosition: 'right',
+        unmountInactiveRoutes: true,
       },
     ),
   },
   {
-    initialRouteName: 'practitionerFlow',
+    initialRouteName: 'patientFlow',
   },
 );
 
