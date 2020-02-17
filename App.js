@@ -1,5 +1,8 @@
+import React from 'react';
+import { View } from 'react-native';
+import { Button } from 'react-native-elements';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import {createDrawerNavigator} from 'react-navigation-drawer';
+import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
 import BookingsStack from './src/navigators/stacks/common/BookingsStack';
 import ClinicsStack from './src/navigators/stacks/common/ClinicsStack';
@@ -31,6 +34,15 @@ const switchNavigator = createSwitchNavigator(
       {
         drawerPosition: 'right',
         unmountInactiveRoutes: true,
+        contentComponent: (props) => (
+          <View>
+            <DrawerItems {...props} />
+            <Button
+              title="Logout"
+              onPress={() => console.log('Logging out')}
+            />
+          </View>
+        ),
       },
     ),
     practitionerFlow: createDrawerNavigator(
