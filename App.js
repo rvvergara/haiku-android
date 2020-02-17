@@ -36,6 +36,14 @@ const switchNavigator = createSwitchNavigator(
         contentOptions: {
           labelStyle: {
             fontSize: 20,
+            fontWeight: 'normal',
+          },
+          itemStyle: {
+            height: 50,
+          },
+          activeLabelStyle: {
+            fontWeight: 'bold',
+            color: 'black',
           },
         },
       },

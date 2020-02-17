@@ -1,29 +1,40 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet, Text, TouchableOpacity, View,
+} from 'react-native';
 import {DrawerItems} from 'react-navigation-drawer';
 
 const styles = StyleSheet.create({
-  logout: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  container: {
+    flex: 1,
   },
-  touch: {
-    marginLeft: 15,
+  logoutText: {
+    fontSize: 20,
+  },
+  logoutContainer: {
+    borderTopColor: 'black',
+    borderTopWidth: 0.95,
+    paddingLeft: 15,
+    paddingTop: 20,
     flexDirection: 'column',
     flex: 2,
   },
+  itemsContainer: {
+    flex: 3,
+  },
 });
 
-const CustomDrawer = props => (
-  <View style={{flex: 1}}>
-    <View style={{flex: 3}}>
+const CustomDrawer = (props) => (
+  <View style={styles.container}>
+    <View style={styles.itemsContainer}>
       <DrawerItems {...props} />
     </View>
 
     <TouchableOpacity
-      style={styles.touch}
-      onPress={() => console.log('Logging out')}>
-      <Text style={styles.logout}>Logout</Text>
+      style={styles.logoutContainer}
+      onPress={() => props.navigation.navigate('Login')}
+    >
+      <Text style={styles.logoutText}>Logout</Text>
     </TouchableOpacity>
   </View>
 );
