@@ -1,8 +1,8 @@
 import React from 'react';
-import {
-  StyleSheet, Text, TouchableOpacity, View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {DrawerItems} from 'react-navigation-drawer';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../store/thunks/user';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,19 +24,24 @@ const styles = StyleSheet.create({
   },
 });
 
-const CustomDrawer = (props) => (
-  <View style={styles.container}>
-    <View style={styles.itemsContainer}>
-      <DrawerItems {...props} />
-    </View>
+const CustomDrawer = props => {
+  const dispatch = useDispatch();
 
-    <TouchableOpacity
-      style={styles.logoutContainer}
-      onPress={() => props.navigation.navigate('Login')}
-    >
-      <Text style={styles.logoutText}>Logout</Text>
-    </TouchableOpacity>
-  </View>
-);
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.itemsContainer}>
+        <DrawerItems {...props} />
+      </View>
+
+      <TouchableOpacity style={styles.logoutContainer} onPress={handleLogout}>
+        <Text style={styles.logoutText}>Logout</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 export default CustomDrawer;

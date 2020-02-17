@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {sendRequest, setAuthorizationToken} from '../../utils/api';
-import { setCurrentUser } from '../actions/user';
-import { navigate } from '../../utils/navigationRef';
+import {navigate} from '../../utils/navigationRef';
+import {setCurrentUser} from '../actions/user';
 
-export const login = (loginParams) => async (dispatch) => {
+export const login = loginParams => async dispatch => {
   const path = 'v1/login';
 
   try {
@@ -13,13 +13,29 @@ export const login = (loginParams) => async (dispatch) => {
     // Store token in Async storage
     await AsyncStorage.setItem('token', token);
     // Dispatch currentUser Data
-    dispatch(setCurrentUser({
-      authenticated: true,
-      data: user,
-    }));
+    dispatch(
+      setCurrentUser({
+        authenticated: true,
+        data: user,
+      }),
+    );
     // navigate to the appropriate flow
     navigate('patientFlow');
   } catch (err) {
     console.log('LOGIN ERROR', err);
   }
+};
+
+export const logout = () => async dispatch => {
+  setAuthorizationToken(false);
+
+  await AsyncStorage.removeItem('token');
+
+  dispatch(
+    setCurrentUser({
+      authenticated: false,
+      data: {},
+    }),
+  );
+  navigate('Login');
 };
