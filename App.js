@@ -8,8 +8,6 @@ import HomeStack from './src/navigators/stacks/common/HomeStack';
 import ProfileEditStack from './src/navigators/stacks/common/ProfileEditStack';
 import PractitionersListStack from './src/navigators/stacks/Patient/PractitionersListStack';
 import LoginScreen from './src/screens/LoginScreen';
-import ScheduleScreen from './src/screens/ScheduleScreen';
-import ScheduleSubmissionScreen from './src/screens/ScheduleSubmissionScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import ScheduleStack from './src/navigators/stacks/Practitioner/ScheduleStack';
