@@ -79,7 +79,7 @@ const switchNavigator = createSwitchNavigator(
 
 const App = createAppContainer(switchNavigator);
 
-export default (
+export default () => (
   <Provider store={store}>
     <App />
   </Provider>
