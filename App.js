@@ -1,7 +1,7 @@
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
-import LogoutButton from './src/components/Common/LogoutButton';
+import CustomDrawer from './src/components/Common/CustomDrawer';
 import BookingsStack from './src/navigators/stacks/common/BookingsStack';
 import ClinicsStack from './src/navigators/stacks/common/ClinicsStack';
 import FeedbackStack from './src/navigators/stacks/common/FeedbackStack';
@@ -32,7 +32,12 @@ const switchNavigator = createSwitchNavigator(
       {
         drawerPosition: 'right',
         unmountInactiveRoutes: true,
-        contentComponent: LogoutButton,
+        contentComponent: CustomDrawer,
+        contentOptions: {
+          labelStyle: {
+            fontSize: 20,
+          },
+        },
       },
     ),
     practitionerFlow: createDrawerNavigator(
@@ -47,7 +52,12 @@ const switchNavigator = createSwitchNavigator(
       {
         drawerPosition: 'right',
         unmountInactiveRoutes: true,
-        contentComponent: LogoutButton,
+        contentComponent: CustomDrawer,
+        contentOptions: {
+          labelStyle: {
+            fontSize: 20,
+          },
+        },
       },
     ),
   },
