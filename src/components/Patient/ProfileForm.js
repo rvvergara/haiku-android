@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {
+  View, StyleSheet, TouchableOpacity, FlatList,
+} from 'react-native';
 import {Button, Text, Input} from 'react-native-elements';
 import {withNavigation, NavigationEvents} from 'react-navigation';
 import {setErrors} from '../../store/actions/error';
 import {createPatient} from '../../store/thunks/patient';
 import {logout} from '../../store/thunks/user';
 import MultipleInput from '../Common/MultipleInput';
+import usePatientForm from '../../hooks/usePatientForm';
 
 const styles = StyleSheet.create({
   error: {
@@ -21,59 +23,39 @@ const styles = StyleSheet.create({
 });
 
 const ProfileForm = ({navigation}) => {
-  const currentUserData = useSelector(state => state.currentUser.data);
-  const {id} = currentUserData;
-  const errors = useSelector(state => state.errors);
-  const dispatch = useDispatch();
-  const [firstName, setFirstName] = useState(
-    currentUserData.patient ? currentUserData.patient.firstName : '',
-  );
-  const [lastName, setLastName] = useState(
-    currentUserData.patient ? currentUserData.patient.lastName : '',
-  );
-  const [contactNumber, setContactNumber] = useState(
-    currentUserData.patient ? currentUserData.patient.contactNumber : '',
-  );
-  const [passport, setPassport] = useState(
-    currentUserData.patient ? currentUserData.patient.passport : '',
-  );
-  const [postalCode, setPostalCode] = useState(
-    currentUserData.patient ? currentUserData.patient.postalCode : '',
-  );
-  const [address, setAddress] = useState(
-    currentUserData.patient ? currentUserData.patient.address : '',
-  );
-  const [languages, setLanguages] = useState(
-    currentUserData.patient
-      ? JSON.parse(currentUserData.patient.languages)
-      : [],
-  );
+  const {
+    patientParams, patientSetters, errors, dispatch,
+  } = usePatientForm();
 
-  const buttonTitle =
-    navigation.state.routeName === 'NewProfile'
-      ? 'Create Profile'
-      : 'Update Profile';
+  const {
+    firstName, lastName, contactNumber, passport, postalCode, address, languages,
+  } = patientParams;
 
-  const errorMessages = errs => (
+  const {
+    setFirstName,
+    setLastName,
+    setContactNumber,
+    setPassport,
+    setPostalCode,
+    setAddress,
+    setLanguages,
+  } = patientSetters;
+
+  const buttonTitle = navigation.state.routeName === 'NewProfile'
+    ? 'Create Profile'
+    : 'Update Profile';
+
+  const errorMessages = (errs) => (
     <FlatList
       data={errs}
-      keyExtractor={err => err}
+      keyExtractor={(err) => err}
       renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
     />
   );
 
   const handleSubmit = () => {
     dispatch(
-      createPatient({
-        firstName,
-        lastName,
-        contactNumber,
-        passport,
-        postalCode,
-        address,
-        languages: JSON.stringify(languages),
-        userId: id,
-      }),
+      createPatient({...patientParams, languages: JSON.stringify(languages)}),
     );
   };
 
