@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, StyleSheet, TouchableOpacity, FlatList,
+  View, StyleSheet, TouchableOpacity, FlatList, Platform,
 } from 'react-native';
 import {
   Button, Text, Input, Image,
@@ -67,7 +67,12 @@ const ProfileForm = ({navigation}) => {
     };
     ImagePicker.launchImageLibrary(options, (res) => {
       if (res.path) {
-        setFiles(res);
+        const photoFile = {
+          name: res.fileName,
+          type: res.type,
+          uri: Platform.OS === 'android' ? res.uri : res.uri.replace('file://', ''),
+        };
+        setFiles(photoFile);
       }
     });
   };
