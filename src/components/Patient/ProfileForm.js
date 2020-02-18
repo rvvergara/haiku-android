@@ -67,7 +67,8 @@ const ProfileForm = ({navigation}) => {
     };
     ImagePicker.launchImageLibrary(options, (res) => {
       if (res.path) {
-        setFiles(res.path);
+        console.log('RESPONSE', res);
+        setFiles(res);
       }
     });
   };
@@ -80,13 +81,14 @@ const ProfileForm = ({navigation}) => {
 
   const stockPhotoUrl = 'https://bit.ly/38AvkO4';
 
+  const imageUri = files ? files.uri : stockPhotoUrl;
   return (
     <View>
       <NavigationEvents onWillBlur={() => dispatch(setErrors([]))} />
       {errors.length > 0 ? errorMessages(errors) : null}
       <View>
         <Image
-          source={{uri: stockPhotoUrl}}
+          source={{uri: imageUri}}
           style={styles.image}
         />
         <Button
