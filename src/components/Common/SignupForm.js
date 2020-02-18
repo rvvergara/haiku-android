@@ -5,9 +5,9 @@ import {
 } from 'react-native';
 import {NavigationEvents, withNavigation} from 'react-navigation';
 import {Input, Button, Text} from 'react-native-elements';
-import validator from 'validator';
 import {setError} from '../../store/actions/error';
 import { signup } from '../../store/thunks/user';
+import { isValidSignup } from '../../utils/formHelpers';
 
 const styles = StyleSheet.create({
   error: {
@@ -28,19 +28,6 @@ const SignupForm = ({navigation}) => {
   const [referralCode, setReferralCode] = useState('');
   const dispatch = useDispatch();
 
-  const isValidSignup = () => {
-    if (!password) {
-      dispatch(setError('All fields are required'));
-    } else if (!validator.isEmail(email)) {
-      dispatch(setError('Please put a valid email'));
-    } else if (role === '') {
-      dispatch(setError('Please select a role'));
-    } else {
-      return true;
-    }
-    return false;
-  };
-
   const clearForm = () => {
     setEmail('');
     setPassword('');
@@ -50,7 +37,7 @@ const SignupForm = ({navigation}) => {
   };
 
   const handleSignup = () => {
-    if (isValidSignup()) {
+    if (isValidSignup(dispatch, setError, { email, password, role})) {
       dispatch(signup({
         email,
         password,
