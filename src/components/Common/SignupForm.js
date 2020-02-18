@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, StyleSheet, TouchableOpacity, Picker,
+  View, StyleSheet, TouchableOpacity, Picker, FlatList,
 } from 'react-native';
 import {NavigationEvents, withNavigation} from 'react-navigation';
 import {Input, Button, Text} from 'react-native-elements';
-import {setError} from '../../store/actions/error';
+import {setErrors} from '../../store/actions/error';
 import { signup } from '../../store/thunks/user';
 import { isValidSignup } from '../../utils/formHelpers';
 import useSignup from '../../hooks/useSignup';
@@ -26,7 +26,7 @@ const SignupForm = ({navigation}) => {
     signupParams,
     clearForm,
     dispatch,
-    error,
+    errors,
     setEmail,
     setPassword,
     setRole,
@@ -38,7 +38,7 @@ const SignupForm = ({navigation}) => {
   } = signupParams;
 
   const handleSignup = () => {
-    if (isValidSignup(dispatch, setError, { email, password, role})) {
+    if (isValidSignup(dispatch, setErrors, { email, password, role})) {
       dispatch(signup({
         email,
         password,
@@ -48,11 +48,19 @@ const SignupForm = ({navigation}) => {
     }
   };
 
+  const errorMessages = (errs) => (
+    <FlatList
+      data={errs}
+      keyExtractor={(err) => err}
+      renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
+    />
+  );
+
   return (
     <View>
       <NavigationEvents onWillBlur={clearForm} />
 
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+      {errors.length > 0 ? errorMessages(errors) : null}
 
       <Input placeholder="Email" value={email} onChangeText={setEmail} />
       <View>

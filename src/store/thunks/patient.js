@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { sendAuthorizedRequest } from '../../utils/api';
 import { setCurrentUser } from '../actions/user';
-import { setError } from '../actions/error';
+import { setErrors } from '../actions/error';
 import { navigate } from '../../utils/navigationRef';
 
 export const createPatient = (params) => async (dispatch, getState) => {
@@ -15,7 +15,7 @@ export const createPatient = (params) => async (dispatch, getState) => {
     dispatch(setCurrentUser({ ...currentUser, data: updatedUserData }));
     navigate('Home');
   } catch (err) {
-    // console.log('ERROR', err.response.data.error.errors);
-    dispatch(setError('Something went wrong'));
+    const errors = err.response.data.error.errors.map((error) => error.msg);
+    dispatch(setErrors(errors));
   }
 };

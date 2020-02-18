@@ -1,12 +1,12 @@
 import validator from 'validator';
 
-export const isValidSignup = (dispatch, setError, { email, password, role }) => {
+export const isValidSignup = (dispatch, setErrors, { email, password, role }) => {
   if (!password) {
-    dispatch(setError('All fields are required'));
+    dispatch(setErrors(['All fields are required']));
   } else if (!validator.isEmail(email)) {
-    dispatch(setError('Please put a valid email'));
+    dispatch(setErrors(['Please put a valid email']));
   } else if (role === '') {
-    dispatch(setError('Please select a role'));
+    dispatch(setErrors(['Please select a role']));
   } else {
     return true;
   }

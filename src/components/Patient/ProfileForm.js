@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View, StyleSheet, TouchableOpacity, FlatList,
+} from 'react-native';
 import { Button, Text, Input } from 'react-native-elements';
 import { withNavigation, NavigationEvents } from 'react-navigation';
-import { setError } from '../../store/actions/error';
+import { setErrors } from '../../store/actions/error';
 import { createPatient } from '../../store/thunks/patient';
 import { logout } from '../../store/thunks/user';
 
 const styles = StyleSheet.create({
-
+  error: {
+    color: 'red',
+    fontSize: 18,
+  },
+  link: {
+    color: 'blue',
+    fontSize: 18,
+  },
 });
 
 const ProfileForm = ({ navigation }) => {
   const currentUserData = useSelector((state) => state.currentUser.data);
-  const error = useSelector((state) => state.error);
+  const { id } = currentUserData;
+  const errors = useSelector((state) => state.errors);
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState(currentUserData.patient ? currentUserData.patient.firstName : '');
   const [lastName, setLastName] = useState(currentUserData.patient ? currentUserData.patient.lastName : '');
@@ -25,8 +35,16 @@ const ProfileForm = ({ navigation }) => {
 
   const buttonTitle = navigation.state.routeName === 'NewProfile' ? 'Create Profile' : 'Update Profile';
 
+
+  const errorMessages = (errs) => (
+    <FlatList
+      data={errs}
+      keyExtractor={(err) => err}
+      renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
+    />
+  );
+
   const handleSubmit = () => {
-    // console.log('ROUTE: ', navigation.state.routeName);
     dispatch(createPatient({
       firstName,
       lastName,
@@ -34,15 +52,16 @@ const ProfileForm = ({ navigation }) => {
       passport,
       postalCode,
       address,
+      userId: id,
     }));
   };
 
   return (
     <View>
       <NavigationEvents
-        onWillBlur={() => dispatch(setError(''))}
+        onWillBlur={() => dispatch(setErrors([]))}
       />
-      { error ? <Text>{error}</Text> : null }
+      { errors.length > 0 ? errorMessages(errors) : null }
       <Input
         placeholder="First Name"
         value={firstName}
@@ -80,7 +99,7 @@ const ProfileForm = ({ navigation }) => {
         />
       </View>
       <TouchableOpacity onPress={() => dispatch(logout())}>
-        <Text>Sign in as another user? Log out</Text>
+        <Text style={styles.link}>Sign in as another user? Log out</Text>
       </TouchableOpacity>
     </View>
   );

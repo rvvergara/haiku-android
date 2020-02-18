@@ -1,8 +1,8 @@
-import { SET_ERROR } from '../actions/types';
+import { SET_ERRORS } from '../actions/types';
 
-export default (state = '', action) => {
-  if (action.type === SET_ERROR) {
-    return action.error;
+export default (state = [], action) => {
+  if (action.type === SET_ERRORS) {
+    return action.errors;
   }
   return state;
 };

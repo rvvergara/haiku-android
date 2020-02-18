@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {sendUnauthenticatedRequest, sendAuthorizedRequest, setAuthorizationToken} from '../../utils/api';
 import {navigate} from '../../utils/navigationRef';
 import {setCurrentUser} from '../actions/user';
-import { setError} from '../actions/error';
+import { setErrors} from '../actions/error';
 
 export const signup = (signupParams) => async (dispatch) => {
   const path = 'v1/users';
@@ -11,7 +11,7 @@ export const signup = (signupParams) => async (dispatch) => {
     await sendUnauthenticatedRequest('post', path, signupParams);
     return navigate('VerifyMessage');
   } catch (err) {
-    return dispatch(setError(err.response.data.error));
+    return dispatch(setErrors([err.response.data.error]));
   }
 };
 
@@ -30,7 +30,7 @@ export const login = (loginParams) => async (dispatch) => {
     );
     navigate('ResolveProfile');
   } catch (err) {
-    dispatch(setError('Invalid email or password!'));
+    dispatch(setErrors(['Invalid email or password!']));
   }
 };
 
@@ -86,6 +86,6 @@ export const fetchUserData = (id) => async (dispatch) => {
       }),
     );
   } catch (err) {
-    return dispatch(setError(err));
+    return dispatch(setErrors(err));
   }
 };

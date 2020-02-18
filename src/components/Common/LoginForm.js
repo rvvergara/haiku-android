@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View, StyleSheet, TouchableOpacity, FlatList,
+} from 'react-native';
 import { NavigationEvents, withNavigation } from 'react-navigation';
 import { Input, Button, Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { login } from '../../store/thunks/user';
-import { setError } from '../../store/actions/error';
+import { setErrors } from '../../store/actions/error';
 
 const styles = StyleSheet.create({
   error: {
@@ -18,7 +21,7 @@ const styles = StyleSheet.create({
 const LoginForm = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const error = useSelector((state) => state.error);
+  const errors = useSelector((state) => state.errors);
   const dispatch = useDispatch();
   const handleSubmit = () => {
     dispatch(login({email, password}));
@@ -27,15 +30,23 @@ const LoginForm = ({ navigation }) => {
   const clearForm = () => {
     setEmail('');
     setPassword('');
-    dispatch(setError(''));
+    dispatch(setErrors(''));
   };
+
+  const errorMessages = (errs) => (
+    <FlatList
+      data={errs}
+      keyExtractor={(err) => err}
+      renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
+    />
+  );
 
   return (
     <View>
       <NavigationEvents
         onWillBlur={clearForm}
       />
-      { error ? <Text style={styles.error}>{error}</Text> : null }
+      { errors.length > 0 ? errorMessages(errors) : null }
       <Input
         placeholder="Email"
         value={email}
@@ -52,10 +63,14 @@ const LoginForm = ({ navigation }) => {
         onPress={handleSubmit}
       />
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-        <Text>Don't have an account yet? Sign up instead</Text>
+        <Text>Don&apos;t have an account yet? Sign up instead</Text>
       </TouchableOpacity>
     </View>
   );
+};
+
+LoginForm.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default withNavigation(LoginForm);

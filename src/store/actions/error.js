@@ -1,6 +1,6 @@
-import { SET_ERROR } from './types';
+import { SET_ERRORS } from './types';
 
-export const setError = (error) => ({
-  type: SET_ERROR,
-  error,
+export const setErrors = (errors) => ({
+  type: SET_ERRORS,
+  errors,
 });

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setError } from '../store/actions/error';
+import { setErrors } from '../store/actions/error';
 
 export default () => {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
   const [password, setPassword] = useState('');
   const [referralCode, setReferralCode] = useState('');
-  const error = useSelector((state) => state.error);
+  const errors = useSelector((state) => state.errors);
   const dispatch = useDispatch();
 
   const clearForm = () => {
@@ -15,13 +15,13 @@ export default () => {
     setPassword('');
     setRole('');
     setReferralCode('');
-    dispatch(setError(''));
+    dispatch(setErrors(''));
   };
 
   return {
     clearForm,
     dispatch,
-    error,
+    errors,
     signupParams: {
       email,
       password,

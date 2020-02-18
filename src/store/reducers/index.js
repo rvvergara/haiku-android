@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 import currentUser from './currentUser';
-import error from './error';
+import errors from './error';
 
 export default combineReducers({
   currentUser,
-  error,
+  errors,
 });
