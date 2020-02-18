@@ -40,6 +40,8 @@ target 'merlinstore_client_native' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
   target 'merlinstore_client_nativeTests' do
     inherit! :search_paths
     # Pods for testing

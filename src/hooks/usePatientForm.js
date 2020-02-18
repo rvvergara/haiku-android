@@ -29,6 +29,7 @@ export default () => {
       ? JSON.parse(currentUserData.patient.languages)
       : [],
   );
+  const [files, setFiles] = useState(null);
 
   return {
     patientParams: {

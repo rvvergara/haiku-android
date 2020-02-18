@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import {Button, Text, Input} from 'react-native-elements';
 import {withNavigation, NavigationEvents} from 'react-navigation';
+import ImagePicker from 'react-native-image-picker';
 import {setErrors} from '../../store/actions/error';
 import {createPatient} from '../../store/thunks/patient';
 import {logout} from '../../store/thunks/user';
@@ -28,7 +29,7 @@ const ProfileForm = ({navigation}) => {
   } = usePatientForm();
 
   const {
-    firstName, lastName, contactNumber, passport, postalCode, address, languages,
+    firstName, lastName, contactNumber, passport, postalCode, address, languages, files,
   } = patientParams;
 
   const {
@@ -39,6 +40,7 @@ const ProfileForm = ({navigation}) => {
     setPostalCode,
     setAddress,
     setLanguages,
+    setFiles,
   } = patientSetters;
 
   const buttonTitle = navigation.state.routeName === 'NewProfile'
