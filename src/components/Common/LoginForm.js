@@ -3,8 +3,8 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationEvents, withNavigation } from 'react-navigation';
 import { Input, Button, Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../store/thunks/user';
-import { setError } from '../store/actions/error';
+import { login } from '../../store/thunks/user';
+import { setError } from '../../store/actions/error';
 
 const styles = StyleSheet.create({
   error: {
