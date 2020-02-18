@@ -15,12 +15,14 @@ import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuth';
+import NewProfileScreen from './src/screens/NewProfileScreen';
 import store from './src/store/store';
 import { setNavigator } from './src/utils/navigationRef';
 
 const switchNavigator = createSwitchNavigator(
   {
     ResolveAuth: ResolveAuthScreen,
+    NewProfile: NewProfileScreen,
     authFlow: createStackNavigator({
       Login: LoginScreen,
       Signup: SignupScreen,
