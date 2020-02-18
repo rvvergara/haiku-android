@@ -19,7 +19,7 @@ export const login = (loginParams) => async (dispatch) => {
         data: user,
       }),
     );
-    navigate('patientFlow');
+    navigate('ResolveProfile');
   } catch (err) {
     dispatch(setError('Invalid email or password!'));
   }

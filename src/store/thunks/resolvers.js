@@ -16,8 +16,14 @@ export const resolveToken = () => async (dispatch) => {
   if (token && !checkIfTokenExp(decode(token))) {
     const decoded = decode(token);
     await dispatch(fetchUserData(decoded.user_id));
-    navigate('Home');
+    navigate('ResolveProfile');
   } else {
     navigate('Login');
   }
+};
+
+export const resolveProfile = (userData) => async (dispatch) => {
+  const hasProfile = userData.patient || userData.practitioner;
+
+  return hasProfile ? navigate('Home') : navigate('NewProfile');
 };
