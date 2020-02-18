@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {
   View, StyleSheet, TouchableOpacity, FlatList,
 } from 'react-native';
-import {Button, Text, Input} from 'react-native-elements';
+import {
+  Button, Text, Input, Image,
+} from 'react-native-elements';
 import {withNavigation, NavigationEvents} from 'react-navigation';
 import ImagePicker from 'react-native-image-picker';
 import {setErrors} from '../../store/actions/error';
@@ -20,6 +22,10 @@ const styles = StyleSheet.create({
   link: {
     color: 'blue',
     fontSize: 18,
+  },
+  image: {
+    width: 150,
+    height: 150,
   },
 });
 
@@ -55,16 +61,39 @@ const ProfileForm = ({navigation}) => {
     />
   );
 
+  const handleChooseImage = () => {
+    const options = {
+      noData: true,
+    };
+    ImagePicker.launchImageLibrary(options, (res) => {
+      if (res.path) {
+        setFiles(res.path);
+      }
+    });
+  };
+
   const handleSubmit = () => {
     dispatch(
       createPatient({...patientParams, languages: JSON.stringify(languages)}),
     );
   };
 
+  const stockPhotoUrl = 'https://bit.ly/38AvkO4';
+
   return (
     <View>
       <NavigationEvents onWillBlur={() => dispatch(setErrors([]))} />
       {errors.length > 0 ? errorMessages(errors) : null}
+      <View>
+        <Image
+          source={{uri: stockPhotoUrl}}
+          style={styles.image}
+        />
+        <Button
+          title="Change Pic"
+          onPress={handleChooseImage}
+        />
+      </View>
       <Input
         placeholder="First Name"
         value={firstName}

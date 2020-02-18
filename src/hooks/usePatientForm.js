@@ -41,6 +41,7 @@ export default () => {
       address,
       languages,
       userId,
+      files,
     },
     patientSetters: {
       setFirstName,
@@ -50,6 +51,7 @@ export default () => {
       setPostalCode,
       setAddress,
       setLanguages,
+      setFiles,
     },
     errors,
     dispatch,
