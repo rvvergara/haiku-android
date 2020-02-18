@@ -74,8 +74,17 @@ const ProfileForm = ({navigation}) => {
   };
 
   const handleSubmit = () => {
+    const formData = new FormData();
+
+    const params = {...patientParams, languages: JSON.stringify(languages)};
+
+    for (const key in params) {
+      if (key) formData.append(key, params[key]);
+    }
+
+    console.log('PARAMS SUBMITTED', params);
     dispatch(
-      createPatient({...patientParams, languages: JSON.stringify(languages)}),
+      createPatient(params),
     );
   };
 
