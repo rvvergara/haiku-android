@@ -5,6 +5,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, Text, Input } from 'react-native-elements';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 import { setError } from '../../store/actions/error';
+import { createPatient } from '../../store/thunks/patient';
 import { logout } from '../../store/thunks/user';
 
 const styles = StyleSheet.create({
@@ -25,7 +26,15 @@ const ProfileForm = ({ navigation }) => {
   const buttonTitle = navigation.state.routeName === 'NewProfile' ? 'Create Profile' : 'Update Profile';
 
   const handleSubmit = () => {
-    console.log('ROUTE: ', navigation.state.routeName);
+    // console.log('ROUTE: ', navigation.state.routeName);
+    dispatch(createPatient({
+      firstName,
+      lastName,
+      contactNumber,
+      passport,
+      postalCode,
+      address,
+    }));
   };
 
   return (
