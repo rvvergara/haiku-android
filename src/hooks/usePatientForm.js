@@ -26,7 +26,7 @@ export default () => {
   );
   const [languages, setLanguages] = useState(
     currentUserData.patient
-      ? JSON.parse(currentUserData.patient.languages)
+      ? currentUserData.patient.languages
       : [],
   );
   const [files, setFiles] = useState(null);

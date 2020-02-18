@@ -6,7 +6,7 @@ import {
 import {
   Button, Text, Input, Image,
 } from 'react-native-elements';
-import {withNavigation, NavigationEvents} from 'react-navigation';
+import {withNavigation, NavigationEvents } from 'react-navigation';
 import ImagePicker from 'react-native-image-picker';
 import {setErrors} from '../../store/actions/error';
 import {createPatient} from '../../store/thunks/patient';
@@ -67,7 +67,6 @@ const ProfileForm = ({navigation}) => {
     };
     ImagePicker.launchImageLibrary(options, (res) => {
       if (res.path) {
-        console.log('RESPONSE', res);
         setFiles(res);
       }
     });
@@ -76,16 +75,16 @@ const ProfileForm = ({navigation}) => {
   const handleSubmit = () => {
     const formData = new FormData();
 
-    const params = {...patientParams, languages: JSON.stringify(languages)};
+    const params = {...patientParams, languages: JSON.stringify(languages), dateOfBirth: '1989-01-10'};
 
     for (const key in params) {
       if (key) formData.append(key, params[key]);
     }
 
-    console.log('PARAMS SUBMITTED', params);
     dispatch(
-      createPatient(params),
+      createPatient(formData),
     );
+    navigation.goBack();
   };
 
   const stockPhotoUrl = 'https://bit.ly/38AvkO4';
