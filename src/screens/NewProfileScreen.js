@@ -6,12 +6,11 @@ import PatientForm from '../components/Patient/ProfileForm';
 
 const NewProfileScreen = () => {
   const role = useSelector((state) => state.currentUser.data.role);
+
   return (
     <View>
       <Text h3>
-        New Profile Screen for
-        {' '}
-        {role.toLowerCase()}
+        New Profile Screen
       </Text>
       { role === 'PATIENT' ? <PatientForm /> : null }
     </View>

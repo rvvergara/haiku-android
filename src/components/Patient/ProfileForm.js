@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, Text, Input } from 'react-native-elements';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 import { setError } from '../../store/actions/error';
+import { logout } from '../../store/thunks/user';
 
 const styles = StyleSheet.create({
 
@@ -69,6 +70,9 @@ const ProfileForm = ({ navigation }) => {
           onPress={handleSubmit}
         />
       </View>
+      <TouchableOpacity onPress={() => dispatch(logout())}>
+        <Text>Sign in as another user? Log out</Text>
+      </TouchableOpacity>
     </View>
   );
 };
