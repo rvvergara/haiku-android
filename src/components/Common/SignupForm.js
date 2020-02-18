@@ -7,10 +7,15 @@ import {NavigationEvents, withNavigation} from 'react-navigation';
 import {Input, Button, Text} from 'react-native-elements';
 import validator from 'validator';
 import {setError} from '../../store/actions/error';
+import { signup } from '../../store/thunks/user';
 
 const styles = StyleSheet.create({
   error: {
     color: 'red',
+    fontSize: 16,
+  },
+  link: {
+    color: 'blue',
     fontSize: 16,
   },
 });
@@ -46,7 +51,12 @@ const SignupForm = ({navigation}) => {
 
   const handleSignup = () => {
     if (isValidSignup()) {
-      console.log('SIGNING UP');
+      dispatch(signup({
+        email,
+        password,
+        role,
+        referralCode,
+      }));
     }
   };
 
@@ -82,6 +92,11 @@ const SignupForm = ({navigation}) => {
         title="Sign Up"
         onPress={handleSignup}
       />
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Login')}
+      >
+        <Text style={styles.link}>Already have an account? Log in instead</Text>
+      </TouchableOpacity>
     </View>
   );
 };

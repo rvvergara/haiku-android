@@ -1,10 +1,19 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import decode from 'jwt-decode';
-import moment from 'moment';
 import {sendUnauthenticatedRequest, sendAuthorizedRequest, setAuthorizationToken} from '../../utils/api';
 import {navigate} from '../../utils/navigationRef';
 import {setCurrentUser} from '../actions/user';
 import { setError} from '../actions/error';
+
+export const signup = (signupParams) => async (dispatch) => {
+  const path = 'v1/users';
+
+  try {
+    await sendUnauthenticatedRequest('post', path, signupParams);
+    return navigate('VerifyMessage');
+  } catch (err) {
+    return dispatch(setError(err.response.data.error));
+  }
+};
 
 export const login = (loginParams) => async (dispatch) => {
   const path = 'v1/login';

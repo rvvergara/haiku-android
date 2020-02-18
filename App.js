@@ -29,6 +29,8 @@ const switchNavigator = createSwitchNavigator(
       Login: LoginScreen,
       Signup: SignupScreen,
       VerifyMessage: VerifyMessageScreen,
+    }, {
+      headerMode: null,
     }),
     patientFlow: createDrawerNavigator(
       {
