@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View, StyleSheet, TouchableOpacity, Picker,
 } from 'react-native';
@@ -8,6 +8,7 @@ import {Input, Button, Text} from 'react-native-elements';
 import {setError} from '../../store/actions/error';
 import { signup } from '../../store/thunks/user';
 import { isValidSignup } from '../../utils/formHelpers';
+import useSignup from '../../hooks/useSignup';
 
 const styles = StyleSheet.create({
   error: {
@@ -21,20 +22,20 @@ const styles = StyleSheet.create({
 });
 
 const SignupForm = ({navigation}) => {
-  const error = useSelector((state) => state.error);
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
-  const [password, setPassword] = useState('');
-  const [referralCode, setReferralCode] = useState('');
-  const dispatch = useDispatch();
+  const {
+    signupParams,
+    clearForm,
+    dispatch,
+    error,
+    setEmail,
+    setPassword,
+    setRole,
+    setReferralCode,
+  } = useSignup();
 
-  const clearForm = () => {
-    setEmail('');
-    setPassword('');
-    setRole('');
-    setReferralCode('');
-    dispatch(setError(''));
-  };
+  const {
+    email, password, role, referralCode,
+  } = signupParams;
 
   const handleSignup = () => {
     if (isValidSignup(dispatch, setError, { email, password, role})) {
@@ -86,6 +87,10 @@ const SignupForm = ({navigation}) => {
       </TouchableOpacity>
     </View>
   );
+};
+
+SignupForm.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default withNavigation(SignupForm);
