@@ -32,6 +32,10 @@ export default (routeName) => {
   );
   const [files, setFiles] = useState(null);
 
+  const image = currentUserData.patient ? currentUserData.patient.image : null;
+
+  const patientId = currentUserData.patient ? currentUserData.patient.id : undefined;
+
   useEffect(() => () => dispatch(setErrors([])), []);
 
   return {
@@ -58,5 +62,7 @@ export default (routeName) => {
     },
     errors,
     dispatch,
+    image,
+    patientId,
   };
 };

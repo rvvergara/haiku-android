@@ -10,7 +10,7 @@ import {
 } from 'react-native-elements';
 import {withNavigation, NavigationEvents } from 'react-navigation';
 import {setErrors} from '../../store/actions/error';
-import {createPatient} from '../../store/thunks/patient';
+import {createPatient, updatePatient } from '../../store/thunks/patient';
 import {logout} from '../../store/thunks/user';
 import MultipleInput from '../Common/MultipleInput';
 import usePatientForm from '../../hooks/usePatientForm';
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 
 const ProfileForm = ({navigation}) => {
   const {
-    patientParams, patientSetters, errors, dispatch,
+    patientParams, patientSetters, errors, dispatch, image, patientId,
   } = usePatientForm(navigation.state.routeName);
 
   const {
@@ -65,14 +65,14 @@ const ProfileForm = ({navigation}) => {
   const handleSubmit = () => {
     const params = {...patientParams, languages: JSON.stringify(languages), dateOfBirth: '1989-01-10'};
 
-    const action = navigation.state.routeName === 'NewProfile' ? createPatient : () => {};
+    const action = navigation.state.routeName === 'NewProfile' ? createPatient : updatePatient;
 
-    submitProfile(dispatch, action, params);
+    submitProfile(dispatch, action, params, patientId);
   };
 
-  const stockPhotoUrl = 'https://bit.ly/38AvkO4';
+  const initialImageUri = image || 'https://bit.ly/38AvkO4';
 
-  const imageUri = files ? files.uri : stockPhotoUrl;
+  const imageUri = files ? files.uri : initialImageUri;
   return (
     <View>
       <NavigationEvents onWillBlur={() => dispatch(setErrors([]))} />

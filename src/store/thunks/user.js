@@ -28,7 +28,7 @@ export const login = (loginParams) => async (dispatch) => {
         data: user,
       }),
     );
-    navigate('ResolveRole');
+    navigate('ResolveProfile');
   } catch (err) {
     dispatch(setErrors(['Invalid email or password!']));
   }

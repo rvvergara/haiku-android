@@ -19,9 +19,12 @@ const styles = StyleSheet.create({
 });
 
 const MultipleInput = ({inputs, setInputs, placeholder}) => {
+  const collectionMapped = inputs ? inputs.map((input) => ({
+    id: uuid(),
+    value: input,
+  })) : [];
   const [value, setValue] = useState('');
-  const [collection, setCollection] = useState([]);
-
+  const [collection, setCollection] = useState(collectionMapped);
   const addInput = () => {
     if (!value) return;
     setInputs([...inputs, value]);

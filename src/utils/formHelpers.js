@@ -35,13 +35,12 @@ export const handleChooseImage = (setFiles) => {
   });
 };
 
-export const submitProfile = (dispatch, action, params) => {
+export const submitProfile = (dispatch, action, params, resourceId) => {
   const formData = new FormData();
 
   Object.keys(params).forEach((key) => formData.append(key, params[key]));
-
   dispatch(
-    action(formData),
+    action(formData, resourceId),
   );
 };
 
