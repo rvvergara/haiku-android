@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {
   FlatList,
-  Platform,
   StyleSheet,
   TouchableOpacity,
   View,

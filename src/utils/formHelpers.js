@@ -1,4 +1,5 @@
 import validator from 'validator';
+import { Platform } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 
 
