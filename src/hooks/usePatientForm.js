@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { setErrors } from '../store/actions/error';
 
 export default (routeName) => {
   const currentUserData = useSelector((state) => state.currentUser.data);
@@ -30,6 +31,8 @@ export default (routeName) => {
       : [],
   );
   const [files, setFiles] = useState(null);
+
+  useEffect(() => () => dispatch(setErrors([])), []);
 
   return {
     patientParams: {

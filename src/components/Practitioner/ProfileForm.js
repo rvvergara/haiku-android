@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  FlatList, StyleSheet, TouchableOpacity, View,
+  StyleSheet, TouchableOpacity, View,
 } from 'react-native';
 import {
   Button, Image, Input, Text,
@@ -11,7 +11,7 @@ import usePractitionerForm from '../../hooks/usePractitionerForm';
 import {setErrors} from '../../store/actions/error';
 import {createPractitioner} from '../../store/thunks/practitioner';
 import {logout} from '../../store/thunks/user';
-import {handleChooseImage, submitProfile} from '../../utils/formHelpers';
+import {handleChooseImage, submitProfile, errorMessages } from '../../utils/formHelpers';
 import MultipleInput from '../Common/MultipleInput';
 
 const styles = StyleSheet.create({
@@ -61,14 +61,6 @@ const ProfileForm = ({navigation}) => {
     ? 'Create Profile'
     : 'Update Profile';
 
-  const errorMessages = (errs) => (
-    <FlatList
-      data={errs}
-      keyExtractor={(err) => err}
-      renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
-    />
-  );
-
   const handleSubmit = () => {
     const params = {
       ...practitionerParams,
@@ -89,7 +81,7 @@ const ProfileForm = ({navigation}) => {
   return (
     <View>
       <NavigationEvents onWillBlur={() => dispatch(setErrors([]))} />
-      {errors.length > 0 ? errorMessages(errors) : null}
+      {errors.length > 0 ? errorMessages(errors, styles) : null}
       <View>
         <Image source={{uri: imageUri}} style={styles.image} />
         <Button

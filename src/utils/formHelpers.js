@@ -1,5 +1,8 @@
+import React from 'react';
+import { FlatList, Platform } from 'react-native';
+import { Text } from 'react-native-elements';
 import validator from 'validator';
-import { Platform } from 'react-native';
+
 import ImagePicker from 'react-native-image-picker';
 
 
@@ -41,3 +44,11 @@ export const submitProfile = (dispatch, action, params) => {
     action(formData),
   );
 };
+
+export const errorMessages = (errs, styles) => (
+  <FlatList
+    data={errs}
+    keyExtractor={(err) => err}
+    renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
+  />
+);

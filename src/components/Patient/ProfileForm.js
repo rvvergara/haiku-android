@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
-  FlatList,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -15,7 +14,7 @@ import {createPatient} from '../../store/thunks/patient';
 import {logout} from '../../store/thunks/user';
 import MultipleInput from '../Common/MultipleInput';
 import usePatientForm from '../../hooks/usePatientForm';
-import { handleChooseImage, submitProfile } from '../../utils/formHelpers';
+import { handleChooseImage, submitProfile, errorMessages } from '../../utils/formHelpers';
 
 const styles = StyleSheet.create({
   error: {
@@ -63,16 +62,6 @@ const ProfileForm = ({navigation}) => {
     ? 'Create Profile'
     : 'Update Profile';
 
-  const errorMessages = (errs) => (
-    <FlatList
-      data={errs}
-      keyExtractor={(err) => err}
-      renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
-    />
-  );
-
-  useEffect(() => () => dispatch(setErrors([])), []);
-
   const handleSubmit = () => {
     const params = {...patientParams, languages: JSON.stringify(languages), dateOfBirth: '1989-01-10'};
 
@@ -87,7 +76,7 @@ const ProfileForm = ({navigation}) => {
   return (
     <View>
       <NavigationEvents onWillBlur={() => dispatch(setErrors([]))} />
-      {errors.length > 0 ? errorMessages(errors) : null}
+      {errors.length > 0 ? errorMessages(errors, styles) : null}
       <View>
         <Image
           source={{uri: imageUri}}
