@@ -1,21 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {StyleSheet, Text, ScrollView } from 'react-native';
+import {Text, ScrollView } from 'react-native';
 import PatientForm from '../components/Patient/ProfileForm';
 import PractitionerForm from '../components/Practitioner/ProfileForm';
 
-const styles = StyleSheet.create({});
-
 const ProfileEditScreen = () => {
+  const authenticated = useSelector((state) => state.currentUser.authenticated);
   const role = useSelector((state) => state.currentUser.data.role);
-  return (
-    <ScrollView>
-      <Text>Patient Profile Screen</Text>
-      {
+  return authenticated
+    ? (
+      <ScrollView>
+        <Text>Patient Profile Screen</Text>
+        {
         role === 'PATIENT' ? <PatientForm /> : <PractitionerForm />
       }
-    </ScrollView>
-  );
+      </ScrollView>
+    )
+    : null;
 };
 
 export default ProfileEditScreen;
