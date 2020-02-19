@@ -22,8 +22,10 @@ export const resolveToken = () => async (dispatch) => {
   }
 };
 
-export const resolveProfile = (userData) => async (dispatch) => {
+export const resolveProfile = (userData) => async () => {
   const hasProfile = userData.patient || userData.practitioner;
 
   return hasProfile ? navigate('Home') : navigate('NewProfile');
 };
+
+export const resolveRole = (userData) => async () => (userData.patient ? navigate('patientFlow') : navigate('practitionerFlow'));
