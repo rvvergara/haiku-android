@@ -7,12 +7,12 @@ import {
   Button, Text, Input, Image,
 } from 'react-native-elements';
 import {withNavigation, NavigationEvents } from 'react-navigation';
-import ImagePicker from 'react-native-image-picker';
 import {setErrors} from '../../store/actions/error';
 import {createPatient} from '../../store/thunks/patient';
 import {logout} from '../../store/thunks/user';
 import MultipleInput from '../Common/MultipleInput';
 import usePatientForm from '../../hooks/usePatientForm';
+import { handleChooseImage, submitProfile } from '../../utils/formHelpers';
 
 const styles = StyleSheet.create({
   error: {
@@ -61,35 +61,12 @@ const ProfileForm = ({navigation}) => {
     />
   );
 
-  const handleChooseImage = () => {
-    const options = {
-      noData: true,
-    };
-    ImagePicker.launchImageLibrary(options, (res) => {
-      if (res.path) {
-        const photoFile = {
-          name: res.fileName,
-          type: res.type,
-          uri: Platform.OS === 'android' ? res.uri : res.uri.replace('file://', ''),
-        };
-        setFiles(photoFile);
-      }
-    });
-  };
-
   const handleSubmit = () => {
-    const formData = new FormData();
-
     const params = {...patientParams, languages: JSON.stringify(languages), dateOfBirth: '1989-01-10'};
 
-    for (const key in params) {
-      if (key) formData.append(key, params[key]);
-    }
+    const action = navigation.state.routeName === 'NewProfile' ? createPatient : () => {};
 
-    dispatch(
-      createPatient(formData),
-    );
-    navigation.goBack();
+    submitProfile(dispatch, action, params);
   };
 
   const stockPhotoUrl = 'https://bit.ly/38AvkO4';
@@ -106,7 +83,7 @@ const ProfileForm = ({navigation}) => {
         />
         <Button
           title="Change Pic"
-          onPress={handleChooseImage}
+          onPress={() => handleChooseImage(setFiles)}
         />
       </View>
       <Input
