@@ -19,3 +19,19 @@ export const createPractitioner = (params) => async (dispatch, getState) => {
     dispatch(setErrors(errors));
   }
 };
+
+export const updatePractitioner = (params, practitionerId) => async (dispatch, getState) => {
+  const path = `v1/patients/${practitionerId}`;
+  const token = await AsyncStorage.getItem('token');
+  try {
+    const res = await sendAuthorizedRequest('put', path, token, params);
+    const { practitioner } = res.data;
+    const { currentUser } = getState();
+    const updatedUserData = { ...currentUser.data, practitioner };
+    dispatch(setCurrentUser({ ...currentUser, data: updatedUserData }));
+    navigate('Home');
+  } catch (err) {
+    const errors = err.response.data.error.errors.map((error) => error.msg);
+    dispatch(setErrors(errors));
+  }
+};
