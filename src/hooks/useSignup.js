@@ -15,7 +15,7 @@ export default () => {
     setPassword('');
     setRole('');
     setReferralCode('');
-    dispatch(setErrors(''));
+    dispatch(setErrors([]));
   };
 
   return {

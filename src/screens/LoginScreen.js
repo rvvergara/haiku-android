@@ -11,8 +11,6 @@ const styles = StyleSheet.create({
     marginBottom: 80,
     alignSelf: 'center',
     marginTop: 50,
-    borderColor: 'red',
-    borderWidth: 4,
   },
   logoContainer: {
     alignSelf: 'center',

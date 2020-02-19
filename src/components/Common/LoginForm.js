@@ -14,8 +14,25 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
   },
+  input: {
+    borderWidth: 1,
+    borderColor: '#5271ff',
+    borderRadius: 7,
+    paddingHorizontal: 10,
+    marginTop: 5,
+  },
+  inputContainer: {
+    borderBottomWidth: 0,
+  },
+  label: {
+    color: '#20385a',
+  },
   link: {
     color: 'blue',
+  },
+  button: {
+    backgroundColor: '#5073f1',
+    marginBottom: 5,
   },
 });
 
@@ -51,24 +68,31 @@ const LoginForm = ({ navigation }) => {
       />
       { errors.length > 0 ? errorMessages(errors) : null }
       <Input
-        placeholder="Email"
+        label="Email"
+        labelStyle={styles.label}
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
         autoCorrect={false}
+        inputStyle={styles.input}
+        inputContainerStyle={styles.inputContainer}
       />
       <Spacer />
       <Input
-        placeholder="Password"
+        label="Password"
+        labelStyle={styles.label}
         value={password}
         secureTextEntry
         onChangeText={setPassword}
         autoCapitalize="none"
         autoCorrect={false}
+        inputStyle={styles.input}
+        inputContainerStyle={styles.inputContainer}
       />
       <Spacer />
       <Button
-        title="Log In"
+        buttonStyle={styles.button}
+        title="Login"
         onPress={handleSubmit}
       />
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
