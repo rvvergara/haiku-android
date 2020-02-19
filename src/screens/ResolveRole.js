@@ -5,7 +5,9 @@ import { resolveRole } from '../store/thunks/resolvers';
 const ResolveRole = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.currentUser.data);
-  useEffect(() => dispatch(resolveRole(userData)), []);
+  useEffect(() => {
+    dispatch(resolveRole(userData));
+  }, []);
 
   return null;
 };

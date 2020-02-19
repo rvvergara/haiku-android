@@ -15,6 +15,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import NewProfileScreen from './src/screens/NewProfileScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuth';
 import ResolveProfileScreen from './src/screens/ResolveProfile';
+import ResolveRoleScreen from './src/screens/ResolveRole';
 import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import store from './src/store/store';
@@ -23,6 +24,7 @@ import {setNavigator} from './src/utils/navigationRef';
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
   ResolveProfile: ResolveProfileScreen,
+  ResolveRole: ResolveRoleScreen,
   NewProfile: NewProfileScreen,
   authFlow: createStackNavigator(
     {
@@ -88,6 +90,6 @@ const App = createAppContainer(switchNavigator);
 
 export default () => (
   <Provider store={store}>
-    <App ref={navigator => setNavigator(navigator)} />
+    <App ref={(navigator) => setNavigator(navigator)} />
   </Provider>
 );
