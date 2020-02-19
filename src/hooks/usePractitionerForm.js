@@ -34,7 +34,7 @@ export default () => {
   const [files, setFiles] = useState(null);
 
   return {
-    patientParams: {
+    practitionerParams: {
       firstName,
       lastName,
       education,
@@ -45,7 +45,7 @@ export default () => {
       userId,
       files,
     },
-    patientSetters: {
+    practitionerSetters: {
       setFirstName,
       setLastName,
       setEducation,

@@ -1,19 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  FlatList,
-  Platform,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Button, Image, Input, Text} from 'react-native-elements';
-import ImagePicker from 'react-native-image-picker';
 import {NavigationEvents, withNavigation} from 'react-navigation';
-import usePatientForm from '../../hooks/usePatientForm';
+import usePractitionerForm from '../../hooks/usePractitionerForm';
 import {setErrors} from '../../store/actions/error';
-import {createPatient} from '../../store/thunks/patient';
+import {createPractitioner} from '../../store/thunks/practitioner';
 import {logout} from '../../store/thunks/user';
+import {handleChooseImage, submitProfile} from '../../utils/formHelpers';
 import MultipleInput from '../Common/MultipleInput';
 
 const styles = StyleSheet.create({
@@ -32,7 +26,12 @@ const styles = StyleSheet.create({
 });
 
 const ProfileForm = ({navigation}) => {
-  const {patientParams, patientSetters, errors, dispatch} = usePatientForm();
+  const {
+    practitionerParams,
+    practitionerSetters,
+    errors,
+    dispatch,
+  } = usePractitionerForm();
 
   const {
     firstName,
@@ -43,7 +42,7 @@ const ProfileForm = ({navigation}) => {
     biography,
     languages,
     files,
-  } = patientParams;
+  } = practitionerParams;
 
   const {
     setFirstName,
@@ -54,7 +53,7 @@ const ProfileForm = ({navigation}) => {
     setBiography,
     setLanguages,
     setFiles,
-  } = patientSetters;
+  } = practitionerSetters;
 
   const buttonTitle =
     navigation.state.routeName === 'NewProfile'
@@ -69,40 +68,19 @@ const ProfileForm = ({navigation}) => {
     />
   );
 
-  const handleChooseImage = () => {
-    const options = {
-      noData: true,
-    };
-    ImagePicker.launchImageLibrary(options, res => {
-      if (res.path) {
-        const photoFile = {
-          name: res.fileName,
-          type: res.type,
-          uri:
-            Platform.OS === 'android'
-              ? res.uri
-              : res.uri.replace('file://', ''),
-        };
-        setFiles(photoFile);
-      }
-    });
-  };
-
   const handleSubmit = () => {
-    const formData = new FormData();
-
     const params = {
-      ...patientParams,
+      ...practitionerParams,
       languages: JSON.stringify(languages),
       dateOfBirth: '1989-01-10',
     };
 
-    for (const key in params) {
-      if (key) formData.append(key, params[key]);
-    }
+    const action =
+      navigation.state.routeName === 'NewProfile'
+        ? createPractitioner
+        : () => {};
 
-    dispatch(createPatient(formData));
-    navigation.goBack();
+    submitProfile(dispatch, action, params);
   };
 
   const stockPhotoUrl = 'https://bit.ly/38AvkO4';
@@ -114,7 +92,10 @@ const ProfileForm = ({navigation}) => {
       {errors.length > 0 ? errorMessages(errors) : null}
       <View>
         <Image source={{uri: imageUri}} style={styles.image} />
-        <Button title="Change Pic" onPress={handleChooseImage} />
+        <Button
+          title="Change Pic"
+          onPress={() => handleChooseImage(setFiles)}
+        />
       </View>
       <Input
         placeholder="First Name"
@@ -144,7 +125,11 @@ const ProfileForm = ({navigation}) => {
       <Input
         placeholder="Years of Experience "
         value={yearsOfExperience}
-        onChangeText={setYearsOfExperience}
+        onChangeText={val => {
+          const re = /^\d+(\.\d{0,2})?$/gi;
+          if (val.match(re)) setYearsOfExperience(val);
+        }}
+        keyboardType="numeric"
       />
       <MultipleInput inputs={languages} setInputs={setLanguages} />
       <View>
