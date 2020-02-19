@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View, StyleSheet, TouchableOpacity, FlatList,
 } from 'react-native';
@@ -30,8 +30,10 @@ const LoginForm = ({ navigation }) => {
   const clearForm = () => {
     setEmail('');
     setPassword('');
-    dispatch(setErrors(''));
+    dispatch(setErrors([]));
   };
+
+  useEffect(() => () => clearForm(), []);
 
   const errorMessages = (errs) => (
     <FlatList
