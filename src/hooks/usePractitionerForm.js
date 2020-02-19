@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-export default () => {
-  const currentUserData = useSelector(state => state.currentUser.data);
+export default (routeName) => {
+  const currentUserData = useSelector((state) => state.currentUser.data);
   const userId = currentUserData.id;
-  const errors = useSelector(state => state.errors);
+  const errors = useSelector((state) => state.errors);
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState(
     currentUserData.practitioner ? currentUserData.practitioner.firstName : '',
@@ -13,11 +13,11 @@ export default () => {
     currentUserData.practitioner ? currentUserData.practitioner.lastName : '',
   );
   const [education, setEducation] = useState(
-    currentUserData.practitioner ? currentUserData.practitioner.education : [],
+    routeName === 'ProfileEdit' ? JSON.parse(currentUserData.practitioner.education) : [],
   );
   const [specialties, setSpecialties] = useState(
-    currentUserData.practitioner
-      ? currentUserData.practitioner.specialties
+    routeName === 'ProfileEdit'
+      ? JSON.parse(currentUserData.practitioner.specialties)
       : [],
   );
   const [biography, setBiography] = useState(
@@ -26,10 +26,7 @@ export default () => {
   const [yearsOfExperience, setYearsOfExperience] = useState(
     currentUserData.practitioner
       ? currentUserData.practitioner.yearsOfExperience
-      : 0,
-  );
-  const [languages, setLanguages] = useState(
-    currentUserData.practitioner ? currentUserData.practitioner.languages : [],
+      : '',
   );
   const [files, setFiles] = useState(null);
 
@@ -41,7 +38,6 @@ export default () => {
       specialties,
       biography,
       yearsOfExperience,
-      languages,
       userId,
       files,
     },
@@ -52,7 +48,6 @@ export default () => {
       setSpecialties,
       setBiography,
       setYearsOfExperience,
-      setLanguages,
       setFiles,
     },
     errors,

@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Button, Image, Input, Text} from 'react-native-elements';
+import {
+  FlatList, StyleSheet, TouchableOpacity, View,
+} from 'react-native';
+import {
+  Button, Image, Input, Text,
+} from 'react-native-elements';
 import {NavigationEvents, withNavigation} from 'react-navigation';
 import usePractitionerForm from '../../hooks/usePractitionerForm';
 import {setErrors} from '../../store/actions/error';
@@ -40,7 +44,6 @@ const ProfileForm = ({navigation}) => {
     specialties,
     yearsOfExperience,
     biography,
-    languages,
     files,
   } = practitionerParams;
 
@@ -51,19 +54,17 @@ const ProfileForm = ({navigation}) => {
     setSpecialties,
     setYearsOfExperience,
     setBiography,
-    setLanguages,
     setFiles,
   } = practitionerSetters;
 
-  const buttonTitle =
-    navigation.state.routeName === 'NewProfile'
-      ? 'Create Profile'
-      : 'Update Profile';
+  const buttonTitle = navigation.state.routeName === 'NewProfile'
+    ? 'Create Profile'
+    : 'Update Profile';
 
-  const errorMessages = errs => (
+  const errorMessages = (errs) => (
     <FlatList
       data={errs}
-      keyExtractor={err => err}
+      keyExtractor={(err) => err}
       renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
     />
   );
@@ -71,14 +72,13 @@ const ProfileForm = ({navigation}) => {
   const handleSubmit = () => {
     const params = {
       ...practitionerParams,
-      languages: JSON.stringify(languages),
-      dateOfBirth: '1989-01-10',
+      education: JSON.stringify(education),
+      specialties: JSON.stringify(specialties),
     };
 
-    const action =
-      navigation.state.routeName === 'NewProfile'
-        ? createPractitioner
-        : () => {};
+    const action = navigation.state.routeName === 'NewProfile'
+      ? createPractitioner
+      : () => {};
 
     submitProfile(dispatch, action, params);
   };
@@ -124,14 +124,13 @@ const ProfileForm = ({navigation}) => {
       />
       <Input
         placeholder="Years of Experience "
-        value={yearsOfExperience}
-        onChangeText={val => {
+        value={`${yearsOfExperience}`}
+        onChangeText={(val) => {
           const re = /^\d+(\.\d{0,2})?$/gi;
           if (val.match(re)) setYearsOfExperience(val);
         }}
         keyboardType="numeric"
       />
-      <MultipleInput inputs={languages} setInputs={setLanguages} />
       <View>
         <Button title={buttonTitle} onPress={handleSubmit} />
       </View>

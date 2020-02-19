@@ -9,11 +9,11 @@ export const createPatient = (params) => async (dispatch, getState) => {
   const token = await AsyncStorage.getItem('token');
   try {
     const res = await sendAuthorizedRequest('post', path, token, params);
-    const patient = res.data;
+    const { patient } = res.data;
     const { currentUser } = getState();
     const updatedUserData = { ...currentUser.data, patient };
     dispatch(setCurrentUser({ ...currentUser, data: updatedUserData }));
-    navigate('Home');
+    navigate('patientFlow');
   } catch (err) {
     const errors = err.response.data.error.errors.map((error) => error.msg);
     dispatch(setErrors(errors));
