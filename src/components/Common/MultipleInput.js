@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList, StyleSheet, TouchableOpacity, View,
+} from 'react-native';
 import {Input, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import uuid from 'uuid';
@@ -20,15 +22,16 @@ const MultipleInput = ({inputs, setInputs, placeholder}) => {
   const [collection, setCollection] = useState([]);
 
   const addInput = () => {
+    if (!value) return;
     setInputs([...inputs, value]);
     setCollection([...collection, {id: uuid(), value}]);
     setValue('');
   };
 
-  const removeInput = id => {
-    const filteredCollection = collection.filter(item => item.id !== id);
+  const removeInput = (id) => {
+    const filteredCollection = collection.filter((item) => item.id !== id);
     setCollection(filteredCollection);
-    setInputs(filteredCollection.map(item => item.value));
+    setInputs(filteredCollection.map((item) => item.value));
   };
 
   return (
