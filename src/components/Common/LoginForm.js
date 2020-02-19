@@ -59,6 +59,7 @@ const LoginForm = ({ navigation }) => {
       <NavigationEvents
         onWillBlur={clearForm}
       />
+      { errors.length > 0 ? errorMessages(errors, styles) : null }
       <Input
         label="Email"
         labelStyle={styles.label}
@@ -87,7 +88,6 @@ const LoginForm = ({ navigation }) => {
         title="Login"
         onPress={handleSubmit}
       />
-      { errors.length > 0 ? errorMessages(errors, styles) : null }
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
         <Text>Don&apos;t have an account yet? Sign up instead</Text>
       </TouchableOpacity>

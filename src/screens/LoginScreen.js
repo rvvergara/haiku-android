@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Image } from 'react-native-elements';
 import LoginForm from '../components/Common/LoginForm';
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
     padding: 50,
     alignSelf: 'center',
     marginTop: 70,
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
 });
 
 const LoginScreen = () => (
-  <View style={styles.container}>
+  <ScrollView style={styles.container}>
     <View style={styles.logoContainer}>
       <Image
         source={{uri: 'https://tinyimg.io/i/uS2trrA.png'}}
@@ -33,7 +32,7 @@ const LoginScreen = () => (
       />
     </View>
     <LoginForm />
-  </View>
+  </ScrollView>
 );
 
 
@@ -42,6 +41,7 @@ export default {
   navigationOptions: {
     cardStyle: {
       backgroundColor: '#5073F1',
+      paddingBottom: 50,
     },
   },
 };
