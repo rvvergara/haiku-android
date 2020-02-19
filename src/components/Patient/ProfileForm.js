@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -70,6 +70,8 @@ const ProfileForm = ({navigation}) => {
       renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
     />
   );
+
+  useEffect(() => () => dispatch(setErrors([])), []);
 
   const handleSubmit = () => {
     const params = {...patientParams, languages: JSON.stringify(languages), dateOfBirth: '1989-01-10'};
