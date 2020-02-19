@@ -6,16 +6,18 @@ import LoginForm from '../components/Common/LoginForm';
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    flex: 1,
     padding: 50,
-    marginBottom: 80,
     alignSelf: 'center',
-    marginTop: 50,
+    marginTop: 70,
+    backgroundColor: 'white',
+    overflow: 'hidden',
   },
   logoContainer: {
     alignSelf: 'center',
     marginRight: 50,
-    marginBottom: 30,
+    marginBottom: 10,
+    marginTop: 20,
+    position: 'relative',
   },
   logo: {
     width: 210,
