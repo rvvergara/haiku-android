@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import {
   FlatList, StyleSheet, TouchableOpacity, View,
 } from 'react-native';
@@ -58,6 +59,12 @@ const MultipleInput = ({inputs, setInputs, placeholder}) => {
       />
     </View>
   );
+};
+
+MultipleInput.propTypes = {
+  inputs: PropTypes.instanceOf(Object).isRequired,
+  setInputs: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
 };
 
 export default MultipleInput;
