@@ -34,7 +34,9 @@ const styles = StyleSheet.create({
 });
 
 const ProfileForm = ({navigation}) => {
-  const {patientParams, patientSetters, errors, dispatch} = usePatientForm();
+  const {
+    patientParams, patientSetters, errors, dispatch,
+  } = usePatientForm(navigation.state.routeName);
 
   const {
     firstName,
@@ -58,15 +60,14 @@ const ProfileForm = ({navigation}) => {
     setFiles,
   } = patientSetters;
 
-  const buttonTitle =
-    navigation.state.routeName === 'NewProfile'
-      ? 'Create Profile'
-      : 'Update Profile';
+  const buttonTitle = navigation.state.routeName === 'NewProfile'
+    ? 'Create Profile'
+    : 'Update Profile';
 
-  const errorMessages = errs => (
+  const errorMessages = (errs) => (
     <FlatList
       data={errs}
-      keyExtractor={err => err}
+      keyExtractor={(err) => err}
       renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
     />
   );

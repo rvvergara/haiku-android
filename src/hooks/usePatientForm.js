@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-export default () => {
+export default (routeName) => {
   const currentUserData = useSelector((state) => state.currentUser.data);
   const userId = currentUserData.id;
   const errors = useSelector((state) => state.errors);
@@ -25,8 +25,8 @@ export default () => {
     currentUserData.patient ? currentUserData.patient.address : '',
   );
   const [languages, setLanguages] = useState(
-    currentUserData.patient
-      ? currentUserData.patient.languages
+    routeName === 'ProfileEdit'
+      ? JSON.parse(currentUserData.patient.languages)
       : [],
   );
   const [files, setFiles] = useState(null);
