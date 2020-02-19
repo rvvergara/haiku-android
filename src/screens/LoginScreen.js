@@ -38,4 +38,11 @@ const LoginScreen = () => (
 );
 
 
-export default LoginScreen;
+export default {
+  screen: LoginScreen,
+  navigationOptions: {
+    cardStyle: {
+      backgroundColor: '#5073F1',
+    },
+  },
+};

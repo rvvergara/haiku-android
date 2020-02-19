@@ -28,14 +28,7 @@ const switchNavigator = createSwitchNavigator({
   NewProfile: NewProfileScreen,
   authFlow: createStackNavigator(
     {
-      Login: {
-        screen: LoginScreen,
-        navigationOptions: {
-          cardStyle: {
-            backgroundColor: '#5073F1',
-          },
-        },
-      },
+      Login: LoginScreen,
       Signup: SignupScreen,
       VerifyMessage: VerifyMessageScreen,
     },
