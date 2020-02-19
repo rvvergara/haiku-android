@@ -12,81 +12,82 @@ import ProfileEditStack from './src/navigators/stacks/common/ProfileEditStack';
 import PractitionersListStack from './src/navigators/stacks/Patient/PractitionersListStack';
 import ScheduleStack from './src/navigators/stacks/Practitioner/ScheduleStack';
 import LoginScreen from './src/screens/LoginScreen';
-import SignupScreen from './src/screens/SignupScreen';
-import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
+import NewProfileScreen from './src/screens/NewProfileScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuth';
 import ResolveProfileScreen from './src/screens/ResolveProfile';
-import NewProfileScreen from './src/screens/NewProfileScreen';
+import SignupScreen from './src/screens/SignupScreen';
+import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import store from './src/store/store';
-import { setNavigator } from './src/utils/navigationRef';
+import {setNavigator} from './src/utils/navigationRef';
 
-const switchNavigator = createSwitchNavigator(
-  {
-    ResolveAuth: ResolveAuthScreen,
-    ResolveProfile: ResolveProfileScreen,
-    NewProfile: NewProfileScreen,
-    authFlow: createStackNavigator({
+const switchNavigator = createSwitchNavigator({
+  ResolveAuth: ResolveAuthScreen,
+  ResolveProfile: ResolveProfileScreen,
+  NewProfile: NewProfileScreen,
+  authFlow: createStackNavigator(
+    {
       Login: LoginScreen,
       Signup: SignupScreen,
       VerifyMessage: VerifyMessageScreen,
-    }, {
+    },
+    {
       headerMode: null,
-    }),
-    patientFlow: createDrawerNavigator(
-      {
-        Home: HomeStack,
-        ProfileEdit: ProfileEditStack,
-        Practitioners: PractitionersListStack,
-        Bookings: BookingsStack,
-        Feedback: FeedbackStack,
-        Clinics: ClinicsStack,
-      },
-      {
-        drawerPosition: 'right',
-        unmountInactiveRoutes: true,
-        contentComponent: CustomDrawer,
-        contentOptions: {
-          labelStyle: {
-            fontSize: 20,
-            fontWeight: 'normal',
-          },
-          itemStyle: {
-            height: 50,
-          },
-          activeLabelStyle: {
-            fontWeight: 'bold',
-            color: 'black',
-          },
+    },
+  ),
+  patientFlow: createDrawerNavigator(
+    {
+      Home: HomeStack,
+      ProfileEdit: ProfileEditStack,
+      Practitioners: PractitionersListStack,
+      Bookings: BookingsStack,
+      Feedback: FeedbackStack,
+      Clinics: ClinicsStack,
+    },
+    {
+      drawerPosition: 'right',
+      unmountInactiveRoutes: true,
+      contentComponent: CustomDrawer,
+      contentOptions: {
+        labelStyle: {
+          fontSize: 20,
+          fontWeight: 'normal',
+        },
+        itemStyle: {
+          height: 50,
+        },
+        activeLabelStyle: {
+          fontWeight: 'bold',
+          color: 'black',
         },
       },
-    ),
-    practitionerFlow: createDrawerNavigator(
-      {
-        Home: HomeStack,
-        ProfileEdit: ProfileEditStack,
-        Schedule: ScheduleStack,
-        Bookings: BookingsStack,
-        Clinics: ClinicsStack,
-        Feedback: FeedbackStack,
-      },
-      {
-        drawerPosition: 'right',
-        unmountInactiveRoutes: true,
-        contentComponent: CustomDrawer,
-        contentOptions: {
-          labelStyle: {
-            fontSize: 20,
-          },
+    },
+  ),
+  practitionerFlow: createDrawerNavigator(
+    {
+      Home: HomeStack,
+      ProfileEdit: ProfileEditStack,
+      Schedule: ScheduleStack,
+      Bookings: BookingsStack,
+      Clinics: ClinicsStack,
+      Feedback: FeedbackStack,
+    },
+    {
+      drawerPosition: 'right',
+      unmountInactiveRoutes: true,
+      contentComponent: CustomDrawer,
+      contentOptions: {
+        labelStyle: {
+          fontSize: 20,
         },
       },
-    ),
-  },
-);
+    },
+  ),
+});
 
 const App = createAppContainer(switchNavigator);
 
 export default () => (
   <Provider store={store}>
-    <App ref={(navigator) => setNavigator(navigator)} />
+    <App ref={navigator => setNavigator(navigator)} />
   </Provider>
 );

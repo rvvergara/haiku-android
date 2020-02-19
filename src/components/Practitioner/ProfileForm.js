@@ -7,16 +7,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {
-  Button, Text, Input, Image,
-} from 'react-native-elements';
-import {withNavigation, NavigationEvents } from 'react-navigation';
+import {Button, Image, Input, Text} from 'react-native-elements';
+import ImagePicker from 'react-native-image-picker';
+import {NavigationEvents, withNavigation} from 'react-navigation';
+import usePatientForm from '../../hooks/usePatientForm';
 import {setErrors} from '../../store/actions/error';
 import {createPatient} from '../../store/thunks/patient';
 import {logout} from '../../store/thunks/user';
 import MultipleInput from '../Common/MultipleInput';
-import usePatientForm from '../../hooks/usePatientForm';
-import { handleChooseImage, submitProfile } from '../../utils/formHelpers';
 
 const styles = StyleSheet.create({
   error: {
@@ -39,10 +37,10 @@ const ProfileForm = ({navigation}) => {
   const {
     firstName,
     lastName,
-    contactNumber,
-    passport,
-    postalCode,
-    address,
+    education,
+    specialties,
+    yearsOfExperience,
+    biography,
     languages,
     files,
   } = patientParams;
@@ -50,10 +48,10 @@ const ProfileForm = ({navigation}) => {
   const {
     setFirstName,
     setLastName,
-    setContactNumber,
-    setPassport,
-    setPostalCode,
-    setAddress,
+    setEducation,
+    setSpecialties,
+    setYearsOfExperience,
+    setBiography,
     setLanguages,
     setFiles,
   } = patientSetters;
@@ -71,12 +69,40 @@ const ProfileForm = ({navigation}) => {
     />
   );
 
+  const handleChooseImage = () => {
+    const options = {
+      noData: true,
+    };
+    ImagePicker.launchImageLibrary(options, res => {
+      if (res.path) {
+        const photoFile = {
+          name: res.fileName,
+          type: res.type,
+          uri:
+            Platform.OS === 'android'
+              ? res.uri
+              : res.uri.replace('file://', ''),
+        };
+        setFiles(photoFile);
+      }
+    });
+  };
+
   const handleSubmit = () => {
-    const params = {...patientParams, languages: JSON.stringify(languages), dateOfBirth: '1989-01-10'};
+    const formData = new FormData();
 
-    const action = navigation.state.routeName === 'NewProfile' ? createPatient : () => {};
+    const params = {
+      ...patientParams,
+      languages: JSON.stringify(languages),
+      dateOfBirth: '1989-01-10',
+    };
 
-    submitProfile(dispatch, action, params);
+    for (const key in params) {
+      if (key) formData.append(key, params[key]);
+    }
+
+    dispatch(createPatient(formData));
+    navigation.goBack();
   };
 
   const stockPhotoUrl = 'https://bit.ly/38AvkO4';
@@ -87,14 +113,8 @@ const ProfileForm = ({navigation}) => {
       <NavigationEvents onWillBlur={() => dispatch(setErrors([]))} />
       {errors.length > 0 ? errorMessages(errors) : null}
       <View>
-        <Image
-          source={{uri: imageUri}}
-          style={styles.image}
-        />
-        <Button
-          title="Change Pic"
-          onPress={() => handleChooseImage(setFiles)}
-        />
+        <Image source={{uri: imageUri}} style={styles.image} />
+        <Button title="Change Pic" onPress={handleChooseImage} />
       </View>
       <Input
         placeholder="First Name"
@@ -106,27 +126,27 @@ const ProfileForm = ({navigation}) => {
         value={lastName}
         onChangeText={setLastName}
       />
-      <Input
-        placeholder="Contact Number"
-        value={contactNumber}
-        onChangeText={setContactNumber}
-      />
-      <Input
-        placeholder="Passport Number"
-        value={passport}
-        onChangeText={setPassport}
-      />
-      <Input placeholder="Address" value={address} onChangeText={setAddress} />
-      <Input
-        placeholder="Postal Code"
-        value={postalCode}
-        onChangeText={setPostalCode}
+      <MultipleInput
+        inputs={education}
+        setInputs={setEducation}
+        placeholder="New education"
       />
       <MultipleInput
-        inputs={languages}
-        setInputs={setLanguages}
-        placeholder="New languanges"
+        inputs={specialties}
+        setInputs={setSpecialties}
+        placeholder="New Specialties"
       />
+      <Input
+        placeholder="Biography"
+        value={biography}
+        onChangeText={setBiography}
+      />
+      <Input
+        placeholder="Years of Experience "
+        value={yearsOfExperience}
+        onChangeText={setYearsOfExperience}
+      />
+      <MultipleInput inputs={languages} setInputs={setLanguages} />
       <View>
         <Button title={buttonTitle} onPress={handleSubmit} />
       </View>
