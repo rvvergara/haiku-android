@@ -13,6 +13,7 @@ import {createPractitioner} from '../../store/thunks/practitioner';
 import {logout} from '../../store/thunks/user';
 import {handleChooseImage, submitProfile, errorMessages } from '../../utils/formHelpers';
 import MultipleInput from '../Common/MultipleInput';
+import ProfileFormFooter from '../Common/ProfileFormFooter';
 
 const styles = StyleSheet.create({
   error: {
@@ -126,9 +127,7 @@ const ProfileForm = ({navigation}) => {
       <View>
         <Button title={buttonTitle} onPress={handleSubmit} />
       </View>
-      <TouchableOpacity onPress={() => dispatch(logout())}>
-        <Text style={styles.link}>Sign in as another user? Log out</Text>
-      </TouchableOpacity>
+      <ProfileFormFooter />
     </View>
   );
 };

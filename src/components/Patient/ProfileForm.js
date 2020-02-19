@@ -2,19 +2,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {
   StyleSheet,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import {
-  Button, Text, Input, Image,
+  Button, Input, Image,
 } from 'react-native-elements';
 import {withNavigation, NavigationEvents } from 'react-navigation';
 import {setErrors} from '../../store/actions/error';
 import {createPatient, updatePatient } from '../../store/thunks/patient';
-import {logout} from '../../store/thunks/user';
 import MultipleInput from '../Common/MultipleInput';
 import usePatientForm from '../../hooks/usePatientForm';
 import { handleChooseImage, submitProfile, errorMessages } from '../../utils/formHelpers';
+import ProfileFormFooter from '../Common/ProfileFormFooter';
 
 const styles = StyleSheet.create({
   error: {
@@ -121,9 +120,7 @@ const ProfileForm = ({navigation}) => {
       <View>
         <Button title={buttonTitle} onPress={handleSubmit} />
       </View>
-      <TouchableOpacity onPress={() => dispatch(logout())}>
-        <Text style={styles.link}>Sign in as another user? Log out</Text>
-      </TouchableOpacity>
+      <ProfileFormFooter />
     </View>
   );
 };
