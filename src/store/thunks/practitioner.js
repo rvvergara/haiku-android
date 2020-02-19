@@ -21,7 +21,7 @@ export const createPractitioner = (params) => async (dispatch, getState) => {
 };
 
 export const updatePractitioner = (params, practitionerId) => async (dispatch, getState) => {
-  const path = `v1/patients/${practitionerId}`;
+  const path = `v1/practitioners/${practitionerId}`;
   const token = await AsyncStorage.getItem('token');
   try {
     const res = await sendAuthorizedRequest('put', path, token, params);

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  StyleSheet, TouchableOpacity, View,
+  StyleSheet, View,
 } from 'react-native';
 import {
   Button, Image, Input, Text,
@@ -9,8 +9,7 @@ import {
 import {NavigationEvents, withNavigation} from 'react-navigation';
 import usePractitionerForm from '../../hooks/usePractitionerForm';
 import {setErrors} from '../../store/actions/error';
-import {createPractitioner} from '../../store/thunks/practitioner';
-import {logout} from '../../store/thunks/user';
+import {createPractitioner, updatePractitioner} from '../../store/thunks/practitioner';
 import {handleChooseImage, submitProfile, errorMessages } from '../../utils/formHelpers';
 import MultipleInput from '../Common/MultipleInput';
 import ProfileFormFooter from '../Common/ProfileFormFooter';
@@ -36,7 +35,9 @@ const ProfileForm = ({navigation}) => {
     practitionerSetters,
     errors,
     dispatch,
-  } = usePractitionerForm();
+    image,
+    practitionerId,
+  } = usePractitionerForm(navigation.state.routeName);
 
   const {
     firstName,
@@ -71,14 +72,14 @@ const ProfileForm = ({navigation}) => {
 
     const action = navigation.state.routeName === 'NewProfile'
       ? createPractitioner
-      : () => {};
+      : updatePractitioner;
 
-    submitProfile(dispatch, action, params);
+    submitProfile(dispatch, action, params, practitionerId);
   };
 
-  const stockPhotoUrl = 'https://bit.ly/38AvkO4';
+  const initialImageUri = image || 'https://bit.ly/38AvkO4';
 
-  const imageUri = files ? files.uri : stockPhotoUrl;
+  const imageUri = files ? files.uri : initialImageUri;
   return (
     <View>
       <NavigationEvents onWillBlur={() => dispatch(setErrors([]))} />

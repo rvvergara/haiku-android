@@ -31,6 +31,10 @@ export default (routeName) => {
   );
   const [files, setFiles] = useState(null);
 
+  const image = currentUserData.practitioner ? currentUserData.practitioner.image : null;
+
+  const practitionerId = currentUserData.practitioner ? currentUserData.practitioner.id : undefined;
+
   useEffect(() => () => dispatch(setErrors([])), []);
 
   return {
@@ -55,5 +59,7 @@ export default (routeName) => {
     },
     errors,
     dispatch,
+    image,
+    practitionerId,
   };
 };
