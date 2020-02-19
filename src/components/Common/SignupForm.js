@@ -9,15 +9,33 @@ import {setErrors} from '../../store/actions/error';
 import { signup } from '../../store/thunks/user';
 import { isValidSignup } from '../../utils/formHelpers';
 import useSignup from '../../hooks/useSignup';
+import Spacer from './Spacer';
 
 const styles = StyleSheet.create({
   error: {
     color: 'red',
-    fontSize: 16,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#5271ff',
+    borderRadius: 7,
+    paddingHorizontal: 10,
+    marginTop: 5,
+  },
+  inputContainer: {
+    borderBottomWidth: 0,
+    marginBottom: 8,
+  },
+  label: {
+    color: '#20385a',
   },
   link: {
-    color: 'blue',
-    fontSize: 16,
+    color: '#5073F1',
+    fontSize: 14.5,
+  },
+  button: {
+    backgroundColor: '#5073f1',
+    marginBottom: 5,
   },
 });
 
@@ -57,12 +75,21 @@ const SignupForm = ({navigation}) => {
   );
 
   return (
-    <View>
+    <Spacer>
       <NavigationEvents onWillBlur={clearForm} />
 
       {errors.length > 0 ? errorMessages(errors) : null}
 
-      <Input placeholder="Email" value={email} onChangeText={setEmail} />
+      <Input
+        label="Email"
+        labelStyle={styles.label}
+        value={email}
+        onChangeText={setEmail}
+        autoCorrect={false}
+        autoCapitalize="none"
+        inputStyle={styles.input}
+        inputContainerStyle={styles.inputContainer}
+      />
       <View>
         <Picker
           onValueChange={(val) => setRole(val)}
@@ -74,17 +101,27 @@ const SignupForm = ({navigation}) => {
         </Picker>
       </View>
       <Input
-        placeholder="Password"
+        label="Password"
+        labelStyle={styles.label}
         value={password}
         secureTextEntry
         onChangeText={setPassword}
+        autoCapitalize="none"
+        autoCorrect={false}
+        inputStyle={styles.input}
+        inputContainerStyle={styles.inputContainer}
       />
       <Input
-        placeholder="Referral Code"
+        label="Referral Code"
+        labelStyle={styles.label}
         value={referralCode}
         onChangeText={setReferralCode}
+        inputStyle={styles.input}
+        inputContainerStyle={styles.inputContainer}
       />
+      <Spacer />
       <Button
+        buttonStyle={styles.button}
         title="Sign Up"
         onPress={handleSignup}
       />
@@ -93,7 +130,7 @@ const SignupForm = ({navigation}) => {
       >
         <Text style={styles.link}>Already have an account? Log in instead</Text>
       </TouchableOpacity>
-    </View>
+    </Spacer>
   );
 };
 

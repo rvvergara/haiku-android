@@ -1,16 +1,15 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Image } from 'react-native-elements';
 import SignupForm from '../components/Common/SignupForm';
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    padding: 50,
+    paddingTop: 50,
+    paddingHorizontal: 40,
     alignSelf: 'center',
-    marginTop: 70,
     backgroundColor: 'white',
-    overflow: 'hidden',
+    flex: 1,
   },
   logoContainer: {
     alignSelf: 'center',
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
 });
 
 const SignupScreen = () => (
-  <View style={styles.container}>
+  <ScrollView style={styles.container}>
     <View style={styles.logoContainer}>
       <Image
         source={{uri: 'https://tinyimg.io/i/uS2trrA.png'}}
@@ -34,7 +33,7 @@ const SignupScreen = () => (
       />
     </View>
     <SignupForm />
-  </View>
+  </ScrollView>
 );
 
 export default {
@@ -42,6 +41,8 @@ export default {
   navigationOptions: {
     cardStyle: {
       backgroundColor: '#5073F1',
+      paddingBottom: 20,
+      paddingTop: 80,
     },
   },
 };

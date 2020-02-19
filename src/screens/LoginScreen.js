@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     marginRight: 50,
     marginBottom: 10,
     marginTop: 20,
-    position: 'relative',
   },
   logo: {
     width: 210,

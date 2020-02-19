@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View, StyleSheet, TouchableOpacity, FlatList,
+  StyleSheet, TouchableOpacity, FlatList,
 } from 'react-native';
 import { NavigationEvents, withNavigation } from 'react-navigation';
 import { Input, Button, Text } from 'react-native-elements';
@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { login } from '../../store/thunks/user';
 import { setErrors } from '../../store/actions/error';
 import Spacer from './Spacer';
+import { errorMessages } from '../../utils/formHelpers';
 
 const styles = StyleSheet.create({
   error: {
@@ -53,20 +54,11 @@ const LoginForm = ({ navigation }) => {
 
   useEffect(() => () => clearForm(), []);
 
-  const errorMessages = (errs) => (
-    <FlatList
-      data={errs}
-      keyExtractor={(err) => err}
-      renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
-    />
-  );
-
   return (
     <Spacer>
       <NavigationEvents
         onWillBlur={clearForm}
       />
-      { errors.length > 0 ? errorMessages(errors) : null }
       <Input
         label="Email"
         labelStyle={styles.label}
@@ -95,6 +87,7 @@ const LoginForm = ({ navigation }) => {
         title="Login"
         onPress={handleSubmit}
       />
+      { errors.length > 0 ? errorMessages(errors, styles) : null }
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
         <Text>Don&apos;t have an account yet? Sign up instead</Text>
       </TouchableOpacity>
