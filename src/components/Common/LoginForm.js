@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../store/thunks/user';
 import { setErrors } from '../../store/actions/error';
+import Spacer from './Spacer';
 
 const styles = StyleSheet.create({
   error: {
@@ -44,7 +45,7 @@ const LoginForm = ({ navigation }) => {
   );
 
   return (
-    <View>
+    <Spacer>
       <NavigationEvents
         onWillBlur={clearForm}
       />
@@ -53,13 +54,19 @@ const LoginForm = ({ navigation }) => {
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
+        autoCapitalize="none"
+        autoCorrect={false}
       />
+      <Spacer />
       <Input
         placeholder="Password"
         value={password}
         secureTextEntry
         onChangeText={setPassword}
+        autoCapitalize="none"
+        autoCorrect={false}
       />
+      <Spacer />
       <Button
         title="Log In"
         onPress={handleSubmit}
@@ -67,7 +74,7 @@ const LoginForm = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
         <Text>Don&apos;t have an account yet? Sign up instead</Text>
       </TouchableOpacity>
-    </View>
+    </Spacer>
   );
 };
 
