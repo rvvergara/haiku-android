@@ -50,7 +50,6 @@ export default (navigation) => {
     setShow(Platform.OS === 'ios');
   };
 
-
   const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
@@ -58,10 +57,6 @@ export default (navigation) => {
 
   const showDatePicker = () => {
     showMode('date');
-  };
-
-  const showTimePicker = () => {
-    showMode('time');
   };
 
   const image = currentUserData.patient ? currentUserData.patient.image : null;
@@ -83,13 +78,16 @@ export default (navigation) => {
 
   useEffect(() => () => dispatch(setErrors([])), []);
 
-
   const buttonTitle = navigation.state.routeName === 'NewProfile'
     ? 'Create Profile'
     : 'Update Profile';
 
   const handleSubmit = () => {
-    const params = {...patientParams, languages: JSON.stringify(languages), dateOfBirth: moment(dateOfBirth.valueOf()).toJSON()};
+    const params = {
+      ...patientParams,
+      languages: JSON.stringify(languages),
+      dateOfBirth: moment(dateOfBirth.valueOf()).toJSON(),
+    };
 
     const action = navigation.state.routeName === 'NewProfile' ? createPatient : updatePatient;
 
@@ -123,6 +121,5 @@ export default (navigation) => {
     show,
     onDateChange,
     showDatePicker,
-    showTimePicker,
   };
 };
