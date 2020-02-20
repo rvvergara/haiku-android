@@ -33,6 +33,22 @@ export const handleChooseImage = (setFiles) => {
   });
 };
 
+export const handleCaptureImage = (setFiles) => {
+  const options = {
+    noData: true,
+  };
+  ImagePicker.launchCamera(options, (res) => {
+    if (res.path) {
+      const photoFile = {
+        name: res.fileName,
+        type: res.type,
+        uri: Platform.OS === 'android' ? res.uri : res.uri.replace('file://', ''),
+      };
+      setFiles(photoFile);
+    }
+  });
+};
+
 export const submitProfile = (dispatch, action, params, resourceId) => {
   const formData = new FormData();
 
