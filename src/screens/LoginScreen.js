@@ -6,10 +6,13 @@ import LoginForm from '../components/Common/LoginForm';
 const styles = StyleSheet.create({
   container: {
     padding: 50,
+    paddingTop: 10,
     alignSelf: 'center',
-    marginTop: 70,
     backgroundColor: 'white',
     overflow: 'hidden',
+    position: 'relative',
+    top: 60,
+    maxHeight: 500,
   },
   logoContainer: {
     alignSelf: 'center',
@@ -41,7 +44,6 @@ export default {
   navigationOptions: {
     cardStyle: {
       backgroundColor: '#5073F1',
-      paddingBottom: 50,
     },
   },
 };

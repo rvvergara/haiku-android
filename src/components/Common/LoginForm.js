@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  StyleSheet, TouchableOpacity, FlatList,
+  StyleSheet, TouchableOpacity,
 } from 'react-native';
 import { NavigationEvents, withNavigation } from 'react-navigation';
 import { Input, Button, Text } from 'react-native-elements';
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     color: '#20385a',
   },
   link: {
-    color: 'blue',
+    color: '#5073F1',
   },
   button: {
     backgroundColor: '#5073f1',
@@ -89,7 +89,7 @@ const LoginForm = ({ navigation }) => {
         onPress={handleSubmit}
       />
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-        <Text>Don&apos;t have an account yet? Sign up instead</Text>
+        <Text style={styles.link}>Don&apos;t have an account yet? Sign up instead</Text>
       </TouchableOpacity>
     </Spacer>
   );

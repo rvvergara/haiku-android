@@ -5,11 +5,12 @@ import SignupForm from '../components/Common/SignupForm';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
+    paddingTop: 40,
     paddingHorizontal: 40,
     alignSelf: 'center',
     backgroundColor: 'white',
     flex: 1,
+    position: 'relative',
   },
   logoContainer: {
     alignSelf: 'center',
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
 });
 
 const SignupScreen = () => (
-  <ScrollView style={styles.container}>
+  <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
     <View style={styles.logoContainer}>
       <Image
         source={{uri: 'https://tinyimg.io/i/uS2trrA.png'}}
@@ -41,8 +42,6 @@ export default {
   navigationOptions: {
     cardStyle: {
       backgroundColor: '#5073F1',
-      paddingBottom: 20,
-      paddingTop: 80,
     },
   },
 };
