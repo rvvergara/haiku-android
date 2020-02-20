@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {Text, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
+import { Text } from 'react-native-elements';
 import PatientForm from '../components/Patient/ProfileForm';
 import PractitionerForm from '../components/Practitioner/ProfileForm';
+import Spacer from '../components/Common/Spacer';
 
 const ProfileEditScreen = () => {
   const authenticated = useSelector((state) => state.currentUser.authenticated);
@@ -10,10 +12,12 @@ const ProfileEditScreen = () => {
   return authenticated
     ? (
       <ScrollView>
-        <Text>Patient Profile Screen</Text>
-        {
-        role === 'PATIENT' ? <PatientForm /> : <PractitionerForm />
-      }
+        <Spacer>
+          <Text h4>Edit Your Profile</Text>
+          {
+          role === 'PATIENT' ? <PatientForm /> : <PractitionerForm />
+        }
+        </Spacer>
       </ScrollView>
     )
     : null;
