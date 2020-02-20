@@ -45,9 +45,8 @@ export default (navigation) => {
 
   const onDateChange = (e, selectedDate) => {
     const currentDate = selectedDate || dateOfBirth;
-
-    setDateOfBirth(currentDate);
     setShow(Platform.OS === 'ios');
+    setDateOfBirth(currentDate);
   };
 
   const showMode = (currentMode) => {
