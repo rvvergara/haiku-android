@@ -8,29 +8,9 @@ import PropTypes from 'prop-types';
 import Spacer from './Spacer';
 import ErrorMessages from './ErrorMessages';
 import useLogin from '../../hooks/useLogin';
+import { loginFormStyles } from '../../style-objects/loginStyles';
 
-const styles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    borderColor: '#5271ff',
-    borderRadius: 7,
-    paddingHorizontal: 10,
-    marginTop: 5,
-  },
-  inputContainer: {
-    borderBottomWidth: 0,
-  },
-  label: {
-    color: '#20385a',
-  },
-  link: {
-    color: '#5073F1',
-  },
-  button: {
-    backgroundColor: '#5073f1',
-    marginBottom: 5,
-  },
-});
+const styles = StyleSheet.create(loginFormStyles);
 
 const LoginForm = ({ navigation }) => {
   const {

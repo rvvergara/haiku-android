@@ -11,42 +11,9 @@ import { isValidSignup } from '../../utils/formHelpers';
 import useSignup from '../../hooks/useSignup';
 import Spacer from './Spacer';
 import ErrorMessages from './ErrorMessages';
+import { signupFormStyles } from '../../style-objects/signupStyles';
 
-const styles = StyleSheet.create({
-  error: {
-    color: 'red',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#5271ff',
-    borderRadius: 7,
-    paddingHorizontal: 10,
-    marginTop: 5,
-  },
-  inputContainer: {
-    borderBottomWidth: 0,
-    marginBottom: 8,
-  },
-  select: {
-    height: 55,
-  },
-  selectLabel: {
-    color: '#20385a',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  label: {
-    color: '#20385a',
-  },
-  link: {
-    color: '#5073F1',
-    fontSize: 14.5,
-  },
-  button: {
-    backgroundColor: '#5073f1',
-    marginBottom: 5,
-  },
-});
+const styles = StyleSheet.create(signupFormStyles);
 
 const SignupForm = ({navigation}) => {
   const {
@@ -128,6 +95,8 @@ const SignupForm = ({navigation}) => {
         onChangeText={setReferralCode}
         inputStyle={styles.input}
         inputContainerStyle={styles.inputContainer}
+        autoCapitalize="none"
+        autoCorrect={false}
       />
       <Spacer />
       <Button

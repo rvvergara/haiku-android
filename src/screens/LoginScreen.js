@@ -2,29 +2,9 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Image } from 'react-native-elements';
 import LoginForm from '../components/Common/LoginForm';
+import {loginScreenStyles} from '../style-objects/loginStyles';
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 50,
-    paddingTop: 10,
-    alignSelf: 'center',
-    backgroundColor: 'white',
-    overflow: 'hidden',
-    position: 'relative',
-    top: 60,
-    maxHeight: 500,
-  },
-  logoContainer: {
-    alignSelf: 'center',
-    marginRight: 50,
-    marginBottom: 10,
-    marginTop: 20,
-  },
-  logo: {
-    width: 210,
-    height: 80,
-  },
-});
+const styles = StyleSheet.create(loginScreenStyles);
 
 const LoginScreen = () => (
   <ScrollView style={styles.container}>

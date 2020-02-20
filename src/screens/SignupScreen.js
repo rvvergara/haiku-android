@@ -2,28 +2,9 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Image } from 'react-native-elements';
 import SignupForm from '../components/Common/SignupForm';
+import { signupScreenStyles } from '../style-objects/signupStyles';
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 30,
-    paddingHorizontal: 40,
-    alignSelf: 'center',
-    backgroundColor: 'white',
-    flex: 1,
-    position: 'relative',
-  },
-  logoContainer: {
-    alignSelf: 'center',
-    marginRight: 50,
-    marginBottom: 10,
-    marginTop: 20,
-    position: 'relative',
-  },
-  logo: {
-    width: 210,
-    height: 80,
-  },
-});
+const styles = StyleSheet.create(signupScreenStyles);
 
 const SignupScreen = () => (
   <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
