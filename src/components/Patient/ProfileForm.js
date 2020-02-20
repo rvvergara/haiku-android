@@ -9,31 +9,19 @@ import {
 } from 'react-native-elements';
 import {withNavigation, NavigationEvents } from 'react-navigation';
 import {setErrors} from '../../store/actions/error';
-import {createPatient, updatePatient } from '../../store/thunks/patient';
 import MultipleInput from '../Common/MultipleInput';
 import usePatientForm from '../../hooks/usePatientForm';
-import { handleChooseImage, submitProfile, errorMessages } from '../../utils/formHelpers';
+import { handleChooseImage } from '../../utils/formHelpers';
+import ErrorMessages from '../Common/ErrorMessages';
 import ProfileFormFooter from '../Common/ProfileFormFooter';
+import { profileFormStyles } from '../../style-objects/patientProfileStyles';
 
-const styles = StyleSheet.create({
-  error: {
-    color: 'red',
-    fontSize: 18,
-  },
-  link: {
-    color: 'blue',
-    fontSize: 18,
-  },
-  image: {
-    width: 150,
-    height: 150,
-  },
-});
+const styles = StyleSheet.create(profileFormStyles);
 
 const ProfileForm = ({navigation}) => {
   const {
-    patientParams, patientSetters, errors, dispatch, image, patientId,
-  } = usePatientForm(navigation.state.routeName);
+    patientParams, patientSetters, buttonTitle, errors, dispatch, imageUri, handleSubmit,
+  } = usePatientForm(navigation);
 
   const {
     firstName,
@@ -43,7 +31,6 @@ const ProfileForm = ({navigation}) => {
     postalCode,
     address,
     languages,
-    files,
   } = patientParams;
 
   const {
@@ -57,25 +44,10 @@ const ProfileForm = ({navigation}) => {
     setFiles,
   } = patientSetters;
 
-  const buttonTitle = navigation.state.routeName === 'NewProfile'
-    ? 'Create Profile'
-    : 'Update Profile';
-
-  const handleSubmit = () => {
-    const params = {...patientParams, languages: JSON.stringify(languages), dateOfBirth: '1989-01-10'};
-
-    const action = navigation.state.routeName === 'NewProfile' ? createPatient : updatePatient;
-
-    submitProfile(dispatch, action, params, patientId);
-  };
-
-  const initialImageUri = image || 'https://bit.ly/38AvkO4';
-
-  const imageUri = files ? files.uri : initialImageUri;
   return (
     <View>
       <NavigationEvents onWillBlur={() => dispatch(setErrors([]))} />
-      {errors.length > 0 ? errorMessages(errors, styles) : null}
+      {errors.length > 0 ? <ErrorMessages errors={errors} /> : null}
       <View>
         <Image
           source={{uri: imageUri}}
