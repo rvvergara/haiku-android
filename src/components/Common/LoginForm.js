@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   StyleSheet, TouchableOpacity,
 } from 'react-native';
 import { NavigationEvents, withNavigation } from 'react-navigation';
 import { Input, Button, Text } from 'react-native-elements';
-import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login } from '../../store/thunks/user';
-import { setErrors } from '../../store/actions/error';
 import Spacer from './Spacer';
 import ErrorMessages from './ErrorMessages';
+import useLogin from '../../hooks/useLogin';
 
 const styles = StyleSheet.create({
   input: {
@@ -35,21 +33,12 @@ const styles = StyleSheet.create({
 });
 
 const LoginForm = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const errors = useSelector((state) => state.errors);
-  const dispatch = useDispatch();
-  const handleSubmit = () => {
-    dispatch(login({email, password}));
-  };
+  const {
+    loginParams, loginSetters, errors, handleSubmit, clearForm,
+  } = useLogin();
 
-  const clearForm = () => {
-    setEmail('');
-    setPassword('');
-    dispatch(setErrors([]));
-  };
-
-  useEffect(() => () => clearForm(), []);
+  const { email, password } = loginParams;
+  const { setEmail, setPassword } = loginSetters;
 
   return (
     <Spacer>
