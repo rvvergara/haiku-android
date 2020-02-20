@@ -9,12 +9,9 @@ import PropTypes from 'prop-types';
 import { login } from '../../store/thunks/user';
 import { setErrors } from '../../store/actions/error';
 import Spacer from './Spacer';
-import { errorMessages } from '../../utils/formHelpers';
+import ErrorMessages from './ErrorMessages';
 
 const styles = StyleSheet.create({
-  error: {
-    color: 'red',
-  },
   input: {
     borderWidth: 1,
     borderColor: '#5271ff',
@@ -59,7 +56,9 @@ const LoginForm = ({ navigation }) => {
       <NavigationEvents
         onWillBlur={clearForm}
       />
-      { errors.length > 0 ? errorMessages(errors, styles) : null }
+      <ErrorMessages
+        errors={errors}
+      />
       <Input
         label="Email"
         labelStyle={styles.label}

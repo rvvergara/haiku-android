@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, StyleSheet, TouchableOpacity, Picker, FlatList,
+  View, StyleSheet, TouchableOpacity, Picker,
 } from 'react-native';
 import {NavigationEvents, withNavigation} from 'react-navigation';
 import {Input, Button, Text} from 'react-native-elements';
@@ -10,6 +10,7 @@ import { signup } from '../../store/thunks/user';
 import { isValidSignup } from '../../utils/formHelpers';
 import useSignup from '../../hooks/useSignup';
 import Spacer from './Spacer';
+import ErrorMessages from './ErrorMessages';
 
 const styles = StyleSheet.create({
   error: {
@@ -66,20 +67,12 @@ const SignupForm = ({navigation}) => {
     }
   };
 
-  const errorMessages = (errs) => (
-    <FlatList
-      data={errs}
-      keyExtractor={(err) => err}
-      renderItem={({item}) => <Text style={styles.error}>{item}</Text>}
-    />
-  );
-
   return (
     <Spacer>
       <NavigationEvents onWillBlur={clearForm} />
-
-      {errors.length > 0 ? errorMessages(errors) : null}
-
+      <ErrorMessages
+        errors={errors}
+      />
       <Input
         label="Email"
         labelStyle={styles.label}

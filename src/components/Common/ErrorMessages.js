@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
+import { Text } from 'react-native-elements';
 
-const ErrorMessages = ({ errors, styles}) => (
+const styles = StyleSheet.create({
+  error: {
+    color: 'red',
+  },
+
+});
+
+const ErrorMessages = ({ errors }) => (
   <FlatList
     data={errors}
     keyExtractor={(err) => err}
