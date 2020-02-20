@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 import {
-  Button, Input, Image,
+  Button, Image,
 } from 'react-native-elements';
 import {withNavigation, NavigationEvents } from 'react-navigation';
 import {setErrors} from '../../store/actions/error';

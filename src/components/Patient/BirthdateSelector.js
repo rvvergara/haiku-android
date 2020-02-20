@@ -6,6 +6,7 @@ import { Input } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import usePatientForm from '../../hooks/usePatientForm';
+import TextInput from '../Common/TextInput';
 
 const BirthdateSelector = ({navigation}) => {
   const {
@@ -20,7 +21,8 @@ const BirthdateSelector = ({navigation}) => {
         <TouchableOpacity
           onPress={showDatePicker}
         >
-          <Input
+          <TextInput
+            label="Birth Date"
             placeholder={moment(dateOfBirth).format('MMMM DD, YYYY')}
             disabled
           />

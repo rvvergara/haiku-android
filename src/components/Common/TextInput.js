@@ -17,7 +17,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const TextInput = ({ label, value, onChangeText }) => (
+const TextInput = ({
+  label, value, onChangeText, disabled, placeholder,
+}) => (
   <Input
     label={label}
     labelStyle={styles.label}
@@ -27,13 +29,22 @@ const TextInput = ({ label, value, onChangeText }) => (
     autoCapitalize="none"
     inputStyle={styles.input}
     inputContainerStyle={styles.inputContainer}
+    disabled={disabled}
+    placeholder={placeholder}
   />
 );
+
+TextInput.defaultProps = {
+  disabled: false,
+  placeholder: '',
+};
 
 TextInput.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChangeText: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  placeholder: PropTypes.string,
 };
 
 export default TextInput;
