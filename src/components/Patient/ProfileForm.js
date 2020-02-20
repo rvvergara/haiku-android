@@ -17,6 +17,7 @@ import ProfileFormFooter from '../Common/ProfileFormFooter';
 import { profileFormStyles } from '../../style-objects/patientProfileStyles';
 import TextInput from '../Common/TextInput';
 import BirthdateSelector from './BirthdateSelector';
+import Spacer from '../Common/Spacer';
 
 const styles = StyleSheet.create(profileFormStyles);
 
@@ -66,6 +67,7 @@ const ProfileForm = ({navigation}) => {
           onPress={() => handleChooseImage(setFiles)}
         />
       </View>
+      <Spacer />
       <TextInput
         label="First Name"
         value={firstName}
@@ -100,7 +102,8 @@ const ProfileForm = ({navigation}) => {
       <MultipleInput
         inputs={languages}
         setInputs={setLanguages}
-        placeholder="New languanges"
+        placeholder="Add language"
+        label="Languages Spoken"
       />
       <View>
         <Button title={buttonTitle} onPress={handleSubmit} />

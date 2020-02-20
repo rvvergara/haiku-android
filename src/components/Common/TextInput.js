@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Input } from 'react-native-elements';
 
 const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 20,
+  },
   input: {
     borderWidth: 1,
     borderColor: '#5271ff',
@@ -15,28 +18,36 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     marginBottom: 8,
   },
+  label: {
+    color: '#20385a',
+    fontSize: 18,
+  },
 });
 
 const TextInput = ({
-  label, value, onChangeText, disabled, placeholder,
+  label, value, onChangeText, disabled, placeholder, submit,
 }) => (
-  <Input
-    label={label}
-    labelStyle={styles.label}
-    value={value}
-    onChangeText={onChangeText}
-    autoCorrect={false}
-    autoCapitalize="none"
-    inputStyle={styles.input}
-    inputContainerStyle={styles.inputContainer}
-    disabled={disabled}
-    placeholder={placeholder}
-  />
+  <View>
+    <Input
+      label={label}
+      labelStyle={styles.label}
+      value={value}
+      onChangeText={onChangeText}
+      autoCorrect={false}
+      autoCapitalize="none"
+      inputStyle={styles.input}
+      inputContainerStyle={styles.inputContainer}
+      disabled={disabled}
+      placeholder={placeholder}
+      onSubmitEditing={submit}
+    />
+  </View>
 );
 
 TextInput.defaultProps = {
   disabled: false,
   placeholder: '',
+  submit: () => {},
 };
 
 TextInput.propTypes = {
@@ -45,6 +56,7 @@ TextInput.propTypes = {
   onChangeText: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
+  submit: PropTypes.func,
 };
 
 export default TextInput;

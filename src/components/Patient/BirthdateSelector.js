@@ -25,6 +25,8 @@ const BirthdateSelector = ({navigation}) => {
             label="Birth Date"
             placeholder={moment(dateOfBirth).format('MMMM DD, YYYY')}
             disabled
+            onChangeText={() => {}}
+            value=""
           />
         </TouchableOpacity>
         {
