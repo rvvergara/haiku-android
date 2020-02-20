@@ -27,6 +27,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     marginBottom: 8,
   },
+  select: {
+    height: 55,
+  },
+  selectLabel: {
+    color: '#20385a',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   label: {
     color: '#20385a',
   },
@@ -83,15 +91,24 @@ const SignupForm = ({navigation}) => {
         inputStyle={styles.input}
         inputContainerStyle={styles.inputContainer}
       />
-      <View>
-        <Picker
-          onValueChange={(val) => setRole(val)}
-          selectedValue={role}
-        >
-          <Picker.Item label="I am a..." value="" />
-          <Picker.Item label="Patient" value="PATIENT" />
-          <Picker.Item label="Practitioner" value="PRACTITIONER" />
-        </Picker>
+      <View style={{position: 'relative', top: -10, marginBottom: -10}}>
+        <Spacer>
+          <Text style={styles.selectLabel}>Select Role</Text>
+          <View style={{
+            ...styles.input, ...styles.select,
+          }}
+          >
+            <Picker
+              onValueChange={(val) => setRole(val)}
+              selectedValue={role}
+              style={{marginBottom: 10}}
+            >
+              <Picker.Item label="I am a..." value="" />
+              <Picker.Item label="Patient" value="PATIENT" />
+              <Picker.Item label="Practitioner" value="PRACTITIONER" />
+            </Picker>
+          </View>
+        </Spacer>
       </View>
       <Input
         label="Password"

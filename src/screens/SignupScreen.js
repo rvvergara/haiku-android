@@ -5,7 +5,7 @@ import SignupForm from '../components/Common/SignupForm';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 40,
+    paddingTop: 30,
     paddingHorizontal: 40,
     alignSelf: 'center',
     backgroundColor: 'white',

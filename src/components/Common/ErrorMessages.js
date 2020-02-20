@@ -20,7 +20,6 @@ const ErrorMessages = ({ errors }) => (
 
 ErrorMessages.propTypes = {
   errors: PropTypes.instanceOf(Object).isRequired,
-  styles: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default ErrorMessages;
