@@ -15,6 +15,7 @@ import { handleChooseImage } from '../../utils/formHelpers';
 import ErrorMessages from '../Common/ErrorMessages';
 import ProfileFormFooter from '../Common/ProfileFormFooter';
 import { profileFormStyles } from '../../style-objects/patientProfileStyles';
+import TextInput from '../Common/TextInput';
 import BirthdateSelector from './BirthdateSelector';
 
 const styles = StyleSheet.create(profileFormStyles);
@@ -65,29 +66,33 @@ const ProfileForm = ({navigation}) => {
           onPress={() => handleChooseImage(setFiles)}
         />
       </View>
-      <Input
-        placeholder="First Name"
+      <TextInput
+        label="First Name"
         value={firstName}
         onChangeText={setFirstName}
       />
-      <Input
-        placeholder="Last Name"
+      <TextInput
+        label="Last Name"
         value={lastName}
         onChangeText={setLastName}
       />
-      <Input
-        placeholder="Contact Number"
+      <TextInput
+        label="Contact Number"
         value={contactNumber}
         onChangeText={setContactNumber}
       />
-      <Input
-        placeholder="Passport Number"
+      <TextInput
+        label="Passport Number"
         value={passport}
         onChangeText={setPassport}
       />
-      <Input placeholder="Address" value={address} onChangeText={setAddress} />
-      <Input
-        placeholder="Postal Code"
+      <TextInput
+        label="Address"
+        value={address}
+        onChangeText={setAddress}
+      />
+      <TextInput
+        label="Postal Code"
         value={postalCode}
         onChangeText={setPostalCode}
       />
