@@ -7,8 +7,4 @@ export const profileFormStyles = {
     color: 'blue',
     fontSize: 18,
   },
-  image: {
-    width: 150,
-    height: 150,
-  },
 };

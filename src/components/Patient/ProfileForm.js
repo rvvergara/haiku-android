@@ -1,25 +1,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  StyleSheet,
   View,
 } from 'react-native';
 import {
-  Button, Image,
+  Button,
 } from 'react-native-elements';
 import {withNavigation, NavigationEvents } from 'react-navigation';
 import {setErrors} from '../../store/actions/error';
 import MultipleInput from '../Common/MultipleInput';
 import usePatientForm from '../../hooks/usePatientForm';
-import { handleChooseImage } from '../../utils/formHelpers';
 import ErrorMessages from '../Common/ErrorMessages';
 import ProfileFormFooter from '../Common/ProfileFormFooter';
-import { profileFormStyles } from '../../style-objects/patientProfileStyles';
 import TextInput from '../Common/TextInput';
 import BirthdateSelector from './BirthdateSelector';
 import Spacer from '../Common/Spacer';
-
-const styles = StyleSheet.create(profileFormStyles);
+import ImageUploader from '../Common/ImageUploader';
 
 const ProfileForm = ({navigation}) => {
   const {
@@ -56,17 +52,13 @@ const ProfileForm = ({navigation}) => {
   return (
     <View>
       <NavigationEvents onWillBlur={() => dispatch(setErrors([]))} />
-      {errors.length > 0 ? <ErrorMessages errors={errors} /> : null}
-      <View>
-        <Image
-          source={{uri: imageUri}}
-          style={styles.image}
-        />
-        <Button
-          title="Change Pic"
-          onPress={() => handleChooseImage(setFiles)}
-        />
-      </View>
+      {
+        errors.length > 0 ? <ErrorMessages errors={errors} /> : null
+      }
+      <ImageUploader
+        imageUri={imageUri}
+        setFiles={setFiles}
+      />
       <Spacer />
       <TextInput
         label="First Name"
