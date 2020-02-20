@@ -8,6 +8,7 @@ import {
   Button, Input, Image,
 } from 'react-native-elements';
 import {withNavigation, NavigationEvents } from 'react-navigation';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {setErrors} from '../../store/actions/error';
 import MultipleInput from '../Common/MultipleInput';
 import usePatientForm from '../../hooks/usePatientForm';
@@ -20,7 +21,18 @@ const styles = StyleSheet.create(profileFormStyles);
 
 const ProfileForm = ({navigation}) => {
   const {
-    patientParams, patientSetters, buttonTitle, errors, dispatch, imageUri, handleSubmit,
+    patientParams,
+    patientSetters,
+    buttonTitle,
+    errors,
+    dispatch,
+    imageUri,
+    handleSubmit,
+    mode,
+    show,
+    onDateChange,
+    showDatePicker,
+    showTimePicker,
   } = usePatientForm(navigation);
 
   const {
@@ -31,6 +43,7 @@ const ProfileForm = ({navigation}) => {
     postalCode,
     address,
     languages,
+    dateOfBirth,
   } = patientParams;
 
   const {
@@ -89,6 +102,26 @@ const ProfileForm = ({navigation}) => {
         setInputs={setLanguages}
         placeholder="New languanges"
       />
+
+      <View>
+        <View>
+          <Button
+            onPress={showDatePicker}
+            title="Choose Birthdate"
+          />
+          {
+            show ? (
+              <DateTimePicker
+                testID="birthdate"
+                value={dateOfBirth}
+                mode={mode}
+                onChange={onDateChange}
+              />
+            ) : null
+          }
+        </View>
+      </View>
+
       <View>
         <Button title={buttonTitle} onPress={handleSubmit} />
       </View>

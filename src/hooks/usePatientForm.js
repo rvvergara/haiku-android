@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
 import { setErrors } from '../store/actions/error';
 import { createPatient, updatePatient } from '../store/thunks/patient';
 import { submitProfile } from '../utils/formHelpers';
@@ -35,6 +37,33 @@ export default (navigation) => {
   );
   const [files, setFiles] = useState(null);
 
+  const [dateOfBirth, setDateOfBirth] = useState(currentUserData.patient ? new Date(currentUserData.patient.dateOfBirth) : new Date());
+
+  const [mode, setMode] = useState('date');
+
+  const [show, setShow] = useState(false);
+
+  const onDateChange = (e, selectedDate) => {
+    const currentDate = selectedDate || dateOfBirth;
+
+    setDateOfBirth(currentDate);
+    setShow(Platform.OS === 'ios');
+  };
+
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatePicker = () => {
+    showMode('date');
+  };
+
+  const showTimePicker = () => {
+    showMode('time');
+  };
+
   const image = currentUserData.patient ? currentUserData.patient.image : null;
 
   const patientId = currentUserData.patient ? currentUserData.patient.id : undefined;
@@ -49,6 +78,7 @@ export default (navigation) => {
     languages,
     userId,
     files,
+    dateOfBirth,
   };
 
   useEffect(() => () => dispatch(setErrors([])), []);
@@ -59,7 +89,7 @@ export default (navigation) => {
     : 'Update Profile';
 
   const handleSubmit = () => {
-    const params = {...patientParams, languages: JSON.stringify(languages), dateOfBirth: '1989-01-10'};
+    const params = {...patientParams, languages: JSON.stringify(languages), dateOfBirth: moment(dateOfBirth.valueOf()).toJSON()};
 
     const action = navigation.state.routeName === 'NewProfile' ? createPatient : updatePatient;
 
@@ -89,5 +119,10 @@ export default (navigation) => {
     imageUri,
     patientId,
     handleSubmit,
+    mode,
+    show,
+    onDateChange,
+    showDatePicker,
+    showTimePicker,
   };
 };
