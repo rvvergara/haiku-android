@@ -26,6 +26,10 @@ const ProfileForm = ({navigation}) => {
     dispatch,
     imageUri,
     handleSubmit,
+    mode,
+    show,
+    onDateChange,
+    showDatePicker,
   } = usePatientForm(navigation);
 
   const {
@@ -36,6 +40,7 @@ const ProfileForm = ({navigation}) => {
     postalCode,
     address,
     languages,
+    dateOfBirth,
   } = patientParams;
 
   const {
@@ -90,7 +95,15 @@ const ProfileForm = ({navigation}) => {
         value={postalCode}
         onChangeText={setPostalCode}
       />
-      <BirthdateSelector />
+
+      <BirthdateSelector
+        mode={mode}
+        show={show}
+        onDateChange={onDateChange}
+        showDatePicker={showDatePicker}
+        dateOfBirth={dateOfBirth}
+      />
+
       <MultipleInput
         inputs={languages}
         setInputs={setLanguages}
