@@ -4,40 +4,33 @@ import {
   StyleSheet, View,
 } from 'react-native';
 import {
-  Button, Image, Input, Text,
+  Button,
 } from 'react-native-elements';
 import {NavigationEvents, withNavigation} from 'react-navigation';
 import usePractitionerForm from '../../hooks/usePractitionerForm';
 import {setErrors} from '../../store/actions/error';
-import {createPractitioner, updatePractitioner} from '../../store/thunks/practitioner';
-import {handleChooseImage, submitProfile, errorMessages } from '../../utils/formHelpers';
 import MultipleInput from '../Common/MultipleInput';
+import ErrorMessages from '../Common/ErrorMessages';
+import ImageUploader from '../Common/ImageUploader';
 import ProfileFormFooter from '../Common/ProfileFormFooter';
+import Spacer from '../Common/Spacer';
+import TextInput from '../Common/TextInput';
+import MovableSpacer from '../Common/MovableSpacer';
+import { profileFormStyles } from '../../style-objects/profileStyles';
 
-const styles = StyleSheet.create({
-  error: {
-    color: 'red',
-    fontSize: 18,
-  },
-  link: {
-    color: 'blue',
-    fontSize: 18,
-  },
-  image: {
-    width: 150,
-    height: 150,
-  },
-});
+const styles = StyleSheet.create(profileFormStyles);
 
 const ProfileForm = ({navigation}) => {
   const {
     practitionerParams,
     practitionerSetters,
+    buttonTitle,
     errors,
     dispatch,
-    image,
-    practitionerId,
-  } = usePractitionerForm(navigation.state.routeName);
+    imageUri,
+    onChangeYearsExperience,
+    handleSubmit,
+  } = usePractitionerForm(navigation);
 
   const {
     firstName,
@@ -46,7 +39,6 @@ const ProfileForm = ({navigation}) => {
     specialties,
     yearsOfExperience,
     biography,
-    files,
   } = practitionerParams;
 
   const {
@@ -54,81 +46,88 @@ const ProfileForm = ({navigation}) => {
     setLastName,
     setEducation,
     setSpecialties,
-    setYearsOfExperience,
     setBiography,
     setFiles,
   } = practitionerSetters;
 
-  const buttonTitle = navigation.state.routeName === 'NewProfile'
-    ? 'Create Profile'
-    : 'Update Profile';
 
-  const handleSubmit = () => {
-    const params = {
-      ...practitionerParams,
-      education: JSON.stringify(education),
-      specialties: JSON.stringify(specialties),
-    };
-
-    const action = navigation.state.routeName === 'NewProfile'
-      ? createPractitioner
-      : updatePractitioner;
-
-    submitProfile(dispatch, action, params, practitionerId);
-  };
-
-  const initialImageUri = image || 'https://bit.ly/38AvkO4';
-
-  const imageUri = files ? files.uri : initialImageUri;
   return (
     <View>
       <NavigationEvents onWillBlur={() => dispatch(setErrors([]))} />
-      {errors.length > 0 ? errorMessages(errors, styles) : null}
-      <View>
-        <Image source={{uri: imageUri}} style={styles.image} />
-        <Button
-          title="Change Pic"
-          onPress={() => handleChooseImage(setFiles)}
-        />
-      </View>
-      <Input
-        placeholder="First Name"
+      {
+        errors.length > 0 ? <ErrorMessages errors={errors} /> : null
+      }
+      <ImageUploader
+        imageUri={imageUri}
+        setFiles={setFiles}
+      />
+      <Spacer />
+      <TextInput
+        label="First Name"
         value={firstName}
         onChangeText={setFirstName}
       />
-      <Input
-        placeholder="Last Name"
+      <TextInput
+        label="Last Name"
         value={lastName}
         onChangeText={setLastName}
       />
-      <MultipleInput
-        inputs={education}
-        setInputs={setEducation}
-        placeholder="New education"
-      />
-      <MultipleInput
-        inputs={specialties}
-        setInputs={setSpecialties}
-        placeholder="New Specialties"
-      />
-      <Input
-        placeholder="Biography"
-        value={biography}
-        onChangeText={setBiography}
-      />
-      <Input
-        placeholder="Years of Experience "
-        value={`${yearsOfExperience}`}
-        onChangeText={(val) => {
-          const re = /^\d+(\.\d{0,2})?$/gi;
-          if (val.match(re)) setYearsOfExperience(val);
-        }}
-        keyboardType="numeric"
-      />
+      <MovableSpacer
+        position="relative"
+        top={-5}
+      >
+        <MultipleInput
+          inputs={education}
+          setInputs={setEducation}
+          placeholder="Add education"
+          label="Education"
+        />
+      </MovableSpacer>
+      <MovableSpacer
+        position="relative"
+        top={-30}
+      >
+        <MultipleInput
+          inputs={specialties}
+          setInputs={setSpecialties}
+          placeholder="Add specialty"
+          label="Specialties"
+        />
+      </MovableSpacer>
+      <MovableSpacer
+        position="relative"
+        top={-50}
+      >
+        <TextInput
+          label="Biography"
+          value={biography}
+          onChangeText={setBiography}
+        />
+        <TextInput
+          label="Years of Experience "
+          value={`${yearsOfExperience}`}
+          onChangeText={onChangeYearsExperience}
+          keyboardType="numeric"
+        />
+      </MovableSpacer>
       <View>
-        <Button title={buttonTitle} onPress={handleSubmit} />
+        <MovableSpacer
+          position="relative"
+          top={-40}
+        >
+          <Button
+            title={buttonTitle}
+            onPress={handleSubmit}
+            buttonStyle={styles.button}
+          />
+        </MovableSpacer>
       </View>
-      <ProfileFormFooter />
+      <MovableSpacer
+        position="relative"
+        top={-35}
+      >
+        <ProfileFormFooter />
+      </MovableSpacer>
     </View>
   );
 };

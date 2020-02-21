@@ -1,8 +1,11 @@
-import {useState, useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { setErrors } from '../store/actions/error';
+import { createPractitioner, updatePractitioner } from '../store/thunks/practitioner';
+import { submitProfile } from '../utils/formHelpers';
 
-export default (routeName) => {
+export default (navigation) => {
+  const { routeName } = navigation.state;
   const currentUserData = useSelector((state) => state.currentUser.data);
   const userId = currentUserData.id;
   const errors = useSelector((state) => state.errors);
@@ -35,19 +38,49 @@ export default (routeName) => {
 
   const practitionerId = currentUserData.practitioner ? currentUserData.practitioner.id : undefined;
 
+  const practitionerParams = {
+    firstName,
+    lastName,
+    education,
+    specialties,
+    biography,
+    yearsOfExperience,
+    userId,
+    files,
+  };
+
   useEffect(() => () => dispatch(setErrors([])), []);
 
+
+  const buttonTitle = navigation.state.routeName === 'NewProfile'
+    ? 'Create Profile'
+    : 'Update Profile';
+
+  const onChangeYearsExperience = (val) => {
+    const re = /^\d+(\.\d{0,2})?$/gi;
+    if (!val || val.match(re)) setYearsOfExperience(val);
+  };
+
+  const handleSubmit = () => {
+    const params = {
+      ...practitionerParams,
+      education: JSON.stringify(education),
+      specialties: JSON.stringify(specialties),
+    };
+
+    const action = navigation.state.routeName === 'NewProfile'
+      ? createPractitioner
+      : updatePractitioner;
+
+    submitProfile(dispatch, action, params, practitionerId);
+  };
+
+  const initialImageUri = image || 'https://bit.ly/38AvkO4';
+
+  const imageUri = files ? files.uri : initialImageUri;
+
   return {
-    practitionerParams: {
-      firstName,
-      lastName,
-      education,
-      specialties,
-      biography,
-      yearsOfExperience,
-      userId,
-      files,
-    },
+    practitionerParams,
     practitionerSetters: {
       setFirstName,
       setLastName,
@@ -57,9 +90,13 @@ export default (routeName) => {
       setYearsOfExperience,
       setFiles,
     },
+    buttonTitle,
     errors,
     dispatch,
     image,
+    imageUri,
     practitionerId,
+    onChangeYearsExperience,
+    handleSubmit,
   };
 };

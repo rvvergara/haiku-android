@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 });
 
 const TextInput = ({
-  label, value, onChangeText, disabled, placeholder, submit,
+  label, value, onChangeText, disabled, placeholder, submit, keyboardType,
 }) => (
   <View>
     <Input
@@ -40,6 +40,7 @@ const TextInput = ({
       disabled={disabled}
       placeholder={placeholder}
       onSubmitEditing={submit}
+      keyboardType={keyboardType}
     />
   </View>
 );
@@ -48,6 +49,7 @@ TextInput.defaultProps = {
   disabled: false,
   placeholder: '',
   submit: () => {},
+  keyboardType: 'default',
 };
 
 TextInput.propTypes = {
@@ -57,6 +59,7 @@ TextInput.propTypes = {
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
   submit: PropTypes.func,
+  keyboardType: PropTypes.string,
 };
 
 export default TextInput;

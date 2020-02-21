@@ -17,7 +17,7 @@ import TextInput from '../Common/TextInput';
 import BirthdateSelector from './BirthdateSelector';
 import Spacer from '../Common/Spacer';
 import ImageUploader from '../Common/ImageUploader';
-import { profileFormStyles } from '../../style-objects/patientProfileStyles';
+import { profileFormStyles } from '../../style-objects/profileStyles';
 
 const styles = StyleSheet.create(profileFormStyles);
 
