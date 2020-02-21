@@ -7,7 +7,9 @@ import { logout } from '../../store/thunks/user';
 
 const styles = StyleSheet.create({
   link: {
-    color: 'blue',
+    color: '#5073f1',
+    fontSize: 17,
+    fontWeight: 'bold',
   },
 });
 
