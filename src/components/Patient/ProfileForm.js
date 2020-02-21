@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {
   View,
+  StyleSheet,
 } from 'react-native';
 import {
   Button,
@@ -16,6 +17,9 @@ import TextInput from '../Common/TextInput';
 import BirthdateSelector from './BirthdateSelector';
 import Spacer from '../Common/Spacer';
 import ImageUploader from '../Common/ImageUploader';
+import { profileFormStyles } from '../../style-objects/patientProfileStyles';
+
+const styles = StyleSheet.create(profileFormStyles);
 
 const ProfileForm = ({navigation}) => {
   const {
@@ -111,7 +115,11 @@ const ProfileForm = ({navigation}) => {
         label="Languages Spoken"
       />
       <View>
-        <Button title={buttonTitle} onPress={handleSubmit} />
+        <Button
+          title={buttonTitle}
+          onPress={handleSubmit}
+          buttonStyle={styles.button}
+        />
       </View>
       <ProfileFormFooter />
     </View>
