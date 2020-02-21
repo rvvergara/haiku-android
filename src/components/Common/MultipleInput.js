@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    paddingTop: 10,
   },
   textInput: {
     borderColor: 'red',
@@ -34,10 +35,13 @@ const styles = StyleSheet.create({
   },
   item: {
     fontSize: 18,
+    bottom: 10,
   },
   icon: {
-    fontSize: 20,
+    fontSize: 25,
     color: 'red',
+    position: 'relative',
+    bottom: 10,
   },
 });
 
@@ -77,7 +81,9 @@ const MultipleInput = ({
             renderItem={({item}) => (
               <View style={styles.inputContainer}>
                 <Text style={styles.item}>{item.value}</Text>
-                <TouchableOpacity onPress={() => removeInput(item.id)}>
+                <TouchableOpacity
+                  onPress={() => removeInput(item.id)}
+                >
                   <Icon name="remove-circle" style={styles.icon} />
                 </TouchableOpacity>
               </View>
@@ -102,6 +108,7 @@ MultipleInput.propTypes = {
   inputs: PropTypes.instanceOf(Object).isRequired,
   setInputs: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default MultipleInput;
