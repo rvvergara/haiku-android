@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import {
   Text, Button, Avatar,
 } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
+import { setPractitioner } from '../../store/actions/practitioner';
 import Spacer from '../Common/Spacer';
 
 const styles = StyleSheet.create({
@@ -30,6 +32,13 @@ const PractitionerCard = ({ practitioner, navigation}) => {
   const fullName = `Dr. ${practitioner.firstName} ${practitioner.lastName}`;
 
   const specialties = JSON.parse(practitioner.specialties).join(', ');
+
+  const dispatch = useDispatch();
+
+  const handleProfileClick = () => {
+    dispatch(setPractitioner(practitioner));
+    navigation.navigate('Profile');
+  };
   return (
     <Spacer>
       <View style={styles.card}>
@@ -47,7 +56,7 @@ const PractitionerCard = ({ practitioner, navigation}) => {
           </Text>
         </View>
         <View style={styles.links}>
-          <TouchableOpacity onPress={() => navigation.navigate('Profile', { practitioner })}>
+          <TouchableOpacity onPress={handleProfileClick}>
             <Text>Profile</Text>
           </TouchableOpacity>
           <Button

@@ -1,29 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {StyleSheet, Text, View} from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import {View} from 'react-native';
+import { NavigationEvents } from 'react-navigation';
+import { setPractitioner } from '../store/actions/practitioner';
 import PractitionerProfile from '../components/Practitioner/Profile/Profile';
 import Spacer from '../components/Common/Spacer';
 
-const styles = StyleSheet.create({
-
-});
-
-const ProfileScreen = ({ navigation }) => {
-  const patient = navigation.getParam('patient');
-  const practitioner = navigation.getParam('practitioner');
+const ProfileScreen = () => {
+  const practitioner = useSelector((state) => state.displayedPractitioner);
+  const dispatch = useDispatch();
   return (
     <Spacer>
+      <NavigationEvents
+        onWillBlur={() => dispatch(setPractitioner(null))}
+      />
       <View>
-        {
-          practitioner && <PractitionerProfile practitioner={practitioner} />
-        }
+        { practitioner && <PractitionerProfile /> }
       </View>
     </Spacer>
   );
-};
-
-ProfileScreen.propTypes = {
-  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default ProfileScreen;
