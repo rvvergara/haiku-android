@@ -4,27 +4,9 @@ import { View, StyleSheet } from 'react-native';
 import { Text, Avatar, Button } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import Spacer from '../../Common/Spacer';
+import { profileStyles } from '../../../style-objects/profileStyles';
 
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: 'white',
-    alignItems: 'center',
-    borderRadius: 10,
-    shadowColor: 'black',
-    shadowOffset: { width: 10, height: 10},
-    elevation: 5,
-    padding: 20,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#20385a',
-  },
-  button: {
-    backgroundColor: '#5073F1',
-    width: 100,
-  },
-});
+const styles = StyleSheet.create(profileStyles);
 
 const Profile = ({ practitioner, navigation }) => {
   const fullName = `Dr. ${practitioner.firstName} ${practitioner.lastName}`;
