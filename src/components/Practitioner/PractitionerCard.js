@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Image, Text, Button } from 'react-native-elements';
+import {
+  Text, Button, Avatar,
+} from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import Spacer from '../Common/Spacer';
 
@@ -13,10 +15,6 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 10,
-  },
-  avatar: {
-    width: 50,
-    height: 50,
   },
   info: {
     flex: 1,
@@ -35,9 +33,10 @@ const PractitionerCard = ({ practitioner, navigation}) => {
   return (
     <Spacer>
       <View style={styles.card}>
-        <Image
+        <Avatar
           source={{uri: practitioner.image }}
-          style={styles.avatar}
+          size="medium"
+          rounded
         />
         <View style={styles.info}>
           <Text style={styles.name}>
@@ -48,7 +47,7 @@ const PractitionerCard = ({ practitioner, navigation}) => {
           </Text>
         </View>
         <View style={styles.links}>
-          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Profile', { practitioner })}>
             <Text>Profile</Text>
           </TouchableOpacity>
           <Button
