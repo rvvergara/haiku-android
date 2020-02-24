@@ -48,7 +48,9 @@ const PractitionerCard = ({ practitioner, navigation}) => {
           </Text>
         </View>
         <View style={styles.links}>
-          <Text>Profile</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+            <Text>Profile</Text>
+          </TouchableOpacity>
           <Button
             title="Book"
           />
