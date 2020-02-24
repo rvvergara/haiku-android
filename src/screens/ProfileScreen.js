@@ -1,18 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {StyleSheet, Text, View} from 'react-native';
-import { Button } from 'react-native-elements';
-import Header from '../components/Common/Header';
+import PractitionerProfile from '../components/Practitioner/Profile/Profile';
+import Spacer from '../components/Common/Spacer';
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
 
-const ProfileScreen = ({ navigation }) => (
-  <View>
-    <Text>Profile Info Screen</Text>
-    <Button
-      title="Go to Booking Selection"
-      onPress={() => navigation.navigate('BookingSelection')}
-    />
-  </View>
-);
+});
+
+const ProfileScreen = ({ navigation }) => {
+  const patient = navigation.getParam('patient');
+  const practitioner = navigation.getParam('practitioner');
+  return (
+    <Spacer>
+      <View>
+        {
+          practitioner && <PractitionerProfile practitioner={practitioner} />
+        }
+      </View>
+    </Spacer>
+  );
+};
+
+ProfileScreen.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default ProfileScreen;
