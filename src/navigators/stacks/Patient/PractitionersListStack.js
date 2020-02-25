@@ -3,6 +3,7 @@ import { navigationOptions, defaultNavigationOptions } from '../../navigationHel
 import PractitionersScreen from '../../../screens/PractitionersScreen';
 import ProfileScreen from '../../../screens/ProfileScreen';
 import BookingSelectionScreen from '../../../screens/BookingSelectionScreen';
+import BookingSubmissionScreen from '../../../screens/BookingSubmissionScreen';
 
 const screens = {
   Practitioners: {
@@ -20,6 +21,10 @@ const screens = {
   },
   BookingSelection: {
     screen: BookingSelectionScreen,
+    navigationOptions,
+  },
+  BookingSubmission: {
+    screen: BookingSubmissionScreen,
     navigationOptions,
   },
 };
