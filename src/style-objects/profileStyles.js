@@ -28,16 +28,20 @@ export const profileStyles = {
     fontWeight: 'bold',
     color: '#20385a',
   },
-  listTitle: {
+  boxTitle: {
     fontSize: 17,
     fontWeight: 'bold',
     alignSelf: 'flex-start',
+    marginBottom: 5,
   },
   list: {
     alignSelf: 'flex-start',
   },
   listItem: {
     marginRight: 5,
+  },
+  about: {
+    alignSelf: 'flex-start',
   },
   button: {
     backgroundColor: '#5073F1',
