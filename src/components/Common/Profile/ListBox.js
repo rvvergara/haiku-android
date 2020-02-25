@@ -4,23 +4,16 @@ import {
   View, StyleSheet, FlatList,
 } from 'react-native';
 import { Text } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import ListSeparator from './ListSeparator';
 import { profileStyles } from '../../../style-objects/profileStyles';
 
 const styles = StyleSheet.create(profileStyles);
 
 const ListBox = ({ list, title }) => (
   <View style={styles.card}>
-    <Text style={styles.listTitle}>{title}</Text>
+    <Text style={styles.boxTitle}>{title}</Text>
     <FlatList
-      ItemSeparatorComponent={() => (
-        <View style={{justifyContent: 'center', marginRight: 5}}>
-          <Icon
-            name="cards-diamond"
-            size={10}
-          />
-        </View>
-      )}
+      ItemSeparatorComponent={() => <ListSeparator />}
       style={styles.list}
       horizontal
       data={list}
