@@ -3,6 +3,7 @@ import { useSelector, useDispatch} from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import Spacer from '../../Common/Spacer';
 import MainBox from './MainBox';
+import ListBox from '../../Common/Profile/ListBox';
 import { setPractitioner } from '../../../store/actions/practitioner';
 import { profileStyles } from '../../../style-objects/profileStyles';
 
@@ -19,6 +20,14 @@ const Profile = () => {
     <Spacer>
       <View style={styles.container}>
         <MainBox practitioner={practitioner} />
+        <ListBox
+          list={JSON.parse(practitioner.specialties)}
+          title="Specialties"
+        />
+        <ListBox
+          list={JSON.parse(practitioner.education)}
+          title="Education"
+        />
       </View>
     </Spacer>
   );
