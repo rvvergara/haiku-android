@@ -3,6 +3,7 @@ import DrawerTrigger from '../components/Common/DrawerTrigger.js';
 
 export const navigationOptions = {
   headerRight: () => <DrawerTrigger />,
+  headerTintColor: 'white',
 };
 
 export const defaultNavigationOptions = {
