@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 });
 
 const TextInput = ({
-  label, value, onChangeText, disabled, placeholder, submit, keyboardType,
+  label, value, onChangeText, disabled, placeholder, submit, keyboardType, multiline, numberOfLines,
 }) => (
   <View>
     <Input
@@ -41,6 +41,9 @@ const TextInput = ({
       placeholder={placeholder}
       onSubmitEditing={submit}
       keyboardType={keyboardType}
+      multiline={multiline}
+      numberOfLines={numberOfLines}
+      textAlignVertical="top"
     />
   </View>
 );
@@ -50,6 +53,8 @@ TextInput.defaultProps = {
   placeholder: '',
   submit: () => {},
   keyboardType: 'default',
+  multiline: false,
+  numberOfLines: 1,
 };
 
 TextInput.propTypes = {
@@ -60,6 +65,8 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   submit: PropTypes.func,
   keyboardType: PropTypes.string,
+  multiline: PropTypes.bool,
+  numberOfLines: PropTypes.number,
 };
 
 export default TextInput;

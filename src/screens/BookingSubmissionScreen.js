@@ -1,13 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import Header from '../components/Common/Header';
-
-const styles = StyleSheet.create({});
+import SlotSubmission from '../components/Practitioner/BookingSlots/SlotSubmission';
+import Spacer from '../components/Common/Spacer';
 
 const BookingSubmissionScreen = () => (
-  <View>
-    <Text>Booking Form Here Screen</Text>
-  </View>
+  <Spacer>
+    <SlotSubmission />
+  </Spacer>
 );
 
 export default BookingSubmissionScreen;
