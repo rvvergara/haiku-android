@@ -5,6 +5,7 @@ import practitioners from './practitioners';
 import displayedPractitioner from './displayedPractitioner';
 import isBooking from './isBooking';
 import displayedSlot from './displayedSlot';
+import bookingSlots from './bookingSlots';
 
 export default combineReducers({
   currentUser,
@@ -13,4 +14,5 @@ export default combineReducers({
   displayedPractitioner,
   isBooking,
   displayedSlot,
+  bookingSlots,
 });
