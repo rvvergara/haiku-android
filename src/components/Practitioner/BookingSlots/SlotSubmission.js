@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import TextInput from '../../Common/TextInput';
 import Spacer from '../../Common/Spacer';
+import { displaySlot } from '../../../store/actions/bookingSlot';
 
 const styles = StyleSheet.create({
   container: {
@@ -37,6 +38,8 @@ const SlotSubmission = () => {
   const dispatch = useDispatch();
 
   const slot = useSelector((state) => state.displayedSlot);
+
+  useEffect(() => () => dispatch(displaySlot(null)), []);
 
   return (
     <View style={styles.container}>
