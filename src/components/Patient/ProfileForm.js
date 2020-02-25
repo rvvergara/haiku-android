@@ -14,7 +14,7 @@ import usePatientForm from '../../hooks/usePatientForm';
 import ErrorMessages from '../Common/ErrorMessages';
 import ProfileFormFooter from '../Common/ProfileFormFooter';
 import TextInput from '../Common/TextInput';
-import BirthdateSelector from './BirthdateSelector';
+import DateSelector from '../Common/DateSelector';
 import Spacer from '../Common/Spacer';
 import ImageUploader from '../Common/ImageUploader';
 import { profileFormStyles } from '../../style-objects/profileStyles';
@@ -100,12 +100,13 @@ const ProfileForm = ({navigation}) => {
         onChangeText={setPostalCode}
       />
 
-      <BirthdateSelector
+      <DateSelector
         mode={mode}
         show={show}
         onDateChange={onDateChange}
         showDatePicker={showDatePicker}
-        dateOfBirth={dateOfBirth}
+        date={dateOfBirth}
+        label="Birth Date"
       />
 
       <MultipleInput

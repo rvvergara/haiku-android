@@ -4,14 +4,15 @@ import moment from 'moment';
 import { View, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import TextInput from '../Common/TextInput';
+import TextInput from './TextInput';
 
-const BirthdateSelector = ({
+const DateSelector = ({
   mode,
   show,
   onDateChange,
   showDatePicker,
-  dateOfBirth,
+  date,
+  label,
 }) => (
   <View>
     <View>
@@ -19,8 +20,8 @@ const BirthdateSelector = ({
         onPress={showDatePicker}
       >
         <TextInput
-          label="Birth Date"
-          placeholder={moment(dateOfBirth).format('MMMM DD, YYYY')}
+          label={label}
+          placeholder={moment(date).format('MMMM DD, YYYY')}
           disabled
           onChangeText={() => {}}
           value=""
@@ -30,7 +31,7 @@ const BirthdateSelector = ({
             show ? (
               <DateTimePicker
                 testID="birthdate"
-                value={dateOfBirth}
+                value={date}
                 mode={mode}
                 onChange={onDateChange}
               />
@@ -40,12 +41,13 @@ const BirthdateSelector = ({
   </View>
 );
 
-BirthdateSelector.propTypes = {
+DateSelector.propTypes = {
   mode: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
   onDateChange: PropTypes.func.isRequired,
   showDatePicker: PropTypes.func.isRequired,
-  dateOfBirth: PropTypes.instanceOf(Object).isRequired,
+  date: PropTypes.instanceOf(Object).isRequired,
+  label: PropTypes.string.isRequired,
 };
 
-export default withNavigation(BirthdateSelector);
+export default withNavigation(DateSelector);
