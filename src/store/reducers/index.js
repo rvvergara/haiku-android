@@ -5,12 +5,14 @@ import practitioners from './practitioners';
 import displayedPractitioner from './displayedPractitioner';
 import displayedSlot from './displayedSlot';
 import bookingSlots from './bookingSlots';
+import appointments from './appointments';
 
 export default combineReducers({
+  appointments,
+  bookingSlots,
   currentUser,
-  errors,
-  practitioners,
   displayedPractitioner,
   displayedSlot,
-  bookingSlots,
+  errors,
+  practitioners,
 });
