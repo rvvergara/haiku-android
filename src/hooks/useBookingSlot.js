@@ -27,11 +27,13 @@ export default (navigation) => {
 
   const chosenSlots = bookingSlots.filter((slot) => slot.date === moment(dateShown).format('MMMM DD, YYYY'));
 
-  const sortedSelectedTimeSlots = chosenSlots.map((slot) => `${slot.startTime} to ${slot.endTime}`).sort();
+  const mappedTimeSlots = chosenSlots.map((slot) => ({id: slot.id, date: slot.date, time: `${slot.startTime} to ${slot.endTime}`}));
 
-  const amSlots = sortedSelectedTimeSlots.filter((slot) => slot.includes('AM'));
+  const sortingFn = (a, b) => (a.time < b.time ? -1 : 1);
 
-  const pmSlots = sortedSelectedTimeSlots.filter((slot) => slot.includes('PM') && !slot.includes('AM'));
+  const amSlots = mappedTimeSlots.filter((slot) => slot.time.includes('AM')).sort(sortingFn);
+
+  const pmSlots = mappedTimeSlots.filter((slot) => slot.time.includes('PM') && !slot.time.includes('AM')).sort(sortingFn);
 
   const shownSlots = [...amSlots, ...pmSlots];
 

@@ -5,32 +5,9 @@ import { Button, Text } from 'react-native-elements';
 import TextInput from '../../Common/TextInput';
 import Spacer from '../../Common/Spacer';
 import { displaySlot } from '../../../store/actions/bookingSlot';
+import { slotSubmissionStyles } from '../../../style-objects/bookingSlotsStyles';
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-  },
-  remarksContainer: {
-    paddingHorizontal: 10,
-  },
-  buttonStyle: {
-    backgroundColor: '#5073F1',
-  },
-  titleStyle: {
-    fontSize: 17,
-    fontWeight: 'bold',
-  },
-  infoLabel: {
-    flexDirection: 'row',
-  },
-  infoTitle: {
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  infoDetail: {
-    fontSize: 18,
-  },
-});
+const styles = StyleSheet.create(slotSubmissionStyles);
 
 const SlotSubmission = () => {
   const [remark, setRemark] = useState('');
@@ -59,11 +36,7 @@ const SlotSubmission = () => {
             {' '}
           </Text>
           <Text style={styles.infoDetail}>
-            {slot.startTime}
-            {' '}
-            to
-            {' '}
-            {slot.endTime}
+            {slot.time}
           </Text>
         </View>
       </Spacer>

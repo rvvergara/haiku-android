@@ -41,13 +41,14 @@ const SlotSelection = ({ navigation }) => {
         renderItem={({item}) => (
           <Spacer>
             <Button
-              title={item}
+              title={item.time}
               onPress={() => handleSlotPress(item)}
               buttonStyle={styles.button}
               titleStyle={styles.buttonTitle}
             />
           </Spacer>
         )}
+        showsVerticalScrollIndicator={false}
       />
     </>
   );
