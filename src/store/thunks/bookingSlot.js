@@ -1,7 +1,9 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { sendAuthorizedRequest } from '../../utils/api';
 import { listSlots } from '../actions/bookingSlot';
+import { addPendingAppointment } from '../actions/pendingAppointments';
 import { localizeBookingSlot } from '../../utils/localizeTime';
+import { navigate } from '../../utils/navigationRef';
 
 export const fetchPractitionerBookingSlots = (
   practitionerId,
@@ -17,8 +19,22 @@ export const fetchPractitionerBookingSlots = (
     const res = await sendAuthorizedRequest('get', path, token);
     const { booking_slots } = res.data;
     const slotsLocalized = booking_slots.map((slot) => localizeBookingSlot(slot, 8));
-    dispatch(listSlots(slotsLocalized));
+    return dispatch(listSlots(slotsLocalized));
   } catch (err) {
-    console.log('ERROR FETCHING SLOTS', err.response);
+    return err;
+  }
+};
+
+export const bookSlot = (params, slotId) => async (dispatch) => {
+  const path = `v1/booking-slots/${slotId}/book`;
+  const token = await AsyncStorage.getItem('token');
+
+  try {
+    const res = await sendAuthorizedRequest('post', path, token, params);
+    const appointment = res.data.booking_slot;
+    navigate('Profile');
+    dispatch(addPendingAppointment(appointment));
+  } catch (err) {
+    console.log('BOOKING ERROR', err.response);
   }
 };
