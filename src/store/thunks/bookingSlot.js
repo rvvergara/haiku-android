@@ -5,20 +5,18 @@ import { setErrors } from '../actions/error';
 import { localizeBookingSlot } from '../../utils/localizeTime';
 import { navigate } from '../../utils/navigationRef';
 
-export const fetchPractitionerBookingSlots = (
+export const fetchPractitionerOpenSlots = (
   practitionerId,
   patientId,
-  status,
 ) => async (dispatch) => {
-  const path = `v1/practitioners/${practitionerId}/booking-slots?status=${
-    status ? status.toUpperCase() : ''
-  }&include=patient&patientId=${patientId || ''}`;
+  const path = `v1/practitioners/${practitionerId}/booking-slots?status=PENDING&include=patient&patientId=${patientId || ''}`;
 
   try {
     const token = await AsyncStorage.getItem('token');
     const res = await sendAuthorizedRequest('get', path, token);
     const { booking_slots } = res.data;
-    const slotsLocalized = booking_slots.map((slot) => localizeBookingSlot(slot, 8));
+    const openSlots = booking_slots.filter((slot) => slot.patient === null);
+    const slotsLocalized = openSlots.map((slot) => localizeBookingSlot(slot, 8));
     return dispatch(listSlots(slotsLocalized));
   } catch (err) {
     return err;

@@ -3,19 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Platform } from 'react-native';
 import moment from 'moment';
 import { displaySlot, listSlots } from '../store/actions/openSlot';
-import { fetchPractitionerBookingSlots } from '../store/thunks/bookingSlot';
+import { fetchPractitionerOpenSlots } from '../store/thunks/bookingSlot';
 
 export default (navigation) => {
-  const bookingSlots = useSelector((state) => state.openSlots);
-
-  const openSlots = bookingSlots.filter((slot) => slot.patient === null);
+  const openSlots = useSelector((state) => state.openSlots);
 
   const dispatch = useDispatch();
 
   const practitioner = useSelector((state) => state.displayedPractitioner);
 
   useEffect(() => {
-    dispatch(fetchPractitionerBookingSlots(practitioner.id, null, 'PENDING'));
+    dispatch(fetchPractitionerOpenSlots(practitioner.id, null));
   }, []);
 
   useEffect(() => () => dispatch(listSlots([])), []);
