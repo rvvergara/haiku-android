@@ -1,4 +1,7 @@
-import { LIST_APPOINTMENTS, ADD_APPOINTMENT } from './types';
+import {
+  LIST_APPOINTMENTS,
+  ADD_APPOINTMENT,
+} from './types';
 
 export const listAppointments = (appointments) => ({
   type: LIST_APPOINTMENTS,
