@@ -1,7 +1,4 @@
 export const slotSelectionStyles = {
-  container: {
-    paddingHorizontal: 20,
-  },
   pickerContainer: {
     paddingHorizontal: 5,
   },

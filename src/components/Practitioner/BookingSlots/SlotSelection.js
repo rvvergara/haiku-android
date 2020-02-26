@@ -14,7 +14,7 @@ const styles = StyleSheet.create(slotSelectionStyles);
 
 const SlotSelection = ({ navigation }) => {
   const {
-    chosenSlots,
+    shownSlots,
     mode,
     show,
     handleSlotPress,
@@ -24,7 +24,7 @@ const SlotSelection = ({ navigation }) => {
   } = useBookingSlot(navigation);
 
   return (
-    <View style={styles.container}>
+    <>
       <View style={styles.pickerContainer}>
         <DateSelector
           mode={mode}
@@ -36,12 +36,12 @@ const SlotSelection = ({ navigation }) => {
         />
       </View>
       <FlatList
-        data={chosenSlots}
+        data={shownSlots}
         keyExtractor={(item) => item.id}
         renderItem={({item}) => (
           <Spacer>
             <Button
-              title={`${item.startTime} to ${item.endTime}`}
+              title={item}
               onPress={() => handleSlotPress(item)}
               buttonStyle={styles.button}
               titleStyle={styles.buttonTitle}
@@ -49,7 +49,7 @@ const SlotSelection = ({ navigation }) => {
           </Spacer>
         )}
       />
-    </View>
+    </>
   );
 };
 
