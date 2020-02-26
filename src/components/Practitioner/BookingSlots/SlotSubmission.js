@@ -5,18 +5,29 @@ import { Button, Text } from 'react-native-elements';
 import TextInput from '../../Common/TextInput';
 import Spacer from '../../Common/Spacer';
 import { displaySlot } from '../../../store/actions/bookingSlot';
+import { bookSlot } from '../../../store/thunks/bookingSlot';
 import { slotSubmissionStyles } from '../../../style-objects/bookingSlotsStyles';
 
 const styles = StyleSheet.create(slotSubmissionStyles);
 
 const SlotSubmission = () => {
-  const [remark, setRemark] = useState('');
+  const [remarks, setRemarks] = useState('');
 
   const dispatch = useDispatch();
 
   const slot = useSelector((state) => state.displayedSlot);
 
+  const patient = useSelector((state) => state.currentUser.data.patient);
+
   useEffect(() => () => dispatch(displaySlot(null)), []);
+
+  const handleSubmit = (bookingSlot) => {
+    const params = {
+      patientId: patient.id,
+      remarks,
+    };
+    dispatch(bookSlot(params, bookingSlot.id));
+  };
 
   return (
     <View style={styles.container}>
@@ -43,8 +54,8 @@ const SlotSubmission = () => {
       <View style={styles.remarksContainer}>
         <TextInput
           label="Remarks"
-          value={remark}
-          onChangeText={setRemark}
+          value={remarks}
+          onChangeText={setRemarks}
           placeholder={null}
           multiline
           numberOfLines={5}
@@ -53,7 +64,7 @@ const SlotSubmission = () => {
       <Spacer>
         <Button
           title="Confirm"
-          onPress={() => console.log('BOOKED', slot.id)}
+          onPress={() => handleSubmit(slot)}
           buttonStyle={styles.buttonStyle}
           titleStyle={styles.titleStyle}
         />

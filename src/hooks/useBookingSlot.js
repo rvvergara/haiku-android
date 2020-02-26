@@ -8,6 +8,8 @@ import { fetchPractitionerBookingSlots } from '../store/thunks/bookingSlot';
 export default (navigation) => {
   const bookingSlots = useSelector((state) => state.bookingSlots);
 
+  const openSlots = bookingSlots.filter((slot) => slot.patient === null);
+
   const dispatch = useDispatch();
 
   const practitioner = useSelector((state) => state.displayedPractitioner);
@@ -18,14 +20,14 @@ export default (navigation) => {
 
   useEffect(() => () => dispatch(listSlots([])), []);
 
-  const [dateShown, setDateShown] = useState(bookingSlots.length > 0
-    ? new Date(bookingSlots[0].date) : new Date());
+  const [dateShown, setDateShown] = useState(openSlots.length > 0
+    ? new Date(openSlots[0].date) : new Date());
 
   const [mode, setMode] = useState('date');
 
   const [show, setShow] = useState(false);
 
-  const chosenSlots = bookingSlots.filter((slot) => slot.date === moment(dateShown).format('MMMM DD, YYYY'));
+  const chosenSlots = openSlots.filter((slot) => slot.date === moment(dateShown).format('MMMM DD, YYYY'));
 
   const mappedTimeSlots = chosenSlots.map((slot) => ({id: slot.id, date: slot.date, time: `${slot.startTime} to ${slot.endTime}`}));
 

@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { sendAuthorizedRequest } from '../../utils/api';
 import { listSlots } from '../actions/bookingSlot';
-import { addPendingAppointment } from '../actions/pendingAppointments';
+import { setErrors } from '../actions/error';
 import { localizeBookingSlot } from '../../utils/localizeTime';
 import { navigate } from '../../utils/navigationRef';
 
@@ -30,11 +30,9 @@ export const bookSlot = (params, slotId) => async (dispatch) => {
   const token = await AsyncStorage.getItem('token');
 
   try {
-    const res = await sendAuthorizedRequest('post', path, token, params);
-    const appointment = res.data.booking_slot;
+    await sendAuthorizedRequest('post', path, token, params);
     navigate('Profile');
-    dispatch(addPendingAppointment(appointment));
   } catch (err) {
-    console.log('BOOKING ERROR', err.response);
+    dispatch(setErrors([err.response.data.error]));
   }
 };
