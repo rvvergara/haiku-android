@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Platform } from 'react-native';
 import moment from 'moment';
-import { displaySlot, listSlots } from '../store/actions/bookingSlot';
+import { displaySlot, listSlots } from '../store/actions/openSlot';
 import { fetchPractitionerBookingSlots } from '../store/thunks/bookingSlot';
 
 export default (navigation) => {
-  const bookingSlots = useSelector((state) => state.bookingSlots);
+  const bookingSlots = useSelector((state) => state.openSlots);
 
   const openSlots = bookingSlots.filter((slot) => slot.patient === null);
 

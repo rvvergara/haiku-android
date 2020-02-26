@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { sendAuthorizedRequest } from '../../utils/api';
-import { listSlots } from '../actions/bookingSlot';
+import { listSlots } from '../actions/openSlot';
 import { setErrors } from '../actions/error';
 import { localizeBookingSlot } from '../../utils/localizeTime';
 import { navigate } from '../../utils/navigationRef';

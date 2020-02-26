@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import TextInput from '../../Common/TextInput';
 import Spacer from '../../Common/Spacer';
-import { displaySlot } from '../../../store/actions/bookingSlot';
+import { displaySlot } from '../../../store/actions/openSlot';
 import { bookSlot } from '../../../store/thunks/bookingSlot';
 import { slotSubmissionStyles } from '../../../style-objects/bookingSlotsStyles';
 

@@ -4,17 +4,17 @@ import errors from './error';
 import practitioners from './practitioners';
 import displayedPractitioner from './displayedPractitioner';
 import displayedSlot from './displayedSlot';
-import bookingSlots from './bookingSlots';
+import openSlots from './openSlots';
 import appointments from './appointments';
 import pendingAppointments from './pendingAppointments';
 
 export default combineReducers({
   appointments,
-  bookingSlots,
   currentUser,
   displayedPractitioner,
   displayedSlot,
   errors,
+  openSlots,
   pendingAppointments,
   practitioners,
 });

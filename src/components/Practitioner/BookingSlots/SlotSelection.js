@@ -7,7 +7,7 @@ import { Button } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import DateSelector from '../../Common/DateSelector';
 import Spacer from '../../Common/Spacer';
-import useBookingSlot from '../../../hooks/useBookingSlot';
+import useOpenSlot from '../../../hooks/useOpenSlot';
 import { slotSelectionStyles } from '../../../style-objects/bookingSlotsStyles';
 
 const styles = StyleSheet.create(slotSelectionStyles);
@@ -21,7 +21,7 @@ const SlotSelection = ({ navigation }) => {
     onDateChange,
     showDatePicker,
     dateShown,
-  } = useBookingSlot(navigation);
+  } = useOpenSlot(navigation);
 
   return (
     <>
