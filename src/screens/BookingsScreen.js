@@ -1,15 +1,12 @@
 import React from 'react';
 import {
-  Button, StyleSheet, Text, View,
+  Text, View,
 } from 'react-native';
-import Header from '../components/Common/Header';
+import PendingList from '../components/Common/Appointments/PendingList';
 
-const styles = StyleSheet.create({});
-
-const BookingsScreen = ({navigation}) => (
+const BookingsScreen = () => (
   <View>
-    <Text>Bookings Screen</Text>
-    <Button title="Video Screen" onPress={() => navigation.navigate('Video')} />
+    <PendingList />
   </View>
 );
 
