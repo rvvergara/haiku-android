@@ -27,6 +27,14 @@ export default (navigation) => {
 
   const chosenSlots = bookingSlots.filter((slot) => slot.date === moment(dateShown).format('MMMM DD, YYYY'));
 
+  const sortedSelectedTimeSlots = chosenSlots.map((slot) => `${slot.startTime} to ${slot.endTime}`).sort();
+
+  const amSlots = sortedSelectedTimeSlots.filter((slot) => slot.includes('AM'));
+
+  const pmSlots = sortedSelectedTimeSlots.filter((slot) => slot.includes('PM') && !slot.includes('AM'));
+
+  const shownSlots = [...amSlots, ...pmSlots];
+
   const handleSlotPress = (slot) => {
     dispatch(displaySlot(slot));
     navigation.navigate('BookingSubmission', { slot });
@@ -48,7 +56,7 @@ export default (navigation) => {
   };
 
   return {
-    chosenSlots,
+    shownSlots,
     mode,
     show,
     handleSlotPress,
