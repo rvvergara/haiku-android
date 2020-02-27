@@ -1,17 +1,31 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import { Button } from 'react-native-elements';
+import { useSelector } from 'react-redux';
+import {ScrollView} from 'react-native';
+import Welcome from '../components/Common/Home/Welcome';
+import PatientHome from '../components/Patient/PatientHome';
+import Spacer from '../components/Common/Spacer';
 
-const styles = StyleSheet.create({});
+const HomeScreen = () => {
+  const currentUser = useSelector((state) => state.currentUser);
 
-const HomeScreen = ({ navigation }) => (
-  <View>
-    <Text>Home Screen</Text>
-    <Button
-      title="Go To Practitioner Profile"
-      onPress={() => navigation.navigate('Profile')}
-    />
-  </View>
-);
+  if (!currentUser.authenticated) {
+    return null;
+  }
+
+  const { role } = currentUser.data;
+
+  const {firstName} = currentUser.data[role.toLowerCase()];
+
+  return (
+    <ScrollView>
+      <Spacer>
+        <Welcome firstName={firstName} />
+        {
+          role === 'PATIENT' && <PatientHome />
+        }
+      </Spacer>
+    </ScrollView>
+  );
+};
 
 export default HomeScreen;
