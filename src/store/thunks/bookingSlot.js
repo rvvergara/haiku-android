@@ -50,7 +50,8 @@ export const fetchPendingAppointments = (profile, role) => async (dispatch) => {
     if (role === 'PRACTITIONER') {
       pendingAppointments = pendingAppointments.filter((slot) => slot.patient !== null);
     }
-    return dispatch(listPendingAppointments(pendingAppointments));
+    const localizedPendingAppointments = pendingAppointments.map((slot) => localizeBookingSlot(slot, 8));
+    return dispatch(listPendingAppointments(localizedPendingAppointments));
   } catch (err) {
     return err;
   }
