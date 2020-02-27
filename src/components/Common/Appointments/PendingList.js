@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
-import { ListItem, Text } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import moment from 'moment';
 import { fetchPendingAppointments } from '../../../store/thunks/bookingSlot';
 import { listPendingAppointments } from '../../../store/actions/pendingAppointments';
+import ScheduleInfo from './ScheduleInfo';
 
 const styles = StyleSheet.create({
   listContainer: {
     margin: 10,
     borderRadius: 10,
+    shadowColor: '#9aa7b2',
+    shadowOffset: { width: 10, height: 2 },
+    elevation: 5,
   },
   rightIcon: {
     color: '#9aa7b2',
@@ -19,6 +22,7 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#20385a',
   },
 });
 
@@ -34,6 +38,10 @@ const PendingList = () => {
   const dispatch = useDispatch();
 
   const pendingAppointments = useSelector((state) => state.pendingAppointments);
+
+  const prefix = appointee === 'practitioner' ? 'Dr.' : '';
+
+  const fullName = (firstName, lastName) => `${prefix} ${firstName} ${lastName}`;
 
   useEffect(() => {
     dispatch(fetchPendingAppointments(profile, role));
@@ -52,19 +60,16 @@ const PendingList = () => {
               source: { uri: appointment[appointee].image },
               size: 'large',
             }}
-            title={`${appointment[appointee].firstName} ${appointment[appointee].lastName}`}
-            subtitle={(
-              <View>
-                <Text>
-                  Date:
-                  {' '}
-                  {moment(appointment.date).format('MMMM DD, YYYY')}
-                </Text>
-                <Text>{`From ${appointment.startTime} to ${appointment.endTime}`}</Text>
-              </View>
+            title={
+              fullName(appointment[appointee].firstName, appointment[appointee].lastName)
+            }
+            subtitle={<ScheduleInfo appointment={appointment} />}
+            rightIcon={(
+              <Icon
+                name="chevron-right-circle"
+                style={styles.rightIcon}
+              />
             )}
-            rightIcon={<Icon name="chevron-right-circle" style={styles.rightIcon} />}
-            bottomDivider
             titleStyle={styles.itemTitle}
           />
         ))
