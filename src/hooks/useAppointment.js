@@ -30,5 +30,6 @@ export default () => {
     pendingAppointments,
     fullName,
     appointee,
+    currentUserData,
   };
 };

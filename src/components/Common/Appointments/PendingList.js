@@ -9,7 +9,14 @@ import useAppointment from '../../../hooks/useAppointment';
 const styles = StyleSheet.create(listStyles);
 
 const PendingList = () => {
-  const { appointee, pendingAppointments, fullName} = useAppointment();
+  const {
+    appointee, pendingAppointments, fullName, currentUserData,
+  } = useAppointment();
+
+  if (Object.keys(currentUserData).length === 0) {
+    return null;
+  }
+
   return (
     <View>
       {
