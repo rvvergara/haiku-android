@@ -75,7 +75,7 @@ const MultipleInput = ({
         <View style={styles.listContainer}>
           <FlatList
             horizontal
-            scrollToOverflowEnabled={false}
+            scrollEnabled={false}
             data={collection}
             keyExtractor={() => uuid()}
             renderItem={({item}) => (
