@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  View, StyleSheet, FlatList,
-} from 'react-native';
-import { Button } from 'react-native-elements';
+import {View, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import DateSelector from '../../Common/DateSelector';
+import TimeSlotList from './TimeSlotList';
 import Spacer from '../../Common/Spacer';
 import useOpenSlot from '../../../hooks/useOpenSlot';
 import { slotSelectionStyles } from '../../../style-objects/bookingSlotsStyles';
@@ -35,21 +33,12 @@ const SlotSelection = ({ navigation }) => {
           label="Select Date"
         />
       </View>
-      <FlatList
-        data={shownSlots}
-        keyExtractor={(item) => item.id}
-        renderItem={({item}) => (
-          <Spacer>
-            <Button
-              title={item.time}
-              onPress={() => handleSlotPress(item)}
-              buttonStyle={styles.button}
-              titleStyle={styles.buttonTitle}
-            />
-          </Spacer>
-        )}
-        showsVerticalScrollIndicator={false}
+      <TimeSlotList
+        shownSlots={shownSlots}
+        handleSlotPress={handleSlotPress}
       />
+      <Spacer />
+      <Spacer />
     </>
   );
 };
