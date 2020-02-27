@@ -7,29 +7,9 @@ import { fetchPractitioners } from '../../store/thunks/practitioner';
 import { listPractitioners, setPractitioner } from '../../store/actions/practitioner';
 import PractitionerDetailsCard from './PractitionerDetailsCard';
 import { navigate } from '../../utils/navigationRef';
+import { cardStyles } from '../../style-objects/practitionerCardStyles';
 
-
-const styles = StyleSheet.create({
-  listContainer: {
-    margin: 10,
-    borderRadius: 10,
-    shadowColor: '#9aa7b2',
-    shadowOffset: { width: 10, height: 2 },
-    elevation: 5,
-  },
-  info: {
-    flex: 1,
-    marginLeft: 15,
-  },
-  name: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  rightIcon: {
-    fontSize: 30,
-    color: '#9aa7b2',
-  },
-});
+const styles = StyleSheet.create(cardStyles);
 
 const PractitionersList = () => {
   const dispatch = useDispatch();
@@ -68,6 +48,7 @@ const PractitionersList = () => {
               />
             )}
             onPress={() => handleProfileClick(practitioner)}
+            underlayColor="#fff"
           />
         ))
       }

@@ -4,25 +4,9 @@ import { View, StyleSheet } from 'react-native';
 import {
   Text,
 } from 'react-native-elements';
+import { cardDetailsStyles } from '../../style-objects/practitionerCardStyles';
 
-const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 10,
-  },
-  info: {
-    flex: 1,
-    marginLeft: 15,
-  },
-  name: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-});
+const styles = StyleSheet.create(cardDetailsStyles);
 
 const PractitionerDetailsCard = ({ practitioner}) => {
   const fullName = `Dr. ${practitioner.firstName} ${practitioner.lastName}`;
@@ -30,11 +14,11 @@ const PractitionerDetailsCard = ({ practitioner}) => {
   const specialties = JSON.parse(practitioner.specialties).join(', ');
 
   return (
-    <View style={styles.info}>
-      <Text style={styles.name}>
+    <View>
+      <Text style={styles.label}>
         { fullName }
       </Text>
-      <Text>
+      <Text style={styles.info}>
         { specialties }
       </Text>
     </View>
