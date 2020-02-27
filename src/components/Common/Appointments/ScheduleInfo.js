@@ -2,21 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, Text } from 'react-native';
 import moment from 'moment';
+import { scheduleInfoStyles } from '../../../style-objects/appointmentStyles';
 
-const styles = StyleSheet.create({
-  infoContainer: {
-    flexDirection: 'row',
-  },
-  label: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    color: '#555',
-  },
-  info: {
-    fontSize: 16,
-    alignSelf: 'center',
-  },
-});
+const styles = StyleSheet.create(scheduleInfoStyles);
 
 const ScheduleInfo = ({ appointment }) => {
   const meetingTime = `${appointment.startTime} to ${appointment.endTime}`;
