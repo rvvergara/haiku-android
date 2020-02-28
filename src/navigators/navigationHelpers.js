@@ -6,11 +6,17 @@ export const navigationOptions = {
   headerTintColor: 'white',
 };
 
+export const deepNavigationOptions = (title) => ({
+  headerRight: () => null,
+  title,
+});
+
 export const defaultNavigationOptions = {
   defaultNavigationOptions: {
     headerStyle: {
       backgroundColor: '#5073f1',
     },
     title: null,
+    headerTintColor: 'white',
   },
 };

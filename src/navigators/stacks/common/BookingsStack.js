@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { navigationOptions, defaultNavigationOptions } from '../../navigationHelpers';
+import { navigationOptions, defaultNavigationOptions, deepNavigationOptions } from '../../navigationHelpers';
 import BookingsScreen from '../../../screens/BookingsScreen';
 import BookingActionsScreen from '../../../screens/BookingActionsScreen';
 import VideoScreen from '../../../screens/VideoScreen';
@@ -11,11 +11,11 @@ const screens = {
   },
   BookingActions: {
     screen: BookingActionsScreen,
-    navigationOptions,
+    navigationOptions: deepNavigationOptions('Booking Actions'),
   },
   Video: {
     screen: VideoScreen,
-    navigationOptions,
+    navigationOptions: deepNavigationOptions('Active Call'),
   },
 };
 
