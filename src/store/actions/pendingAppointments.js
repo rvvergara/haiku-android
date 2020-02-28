@@ -5,7 +5,7 @@ export const listPendingAppointments = (appointments) => ({
   appointments,
 });
 
-export const removeAppointment = (id) => ({
+export const removePendingAppointment = (id) => ({
   type: REMOVE_PENDING_APPOINTMENT,
   id,
 });

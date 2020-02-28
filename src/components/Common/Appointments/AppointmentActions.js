@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import { Text, Avatar, Button } from 'react-native-elements';
+import { withNavigation } from 'react-navigation';
 import moment from 'moment';
+import { confirmBookingSlot } from '../../../store/thunks/bookingSlot';
 import { appointmentActionsStyles } from '../../../style-objects/appointmentStyles';
 
 const styles = StyleSheet.create(appointmentActionsStyles);
 
-const AppointmentActions = ({ appointment }) => {
+const AppointmentActions = ({ appointment, navigation }) => {
   const dispatch = useDispatch();
 
   const {
@@ -21,6 +23,11 @@ const AppointmentActions = ({ appointment }) => {
   const fullName = `${patient.firstName} ${patient.lastName}`;
 
   const time = `${startTime} to ${endTime}`;
+
+  const handleConfirm = () => {
+    dispatch(confirmBookingSlot(appointment.id));
+    navigation.pop();
+  };
 
   return (
     <View style={styles.container}>
@@ -82,7 +89,7 @@ const AppointmentActions = ({ appointment }) => {
           title="Confirm"
           titleStyle={styles.buttonTitle}
           buttonStyle={styles.confirmButton}
-          onPress={() => console.log('CONFIRMING')}
+          onPress={handleConfirm}
         />
         <Button
           title="Reject"
@@ -97,6 +104,7 @@ const AppointmentActions = ({ appointment }) => {
 
 AppointmentActions.propTypes = {
   appointment: PropTypes.instanceOf(Object).isRequired,
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default AppointmentActions;
+export default withNavigation(AppointmentActions);
