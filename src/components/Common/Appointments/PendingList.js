@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ScheduleInfo from './ScheduleInfo';
 import { listStyles } from '../../../style-objects/appointmentStyles';
 import useAppointment from '../../../hooks/useAppointment';
+import { navigate } from '../../../utils/navigationRef';
 
 const styles = StyleSheet.create(listStyles);
 
@@ -39,6 +40,8 @@ const PendingList = () => {
               />
             )}
             titleStyle={styles.itemTitle}
+            onPress={() => navigate('BookingActions', { appointment })}
+            underlayColor="white"
           />
         ))
       }
