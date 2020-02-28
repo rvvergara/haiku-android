@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
+import AppointmentActions from '../components/Common/Appointments/AppointmentActions';
 import Spacer from '../components/Common/Spacer';
 
 const BookingActionsScreen = ({ navigation }) => {
   const appointment = navigation.getParam('appointment');
 
   return (
-    <View>
+    <ScrollView style={{flex: 1}}>
       <Spacer>
-        <Text>Confirm or Reject Booking here</Text>
-        <Text>{appointment.patient.firstName}</Text>
+        <AppointmentActions appointment={appointment} />
       </Spacer>
-    </View>
+    </ScrollView>
   );
 };
 
