@@ -20,6 +20,13 @@ import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import store from './src/store/store';
 import {setNavigator} from './src/utils/navigationRef';
+import Home from './src/navigators/drawerItems/Common/Home';
+import Profile from './src/navigators/drawerItems/Common/Profile';
+import Bookings from './src/navigators/drawerItems/Common/Bookings';
+import Clinics from './src/navigators/drawerItems/Common/Clinics';
+import Practitioners from './src/navigators/drawerItems/Patient/Practitioners';
+import Feedback from './src/navigators/drawerItems/Common/Feedback';
+import Schedule from './src/navigators/drawerItems/Practitioner/Schedule';
 import { drawerOptions } from './src/navigators/drawerOptions';
 
 const switchNavigator = createSwitchNavigator({
@@ -39,28 +46,23 @@ const switchNavigator = createSwitchNavigator({
   ),
   patientFlow: createDrawerNavigator(
     {
-      Home: {
-        screen: HomeStack,
-        navigationOptions: {
-          drawerIcon: () => <Icon name="home" size={30} />,
-        },
-      },
-      'Edit Profile': ProfileEditStack,
-      Practitioners: PractitionersListStack,
-      Bookings: BookingsStack,
-      Feedback: FeedbackStack,
-      Clinics: ClinicsStack,
+      Home,
+      'Edit Profile': Profile,
+      Practitioners,
+      Bookings,
+      Clinics,
+      Feedback,
     },
     drawerOptions,
   ),
   practitionerFlow: createDrawerNavigator(
     {
-      Home: HomeStack,
-      ProfileEdit: ProfileEditStack,
-      Schedule: ScheduleStack,
-      Bookings: BookingsStack,
-      Clinics: ClinicsStack,
-      Feedback: FeedbackStack,
+      Home,
+      'Edit Profile': Profile,
+      Schedule,
+      Bookings,
+      Clinics,
+      Feedback,
     },
     drawerOptions,
   ),
