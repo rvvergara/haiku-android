@@ -31,3 +31,41 @@ export const scheduleInfoStyles = {
     alignSelf: 'center',
   },
 };
+
+export const appointmentActionsStyles = {
+  container: {
+    alignSelf: 'center',
+    marginTop: 50,
+    width: '80%',
+  },
+  avatarContainer: {
+    alignItems: 'center',
+  },
+  fieldContainer: {
+    flexDirection: 'row',
+    marginVertical: 5,
+    alignSelf: 'flex-start',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  info: {
+    fontSize: 18,
+  },
+  confirmButton: {
+    backgroundColor: '#5271ff',
+    borderRadius: 5,
+    marginVertical: 5,
+  },
+  rejectButton: {
+    backgroundColor: 'maroon',
+    borderRadius: 5,
+    marginVertical: 5,
+  },
+  buttonTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    letterSpacing: 1.2,
+  },
+};
