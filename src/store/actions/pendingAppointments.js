@@ -1,6 +1,11 @@
-import { LIST_PENDING_APPOINTMENTS } from './types';
+import { LIST_PENDING_APPOINTMENTS, REMOVE_PENDING_APPOINTMENT } from './types';
 
 export const listPendingAppointments = (appointments) => ({
   type: LIST_PENDING_APPOINTMENTS,
   appointments,
+});
+
+export const removeAppointment = (id) => ({
+  type: REMOVE_PENDING_APPOINTMENT,
+  id,
 });
