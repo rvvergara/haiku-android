@@ -1,5 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet, Text, TouchableOpacity, View,
+} from 'react-native';
 import {DrawerItems} from 'react-navigation-drawer';
 import {useDispatch} from 'react-redux';
 import {logout} from '../../store/thunks/user';
@@ -7,12 +9,15 @@ import {logout} from '../../store/thunks/user';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#5271ff',
+    paddingTop: 10,
   },
   logoutText: {
     fontSize: 20,
+    color: 'white',
   },
   logoutContainer: {
-    borderTopColor: 'black',
+    borderTopColor: 'white',
     borderTopWidth: 0.95,
     paddingLeft: 15,
     paddingTop: 20,
@@ -24,7 +29,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CustomDrawer = props => {
+const CustomDrawer = (props) => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {

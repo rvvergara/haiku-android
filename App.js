@@ -1,9 +1,9 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
 import {Provider} from 'react-redux';
-import CustomDrawer from './src/components/Common/CustomDrawer';
 import BookingsStack from './src/navigators/stacks/common/BookingsStack';
 import ClinicsStack from './src/navigators/stacks/common/ClinicsStack';
 import FeedbackStack from './src/navigators/stacks/common/FeedbackStack';
@@ -20,6 +20,7 @@ import SignupScreen from './src/screens/SignupScreen';
 import VerifyMessageScreen from './src/screens/VerifyMessageScreen';
 import store from './src/store/store';
 import {setNavigator} from './src/utils/navigationRef';
+import { drawerOptions } from './src/navigators/drawerOptions';
 
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
@@ -38,31 +39,19 @@ const switchNavigator = createSwitchNavigator({
   ),
   patientFlow: createDrawerNavigator(
     {
-      Home: HomeStack,
-      ProfileEdit: ProfileEditStack,
+      Home: {
+        screen: HomeStack,
+        navigationOptions: {
+          drawerIcon: () => <Icon name="home" size={30} />,
+        },
+      },
+      'Edit Profile': ProfileEditStack,
       Practitioners: PractitionersListStack,
       Bookings: BookingsStack,
       Feedback: FeedbackStack,
       Clinics: ClinicsStack,
     },
-    {
-      drawerPosition: 'right',
-      unmountInactiveRoutes: true,
-      contentComponent: CustomDrawer,
-      contentOptions: {
-        labelStyle: {
-          fontSize: 20,
-          fontWeight: 'normal',
-        },
-        itemStyle: {
-          height: 50,
-        },
-        activeLabelStyle: {
-          fontWeight: 'bold',
-          color: 'black',
-        },
-      },
-    },
+    drawerOptions,
   ),
   practitionerFlow: createDrawerNavigator(
     {
@@ -73,16 +62,7 @@ const switchNavigator = createSwitchNavigator({
       Clinics: ClinicsStack,
       Feedback: FeedbackStack,
     },
-    {
-      drawerPosition: 'right',
-      unmountInactiveRoutes: true,
-      contentComponent: CustomDrawer,
-      contentOptions: {
-        labelStyle: {
-          fontSize: 20,
-        },
-      },
-    },
+    drawerOptions,
   ),
 });
 
