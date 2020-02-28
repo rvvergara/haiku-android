@@ -6,10 +6,12 @@ import { welcomeStyles } from '../../../style-objects/homeStyles';
 
 const styles = StyleSheet.create(welcomeStyles);
 
-const Welcome = ({ firstName }) => (
+const Welcome = ({ firstName, role }) => (
   <View style={styles.container}>
     <Text style={styles.greeting}>
       Welcome
+      {' '}
+      { role === 'PRACTITIONER' && 'Dr.'}
       {' '}
       {firstName}
       !
@@ -19,6 +21,7 @@ const Welcome = ({ firstName }) => (
 
 Welcome.propTypes = {
   firstName: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
 };
 
 export default Welcome;
