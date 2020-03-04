@@ -2,11 +2,18 @@ import React from 'react';
 import {
   Text, View,
 } from 'react-native';
-import PendingList from '../components/Common/Appointments/PendingList';
+import AppointmentList from '../components/Common/Appointments/AppointmentList';
 
 const BookingsScreen = () => (
   <View>
-    <PendingList />
+    <View>
+      <Text>Confirmed Appointments</Text>
+      <AppointmentList appointmentType="CONFIRMED" />
+    </View>
+    <View>
+      <Text>Pending Appointments</Text>
+      <AppointmentList appointmentType="PENDING" />
+    </View>
   </View>
 );
 

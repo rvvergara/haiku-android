@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,10 +10,10 @@ import { navigate } from '../../../utils/navigationRef';
 
 const styles = StyleSheet.create(listStyles);
 
-const PendingList = () => {
+const AppointmentList = ({ appointmentType }) => {
   const {
-    appointee, pendingAppointments, fullName, currentUserData,
-  } = useAppointment();
+    appointee, shownAppointments, fullName, currentUserData,
+  } = useAppointment(appointmentType);
 
   if (Object.keys(currentUserData).length === 0) {
     return null;
@@ -21,7 +22,7 @@ const PendingList = () => {
   return (
     <View>
       {
-        pendingAppointments.map((appointment) => (
+        shownAppointments.map((appointment) => (
           <ListItem
             key={appointment.id}
             containerStyle={styles.listContainer}
@@ -49,4 +50,8 @@ const PendingList = () => {
   );
 };
 
-export default PendingList;
+AppointmentList.propTypes = {
+  appointmentType: PropTypes.string.isRequired,
+};
+
+export default AppointmentList;
