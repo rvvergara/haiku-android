@@ -63,9 +63,19 @@ export const appointmentActionsStyles = {
     borderRadius: 5,
     marginVertical: 5,
   },
+  joinCallButton: {
+    backgroundColor: 'green',
+    borderRadius: 5,
+    marginVertical: 5,
+  },
   buttonTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     letterSpacing: 1.2,
+  },
+  iconStyle: {
+    fontSize: 30,
+    color: 'white',
+    marginLeft: 10,
   },
 };

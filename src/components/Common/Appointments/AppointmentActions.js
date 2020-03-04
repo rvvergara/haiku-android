@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import { Text, Avatar, Button } from 'react-native-elements';
+import FoIcon from 'react-native-vector-icons/Foundation';
 import { withNavigation } from 'react-navigation';
 import moment from 'moment';
 import { confirmBookingSlot, rejectBookingSlot } from '../../../store/thunks/bookingSlot';
@@ -89,20 +90,38 @@ const AppointmentActions = ({ appointment, navigation }) => {
           </Text>
         </View>
       </View>
-      <View>
-        <Button
-          title="Confirm"
-          titleStyle={styles.buttonTitle}
-          buttonStyle={styles.confirmButton}
-          onPress={handleConfirm}
-        />
-        <Button
-          title="Reject"
-          titleStyle={styles.buttonTitle}
-          buttonStyle={styles.rejectButton}
-          onPress={handleReject}
-        />
-      </View>
+      {
+        appointment.status === 'PENDING' && (
+        <View>
+          <Button
+            title="Confirm"
+            titleStyle={styles.buttonTitle}
+            buttonStyle={styles.confirmButton}
+            onPress={handleConfirm}
+          />
+          <Button
+            title="Reject"
+            titleStyle={styles.buttonTitle}
+            buttonStyle={styles.rejectButton}
+            onPress={handleReject}
+          />
+        </View>
+        )
+    }
+      {
+      appointment.status === 'CONFIRMED' && (
+        <View>
+          <Button
+            title="Join Call"
+            titleStyle={styles.buttonTitle}
+            buttonStyle={styles.joinCallButton}
+            icon={<FoIcon name="telephone" style={styles.iconStyle} />}
+            onPress={() => console.log('JOINING CALL NOW')}
+            iconRight
+          />
+        </View>
+      )
+    }
     </View>
   );
 };
