@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { sendAuthorizedRequest } from '../../utils/api';
 import { listSlots } from '../actions/openSlot';
 import { listPendingAppointments, removePendingAppointment } from '../actions/pendingAppointments';
+import { listAppointments } from '../actions/appointment';
 import { setErrors } from '../actions/error';
 import { localizeBookingSlot } from '../../utils/localizeTime';
 import { navigate } from '../../utils/navigationRef';
@@ -78,6 +79,26 @@ export const rejectBookingSlot = (slotId) => async (dispatch) => {
   try {
     await sendAuthorizedRequest('post', path, token);
     return dispatch(removePendingAppointment(slotId));
+  } catch (err) {
+    return err;
+  }
+};
+
+export const fetchAllConfirmedAppointments = (profileId, role) => async (dispatch) => {
+  const path = role === 'PATIENT'
+    ? `v1/patients/${profileId}/booking-slots?include=practitioner&status=CONFIRMED`
+    : `v1/practitioners/${profileId}/booking-slots?include=patient&status=CONFIRMED`;
+
+  const token = await AsyncStorage.getItem('token');
+
+  try {
+    const res = await sendAuthorizedRequest('get', path, token);
+    const { booking_slots } = res.data;
+    const appointments = booking_slots;
+    const localizedAppointments = appointments.map((slot) => (
+      localizeBookingSlot(slot, 8)
+    ));
+    return dispatch(listAppointments(localizedAppointments));
   } catch (err) {
     return err;
   }
