@@ -70,3 +70,15 @@ export const confirmBookingSlot = (slotId) => async (dispatch) => {
     return err;
   }
 };
+
+export const rejectBookingSlot = (slotId) => async (dispatch) => {
+  const path = `v1/booking-slots/${slotId}/reject`;
+  const token = await AsyncStorage.getItem('token');
+
+  try {
+    await sendAuthorizedRequest('post', path, token);
+    return dispatch(removePendingAppointment(slotId));
+  } catch (err) {
+    return err;
+  }
+};
