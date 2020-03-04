@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 import { Text, Avatar, Button } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import moment from 'moment';
-import { confirmBookingSlot } from '../../../store/thunks/bookingSlot';
+import { confirmBookingSlot, rejectBookingSlot } from '../../../store/thunks/bookingSlot';
 import { appointmentActionsStyles } from '../../../style-objects/appointmentStyles';
 
 const styles = StyleSheet.create(appointmentActionsStyles);
@@ -26,6 +26,11 @@ const AppointmentActions = ({ appointment, navigation }) => {
 
   const handleConfirm = () => {
     dispatch(confirmBookingSlot(appointment.id));
+    navigation.pop();
+  };
+
+  const handleReject = () => {
+    dispatch(rejectBookingSlot(appointment.id));
     navigation.pop();
   };
 
@@ -95,7 +100,7 @@ const AppointmentActions = ({ appointment, navigation }) => {
           title="Reject"
           titleStyle={styles.buttonTitle}
           buttonStyle={styles.rejectButton}
-          onPress={() => console.log('REJECTING')}
+          onPress={handleReject}
         />
       </View>
     </View>
